@@ -6,6 +6,7 @@ import com.github.syndexmx.demopetclinic.controllers.dtos.PetDto;
 import com.github.syndexmx.demopetclinic.services.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import static com.github.syndexmx.demopetclinic.controllers.mappers.PetDtoMapper
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Pet", description = "API Животное")
+@Slf4j
 public class PetController {
 
     private final String ROOT_API_PATH = "/api/v0/pets";
@@ -34,13 +36,14 @@ public class PetController {
     @Operation(summary = "Животное:добавить",
             description = "Создание нового объекта Животное. id присваивается системой")
     public ResponseEntity<PetDto> create(@RequestBody final PetDto petDto) {
+        log.info("POST " + ROOT_API_PATH + " \n" + petDto);
         final Pet pet = petDtoNoIdToPet(petDto);
         final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
                 petToPetDto(petService.create(pet)), HttpStatus.CREATED);
         return responseEntity;
     }
 
-    @GetMapping(ROOT_API_PATH +"/{petId}")
+    @GetMapping(ROOT_API_PATH + "/{petId}")
     @Operation(summary = "Животное:получить по id",
             description = "Получить существующий объект Животное")
     public ResponseEntity<PetDto> retrieve(@PathVariable String petId) {
@@ -65,10 +68,11 @@ public class PetController {
         return response;
     }
 
-    @PutMapping(ROOT_API_PATH +"/{petId}")
+    @PutMapping(ROOT_API_PATH + "/{petId}")
     @Operation(summary = "Животное:обновить объект по id",
             description = "Обновить существующий в базе объект Животное")
     public ResponseEntity<PetDto> update(@RequestBody final PetDto petDto) {
+        log.info("PUT " + ROOT_API_PATH + " \n" + petDto);
         final Pet pet = petDtoToPet(petDto);
         if (!petService.isPresent(pet)) {
             final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
@@ -80,10 +84,11 @@ public class PetController {
         return responseEntity;
     }
 
-    @DeleteMapping(ROOT_API_PATH +"/{petId}")
+    @DeleteMapping(ROOT_API_PATH + "/{petId}")
     @Operation(summary = "Животное:удалить объект по id",
             description = "Удалить существующий в базе объект Животное")
     public ResponseEntity deleteById(@PathVariable String petId) {
+        log.info("POST " + ROOT_API_PATH + " \n" + petId);
         petService.deleteById(petId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

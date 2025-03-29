@@ -6,6 +6,7 @@ import com.github.syndexmx.demopetclinic.controllers.dtos.DoctorDto;
 import com.github.syndexmx.demopetclinic.services.DoctorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import static com.github.syndexmx.demopetclinic.controllers.mappers.DoctorDtoMap
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Doctor", description = "API Доктор")
+@Slf4j
 public class DoctorController {
 
     private final String ROOT_API_PATH = "/api/v0/doctors";
@@ -34,13 +36,14 @@ public class DoctorController {
     @Operation(summary = "Доктор:добавить",
             description = "Создание нового объекта Доктор. id присваивается системой")
     public ResponseEntity<DoctorDto> create(@RequestBody final DoctorDto doctorDto) {
+        log.info("POST " + ROOT_API_PATH + " \n" + doctorDto);
         final Doctor doctor = doctorDtoNoIdToDoctor(doctorDto);
         final ResponseEntity<DoctorDto> responseEntity = new ResponseEntity<> (
                 doctorToDoctorDto(doctorService.create(doctor)), HttpStatus.CREATED);
         return responseEntity;
     }
 
-    @GetMapping(ROOT_API_PATH +"/{doctorId}")
+    @GetMapping(ROOT_API_PATH + "/{doctorId}")
     @Operation(summary = "Доктор:получить по id",
             description = "Получить существующий объект Доктор")
     public ResponseEntity<DoctorDto> retrieve(@PathVariable String doctorId) {
@@ -65,10 +68,11 @@ public class DoctorController {
         return response;
     }
 
-    @PutMapping(ROOT_API_PATH +"/{doctorId}")
+    @PutMapping(ROOT_API_PATH + "/{doctorId}")
     @Operation(summary = "Доктор:обновить объект по id",
             description = "Обновить существующий в базе объект Доктор")
     public ResponseEntity<DoctorDto> update(@RequestBody final DoctorDto doctorDto) {
+        log.info("PUT " + ROOT_API_PATH + " \n" + doctorDto);
         final Doctor doctor = doctorDtoToDoctor(doctorDto);
         if (!doctorService.isPresent(doctor)) {
             final ResponseEntity<DoctorDto> responseEntity = new ResponseEntity<> (
@@ -80,10 +84,11 @@ public class DoctorController {
         return responseEntity;
     }
 
-    @DeleteMapping(ROOT_API_PATH +"/{doctorId}")
+    @DeleteMapping(ROOT_API_PATH + "/{doctorId}")
     @Operation(summary = "Доктор:удалить объект по id",
             description = "Удалить существующий в базе объект Доктор")
     public ResponseEntity deleteById(@PathVariable String doctorId) {
+        log.info("DELETE " + ROOT_API_PATH + " \n" + doctorId);
         doctorService.deleteById(doctorId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

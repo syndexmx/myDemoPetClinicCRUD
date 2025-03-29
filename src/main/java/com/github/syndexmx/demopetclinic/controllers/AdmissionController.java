@@ -6,6 +6,7 @@ import com.github.syndexmx.demopetclinic.controllers.dtos.AdmissionDto;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import static com.github.syndexmx.demopetclinic.controllers.mappers.AdmissionDto
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Admission", description = "API Визит")
+@Slf4j
 public class AdmissionController {
 
     private final String ROOT_API_PATH = "/api/v0/admissions";
@@ -34,6 +36,7 @@ public class AdmissionController {
     @Operation(summary = "Визит:добавить",
             description = "Создание нового объекта Визит. id присваивается системой")
     public ResponseEntity<AdmissionDto> create(@RequestBody final AdmissionDto admissionDto) {
+        log.info("POST " + ROOT_API_PATH + " \n" + admissionDto);
         final Admission admission = admissionDtoNoIdToAdmission(admissionDto);
         final ResponseEntity<AdmissionDto> responseEntity = new ResponseEntity<> (
                 admissionToAdmissionDto(admissionService.create(admission)), HttpStatus.CREATED);
@@ -69,6 +72,7 @@ public class AdmissionController {
     @Operation(summary = "Визит:обновить объект по id",
             description = "Обновить существующий в базе объект Визит")
     public ResponseEntity<AdmissionDto> update(@RequestBody final AdmissionDto admissionDto) {
+        log.info("PUT " + ROOT_API_PATH + " \n" + admissionDto);
         final Admission admission = admissionDtoToAdmission(admissionDto);
         if (!admissionService.isPresent(admission)) {
             final ResponseEntity<AdmissionDto> responseEntity = new ResponseEntity<> (
@@ -80,10 +84,11 @@ public class AdmissionController {
         return responseEntity;
     }
 
-    @DeleteMapping(ROOT_API_PATH +"/{admissionId}")
+    @DeleteMapping(ROOT_API_PATH + "/{admissionId}")
     @Operation(summary = "Визит:удалить объект по id",
             description = "Удалить существующий в базе объект Визит")
     public ResponseEntity deleteById(@PathVariable String admissionId) {
+        log.info("DELETE " + ROOT_API_PATH + admissionId);
         admissionService.deleteById(admissionId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
