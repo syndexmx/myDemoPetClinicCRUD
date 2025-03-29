@@ -34,12 +34,12 @@ public class OwnerTestSupplierKit {
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static OwnerFields NON_EXISTANT_VALUE = OwnerFields.OTHERVALUE;
+    private static OwnerFields NON_EXISTENT_VALUE = OwnerFields.OTHERVALUE;
 
     public static Owner getTestNonExistentOwner( ) {
         return Owner.builder()
                 .id(NON_EXISTENT_Long)
-                .ownerFields(NON_EXISTANT_VALUE)
+                .ownerFields(NON_EXISTENT_VALUE)
                 .build();
     }
 

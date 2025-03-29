@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.domain;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 
@@ -18,6 +19,7 @@ public class AdmissionTestSupplierKit {
     public static Admission getTestAdmission( ) {
         return Admission.builder()
                 .id(id)
+                .date(LocalDate.parse("2025-02-03"))
                 .admissionFields(GENERIC_FIELD_VALUE)
                 .build();
     }
@@ -25,17 +27,18 @@ public class AdmissionTestSupplierKit {
     public static Admission getModifiedTestAdmission( ) {
         return Admission.builder()
                 .id(id)
+                .date(LocalDate.parse("2025-02-03"))
                 .admissionFields(GENERIC_STRING_MODIFIED)
                 .build();
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static AdmissionFields NON_EXISTANT_VALUE = AdmissionFields.OTHERVALUE;
+    private static AdmissionFields NON_EXISTENT_VALUE = AdmissionFields.OTHERVALUE;
 
     public static Admission getTestNonExistentAdmission( ) {
         return Admission.builder()
                 .id(NON_EXISTENT_Long)
-                .admissionFields(NON_EXISTANT_VALUE)
+                .admissionFields(NON_EXISTENT_VALUE)
                 .build();
     }
 

@@ -39,12 +39,12 @@ public class DoctorTestSupplierKit {
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static DoctorSpecialty NON_EXISTANT_VALUE = DoctorSpecialty.ENDOCRINOLOGIST;
+    private static DoctorSpecialty NON_EXISTENT_VALUE = DoctorSpecialty.ENDOCRINOLOGIST;
 
     public static Doctor getTestNonExistentDoctor( ) {
         return Doctor.builder()
                 .id(NON_EXISTENT_Long)
-                .doctorSpecialty(NON_EXISTANT_VALUE)
+                .doctorSpecialty(NON_EXISTENT_VALUE)
                 .build();
     }
 

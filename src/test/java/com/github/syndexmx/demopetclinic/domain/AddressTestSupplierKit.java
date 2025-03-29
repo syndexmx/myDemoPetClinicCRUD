@@ -42,12 +42,12 @@ public class AddressTestSupplierKit {
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static AddressFields NON_EXISTANT_VALUE = AddressFields.OTHERVALUE;
+    private static AddressFields NON_EXISTENT_VALUE = AddressFields.OTHERVALUE;
 
     public static Address getTestNonExistentAddress( ) {
         return Address.builder()
                 .id(NON_EXISTENT_Long)
-                .addressFields(NON_EXISTANT_VALUE)
+                .addressFields(NON_EXISTENT_VALUE)
                 .build();
     }
 
