@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class DoctorDto {
 
     @Schema(description = "id")
-    private String id;
+    private Long id;
 
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")

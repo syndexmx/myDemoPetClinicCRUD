@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Визит")
 public class AdmissionDto {
 
-    @Schema(description = "id")
-    private String id;
+    @Schema(description = "Идентификатор")
+    private Long id;
 
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")

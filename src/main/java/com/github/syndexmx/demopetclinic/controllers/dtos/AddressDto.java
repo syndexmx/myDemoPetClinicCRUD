@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Адрес")
 public class AddressDto {
 
-    @Schema(description = "id")
-    private String id;
+    @Schema(description = "Идентификатор")
+    private Long id;
 
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")

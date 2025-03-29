@@ -1,7 +1,7 @@
 package com.github.syndexmx.demopetclinic.repositories.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.PetFields;
+import com.github.syndexmx.demopetclinic.domain.PetSpecies;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repositories.entities.PetEntity;
 
@@ -11,7 +11,12 @@ public class PetEntityMapper {
     public static PetEntity petToPetEntity(Pet pet) {
         final PetEntity petEntity = PetEntity.builder()
                 .petId(pet.getId())
-                .petFieldContent(pet.getPetFields().toString())
+                .breed(pet.getBreed())
+                .birthDate(pet.getBirthDate())
+                .name(pet.getName())
+                .weight(pet.getWeight())
+                .colour(pet.getColour())
+                .petSpecies(pet.getPetSpecies().toString())
                 .build();
         return petEntity;
     }
@@ -19,7 +24,12 @@ public class PetEntityMapper {
     public static Pet petEntityToPet(PetEntity petEntity) {
         Pet pet = Pet.builder()
                 .id(petEntity.getPetId())
-                .petFields(PetFields.valueOf(petEntity.getPetFieldContent()))
+                .breed(petEntity.getBreed())
+                .birthDate(petEntity.getBirthDate())
+                .name(petEntity.getName())
+                .weight(petEntity.getWeight())
+                .colour(petEntity.getColour())
+                .petSpecies(PetSpecies.valueOf(petEntity.getPetSpecies()))
                 .build();
         return pet;
     }

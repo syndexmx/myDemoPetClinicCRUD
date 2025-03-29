@@ -2,9 +2,11 @@ package com.github.syndexmx.demopetclinic.controllers.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controllers.dtos.PetDto;
-import com.github.syndexmx.demopetclinic.domain.PetFields;
+import com.github.syndexmx.demopetclinic.domain.PetSpecies;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -13,16 +15,26 @@ public class PetDtoMapper {
 
     public static PetDto petToPetDto(Pet pet) {
         final PetDto petDto = PetDto.builder()
-                .id(pet.getId().toString())
-                .petFieldContent(pet.getPetFields().toString())
+                .id(pet.getId())
+                .name(pet.getName())
+                .breed(pet.getBreed())
+                .birthDate(pet.getBirthDate().toString())
+                .weight(pet.getWeight())
+                .colour(pet.getColour())
+                .petSpecies(pet.getPetSpecies().toString())
                 .build();
         return petDto;
     }
 
     public static Pet petDtoToPet(PetDto petDto) {
         Pet pet = Pet.builder()
-                .id(Long.parseLong(petDto.getId()))
-                .petFields(PetFields.valueOf(petDto.getPetFieldContent()))
+                .id(petDto.getId())
+                .name(petDto.getName())
+                .breed(petDto.getBreed())
+                .birthDate(LocalDate.parse(petDto.getBirthDate()))
+                .weight(petDto.getWeight())
+                .colour(petDto.getColour())
+                .petSpecies(PetSpecies.valueOf(petDto.getPetSpecies()))
                 .build();
         return pet;
     }
@@ -31,7 +43,12 @@ public class PetDtoMapper {
         Random random = new Random();
         Pet pet = Pet.builder()
                 .id(random.nextLong())
-                .petFields(PetFields.valueOf(petDto.getPetFieldContent()))
+                .name(petDto.getName())
+                .breed(petDto.getBreed())
+                .birthDate(LocalDate.parse(petDto.getBirthDate()))
+                .weight(petDto.getWeight())
+                .colour(petDto.getColour())
+                .petSpecies(PetSpecies.valueOf(petDto.getPetSpecies()))
                 .build();
         return pet;
     }

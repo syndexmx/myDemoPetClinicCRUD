@@ -13,7 +13,7 @@ public class TreatmentDtoMapper {
 
     public static TreatmentDto treatmentToTreatmentDto(Treatment treatment) {
         final TreatmentDto treatmentDto = TreatmentDto.builder()
-                .id(treatment.getId().toString())
+                .id(treatment.getId())
                 .treatmentFieldContent(treatment.getTreatmentFields().toString())
                 .build();
         return treatmentDto;
@@ -21,7 +21,7 @@ public class TreatmentDtoMapper {
 
     public static Treatment treatmentDtoToTreatment(TreatmentDto treatmentDto) {
         Treatment treatment = Treatment.builder()
-                .id(Long.parseLong(treatmentDto.getId()))
+                .id(treatmentDto.getId())
                 .treatmentFields(TreatmentFields.valueOf(treatmentDto.getTreatmentFieldContent()))
                 .build();
         return treatment;

@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import java.time.LocalDate;
 
 @TemplatedAnnotation
 @AllArgsConstructor
@@ -17,6 +17,12 @@ public class Pet {
 
     private Long id;
 
-    private PetFields petFields;
+    String name;
+    String species;
+    String breed;
+    LocalDate birthDate;
+    Integer weight; // grams
+    String colour;
+    PetSpecies petSpecies;
 
 }

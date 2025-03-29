@@ -13,7 +13,7 @@ public class AdmissionDtoMapper {
 
     public static AdmissionDto admissionToAdmissionDto(Admission admission) {
         final AdmissionDto admissionDto = AdmissionDto.builder()
-                .id(admission.getId().toString())
+                .id(admission.getId())
                 .admissionFieldContent(admission.getAdmissionFields().toString())
                 .build();
         return admissionDto;
@@ -21,7 +21,7 @@ public class AdmissionDtoMapper {
 
     public static Admission admissionDtoToAdmission(AdmissionDto admissionDto) {
         Admission admission = Admission.builder()
-                .id(Long.parseLong(admissionDto.getId()))
+                .id(admissionDto.getId())
                 .admissionFields(AdmissionFields.valueOf(admissionDto.getAdmissionFieldContent()))
                 .build();
         return admission;

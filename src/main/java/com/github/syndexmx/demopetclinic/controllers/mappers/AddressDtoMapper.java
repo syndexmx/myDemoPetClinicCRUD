@@ -13,7 +13,7 @@ public class AddressDtoMapper {
 
     public static AddressDto addressToAddressDto(Address address) {
         final AddressDto addressDto = AddressDto.builder()
-                .id(address.getId().toString())
+                .id(address.getId())
                 .addressFieldContent(address.getAddressFields().toString())
                 .build();
         return addressDto;
@@ -21,7 +21,7 @@ public class AddressDtoMapper {
 
     public static Address addressDtoToAddress(AddressDto addressDto) {
         Address address = Address.builder()
-                .id(Long.parseLong(addressDto.getId()))
+                .id(addressDto.getId())
                 .addressFields(AddressFields.valueOf(addressDto.getAddressFieldContent()))
                 .build();
         return address;

@@ -13,7 +13,7 @@ public class OwnerDtoMapper {
 
     public static OwnerDto ownerToOwnerDto(Owner owner) {
         final OwnerDto ownerDto = OwnerDto.builder()
-                .id(owner.getId().toString())
+                .id(owner.getId())
                 .ownerFieldContent(owner.getOwnerFields().toString())
                 .build();
         return ownerDto;
@@ -21,7 +21,7 @@ public class OwnerDtoMapper {
 
     public static Owner ownerDtoToOwner(OwnerDto ownerDto) {
         Owner owner = Owner.builder()
-                .id(Long.parseLong(ownerDto.getId()))
+                .id(ownerDto.getId())
                 .ownerFields(OwnerFields.valueOf(ownerDto.getOwnerFieldContent()))
                 .build();
         return owner;

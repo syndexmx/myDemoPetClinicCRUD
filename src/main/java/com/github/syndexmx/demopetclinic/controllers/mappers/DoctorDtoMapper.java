@@ -13,7 +13,7 @@ public class DoctorDtoMapper {
 
     public static DoctorDto doctorToDoctorDto(Doctor doctor) {
         final DoctorDto doctorDto = DoctorDto.builder()
-                .id(doctor.getId().toString())
+                .id(doctor.getId())
                 .doctorFieldContent(doctor.getDoctorFields().toString())
                 .build();
         return doctorDto;
@@ -21,7 +21,7 @@ public class DoctorDtoMapper {
 
     public static Doctor doctorDtoToDoctor(DoctorDto doctorDto) {
         Doctor doctor = Doctor.builder()
-                .id(Long.parseLong(doctorDto.getId()))
+                .id(doctorDto.getId())
                 .doctorFields(DoctorFields.valueOf(doctorDto.getDoctorFieldContent()))
                 .build();
         return doctor;
