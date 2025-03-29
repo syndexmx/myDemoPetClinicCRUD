@@ -4,8 +4,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.domain.DoctorTestSupplierKit;
-import com.github.syndexmx.demopetclinic.repositories.entities.DoctorEntity;
-import com.github.syndexmx.demopetclinic.repositories.DoctorRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.DoctorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.DoctorEntityMapper.doctorToDoctorEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper.doctorToDoctorEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

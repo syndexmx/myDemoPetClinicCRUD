@@ -2,8 +2,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
-import com.github.syndexmx.demopetclinic.repositories.entities.OwnerEntity;
-import com.github.syndexmx.demopetclinic.repositories.OwnerRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.OwnerRepository;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Random;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.OwnerEntityMapper.ownerEntityToOwner;
-import static com.github.syndexmx.demopetclinic.repositories.mappers.OwnerEntityMapper.ownerToOwnerEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.OwnerEntityMapper.ownerEntityToOwner;
+import static com.github.syndexmx.demopetclinic.repository.mappers.OwnerEntityMapper.ownerToOwnerEntity;
 
 @TemplatedAnnotation
 @Service

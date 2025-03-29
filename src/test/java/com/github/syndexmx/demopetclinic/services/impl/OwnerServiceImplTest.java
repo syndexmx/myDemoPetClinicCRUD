@@ -4,8 +4,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.OwnerTestSupplierKit;
-import com.github.syndexmx.demopetclinic.repositories.entities.OwnerEntity;
-import com.github.syndexmx.demopetclinic.repositories.OwnerRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.OwnerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.OwnerEntityMapper.ownerToOwnerEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.OwnerEntityMapper.ownerToOwnerEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;

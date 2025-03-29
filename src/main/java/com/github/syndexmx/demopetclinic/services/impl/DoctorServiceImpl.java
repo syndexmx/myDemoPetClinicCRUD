@@ -2,8 +2,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
-import com.github.syndexmx.demopetclinic.repositories.entities.DoctorEntity;
-import com.github.syndexmx.demopetclinic.repositories.DoctorRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.DoctorRepository;
 import com.github.syndexmx.demopetclinic.services.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Random;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.DoctorEntityMapper.doctorEntityToDoctor;
-import static com.github.syndexmx.demopetclinic.repositories.mappers.DoctorEntityMapper.doctorToDoctorEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper.doctorEntityToDoctor;
+import static com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper.doctorToDoctorEntity;
 
 @TemplatedAnnotation
 @Service

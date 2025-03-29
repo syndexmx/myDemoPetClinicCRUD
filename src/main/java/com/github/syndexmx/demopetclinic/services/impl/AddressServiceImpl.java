@@ -2,8 +2,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Address;
-import com.github.syndexmx.demopetclinic.repositories.entities.AddressEntity;
-import com.github.syndexmx.demopetclinic.repositories.AddressRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.AddressRepository;
 import com.github.syndexmx.demopetclinic.services.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.Optional;
 import java.util.Random;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.AddressEntityMapper.addressEntityToAddress;
-import static com.github.syndexmx.demopetclinic.repositories.mappers.AddressEntityMapper.addressToAddressEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.AddressEntityMapper.addressEntityToAddress;
+import static com.github.syndexmx.demopetclinic.repository.mappers.AddressEntityMapper.addressToAddressEntity;
 
 @TemplatedAnnotation
 @Service

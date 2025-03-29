@@ -4,8 +4,8 @@ package com.github.syndexmx.demopetclinic.services.impl;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.domain.AdmissionTestSupplierKit;
-import com.github.syndexmx.demopetclinic.repositories.entities.AdmissionEntity;
-import com.github.syndexmx.demopetclinic.repositories.AdmissionRepository;
+import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
+import com.github.syndexmx.demopetclinic.repository.reporitories.AdmissionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repositories.mappers.AdmissionEntityMapper.admissionToAdmissionEntity;
+import static com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper.admissionToAdmissionEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
