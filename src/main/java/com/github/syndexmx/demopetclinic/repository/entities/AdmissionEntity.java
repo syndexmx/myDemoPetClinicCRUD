@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 
 
 @TemplatedAnnotation
@@ -20,6 +21,10 @@ public class AdmissionEntity {
 
     @Id
     private Long admissionId;
+
+    private Long petId;
+    private Long doctorId;
+    private LocalDate date;
 
     private String admissionFieldContent;
 
