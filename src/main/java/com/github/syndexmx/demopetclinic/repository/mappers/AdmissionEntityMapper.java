@@ -16,6 +16,9 @@ public class AdmissionEntityMapper {
                 .petId(admission.getPetId())
                 .doctorId(admission.getDoctorId())
                 .date(admission.getDate())
+                .issue(admission.getIssue())
+                .inspection(admission.getInspection())
+                .diagnosis(admission.getDiagnosis())
                 .admissionFieldContent(admission.getAdmissionFields().toString())
                 .build();
         return admissionEntity;
@@ -27,6 +30,9 @@ public class AdmissionEntityMapper {
                 .petId(admissionEntity.getPetId())
                 .doctorId(admissionEntity.getDoctorId())
                 .date(admissionEntity.getDate())
+                .issue(admissionEntity.getIssue())
+                .inspection(admissionEntity.getInspection())
+                .diagnosis(admissionEntity.getDiagnosis())
                 .admissionFields(AdmissionFields.valueOf(admissionEntity.getAdmissionFieldContent()))
                 .build();
         return admission;

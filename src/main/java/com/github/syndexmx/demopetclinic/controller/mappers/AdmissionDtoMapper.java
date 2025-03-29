@@ -18,6 +18,9 @@ public class AdmissionDtoMapper {
                 .petId(admission.getPetId())
                 .doctorId(admission.getDoctorId())
                 .date(admission.getDate().toString())
+                .issue(admission.getIssue())
+                .inspection(admission.getInspection())
+                .diagnosis(admission.getDiagnosis())
                 .admissionFieldContent(admission.getAdmissionFields().toString())
                 .build();
         return admissionDto;
@@ -29,6 +32,9 @@ public class AdmissionDtoMapper {
                 .petId(admissionDto.getPetId())
                 .doctorId(admissionDto.getDoctorId())
                 .date(LocalDate.parse(admissionDto.getDate()))
+                .issue(admissionDto.getIssue())
+                .inspection(admissionDto.getInspection())
+                .diagnosis(admissionDto.getDiagnosis())
                 .admissionFields(AdmissionFields.valueOf(admissionDto.getAdmissionFieldContent()))
                 .build();
         return admission;
@@ -41,6 +47,9 @@ public class AdmissionDtoMapper {
                 .petId(admissionDto.getPetId())
                 .doctorId(admissionDto.getDoctorId())
                 .date(LocalDate.parse(admissionDto.getDate()))
+                .issue(admissionDto.getIssue())
+                .inspection(admissionDto.getInspection())
+                .diagnosis(admissionDto.getDiagnosis())
                 .admissionFields(AdmissionFields.valueOf(admissionDto.getAdmissionFieldContent()))
                 .build();
         return admission;

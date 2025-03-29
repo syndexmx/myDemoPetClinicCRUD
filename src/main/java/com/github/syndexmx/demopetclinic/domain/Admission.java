@@ -21,6 +21,9 @@ public class Admission {
     private Long petId;
     private Long doctorId;
     private LocalDate date;
+    private String issue;
+    private String inspection;
+    private String diagnosis;
 
     private AdmissionFields admissionFields;
 

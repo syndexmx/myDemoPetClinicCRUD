@@ -38,6 +38,17 @@ public class AdmissionDto {
     @Schema(description = "Дата", example = "2025-01-09")
     private String date;
 
+    @NotNull(message = "Поле Проблема должно существовать")
+    @NotBlank(message = "Требуется непустое поле Проблема")
+    @Schema(description = "Проблема (Причина обращения)", example = "Травма левой передней лапы")
+    private String issue;
+
+    @Schema(description = "Осмотр (Результаты)", example = "Наблюдается подвижность осколка большой берцовой кости")
+    private String inspection;
+
+    @Schema(description = "Диагноз", example = "Перелом большой берцовой кости")
+    private String diagnosis;
+
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")
     @Schema(description = "Поле", example = "DEFAULTVALUE")
