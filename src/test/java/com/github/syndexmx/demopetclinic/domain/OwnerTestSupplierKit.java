@@ -17,6 +17,8 @@ public class OwnerTestSupplierKit {
 
     public static Owner getTestOwner( ) {
         return Owner.builder()
+                .name("John Smith")
+                .phone("+1(800)01885476")
                 .id(id)
                 .ownerFields(GENERIC_FIELD_VALUE)
                 .build();
@@ -25,6 +27,8 @@ public class OwnerTestSupplierKit {
     public static Owner getModifiedTestOwner( ) {
         return Owner.builder()
                 .id(id)
+                .name("James Gold")
+                .phone("+1(800)01997476")
                 .ownerFields(GENERIC_STRING_MODIFIED)
                 .build();
     }
