@@ -20,6 +20,9 @@ public class AdmissionTestSupplierKit {
         return Admission.builder()
                 .id(id)
                 .date(LocalDate.parse("2025-02-03"))
+                .issue("Front leg trauma")
+                .inspection("Improper bone movement")
+                .diagnosis("Front left tibia fracture")
                 .admissionFields(GENERIC_FIELD_VALUE)
                 .build();
     }
@@ -28,6 +31,9 @@ public class AdmissionTestSupplierKit {
         return Admission.builder()
                 .id(id)
                 .date(LocalDate.parse("2025-02-03"))
+                .issue("Profilactic visit")
+                .inspection("")
+                .diagnosis("Anti-Rabies Vaccination")
                 .admissionFields(GENERIC_STRING_MODIFIED)
                 .build();
     }
