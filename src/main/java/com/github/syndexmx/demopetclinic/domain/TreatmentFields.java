@@ -4,7 +4,7 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 
 @TemplatedAnnotation
 public enum TreatmentFields {
-    DEFAULTVALUE,
+    IBUPROPHENE,
     ALTERNATIVEVALUE,
     OTHERVALUE;
 }

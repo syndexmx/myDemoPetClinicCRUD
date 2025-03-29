@@ -21,6 +21,21 @@ public class OwnerDto {
     @Schema(description = "Идентификатор")
     private Long id;
 
+    @NotNull(message = "Поле Имя должно существовать")
+    @NotBlank(message = "Требуется непустое поле Имя")
+    @Schema(description = "Имя", example = "Сергей Стрижов")
+    private String name;
+
+    @NotNull(message = "Поле Телефон должно существовать")
+    @NotBlank(message = "Требуется непустое поле Телефон")
+    @Schema(description = "Телефон", example = "+7(999)0090909")
+    private String phone;
+
+    @NotNull(message = "Поле Адрес должно существовать")
+    @NotBlank(message = "Требуется непустое поле Адрес")
+    @Schema(description = "Адрес")
+    private Long address;
+
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")
     @Schema(description = "Поле", example = "DEFAULTVALUE")

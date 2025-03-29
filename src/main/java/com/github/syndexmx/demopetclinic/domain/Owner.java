@@ -17,6 +17,10 @@ public class Owner {
 
     private Long id;
 
+    private String name;
+    private String phone;
+    private Long address;
+
     private OwnerFields ownerFields;
 
 }

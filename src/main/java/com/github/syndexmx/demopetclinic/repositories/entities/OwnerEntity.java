@@ -21,6 +21,10 @@ public class OwnerEntity {
     @Id
     private Long ownerId;
 
+    private String name;
+    private String phone;
+    private Long address;
+
     private String ownerFieldContent;
 
 
