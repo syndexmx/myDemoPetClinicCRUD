@@ -21,6 +21,13 @@ public class AddressEntity {
     @Id
     private Long addressId;
 
+    private String region;
+    private String city;
+    private String street;
+    private Integer house;
+    private String building;
+    private Integer flat;
+
     private String addressFieldContent;
 
 

@@ -18,6 +18,12 @@ public class AddressTestSupplierKit {
     public static Address getTestAddress( ) {
         return Address.builder()
                 .id(id)
+                .region("Moscow region")
+                .city("Moscow")
+                .street("Lime")
+                .house(18)
+                .building("b")
+                .flat(18)
                 .addressFields(GENERIC_FIELD_VALUE)
                 .build();
     }
@@ -25,6 +31,12 @@ public class AddressTestSupplierKit {
     public static Address getModifiedTestAddress( ) {
         return Address.builder()
                 .id(id)
+                .region("Leningrad oblast")
+                .city("Peregoff")
+                .street("Lenin")
+                .house(2)
+                .building("")
+                .flat(4)
                 .addressFields(GENERIC_STRING_MODIFIED)
                 .build();
     }

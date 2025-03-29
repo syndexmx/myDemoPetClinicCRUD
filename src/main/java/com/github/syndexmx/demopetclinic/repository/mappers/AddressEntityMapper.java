@@ -11,6 +11,12 @@ public class AddressEntityMapper {
     public static AddressEntity addressToAddressEntity(Address address) {
         final AddressEntity addressEntity = AddressEntity.builder()
                 .addressId(address.getId())
+                .region(address.getRegion())
+                .city(address.getCity())
+                .house(address.getHouse())
+                .street(address.getStreet())
+                .building(address.getBuilding())
+                .flat(address.getFlat())
                 .addressFieldContent(address.getAddressFields().toString())
                 .build();
         return addressEntity;
