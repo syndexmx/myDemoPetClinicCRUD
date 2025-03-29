@@ -12,30 +12,30 @@ public class DoctorTestSupplierKit {
 
     private static Long id = random.nextLong();
 
-    private static DoctorFields GENERIC_FIELD_VALUE = DoctorFields.DEFAULTVALUE;
-    private static DoctorFields GENERIC_STRING_MODIFIED = DoctorFields.ALTERNATIVEVALUE;
+    private static DoctorSpecialty GENERIC_FIELD_VALUE = DoctorSpecialty.DEFAULTVALUE;
+    private static DoctorSpecialty GENERIC_STRING_MODIFIED = DoctorSpecialty.ALTERNATIVEVALUE;
 
     public static Doctor getTestDoctor( ) {
         return Doctor.builder()
                 .id(id)
-                .doctorFields(GENERIC_FIELD_VALUE)
+                .doctorSpecialty(GENERIC_FIELD_VALUE)
                 .build();
     }
 
     public static Doctor getModifiedTestDoctor( ) {
         return Doctor.builder()
                 .id(id)
-                .doctorFields(GENERIC_STRING_MODIFIED)
+                .doctorSpecialty(GENERIC_STRING_MODIFIED)
                 .build();
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static DoctorFields NON_EXISTANT_VALUE = DoctorFields.OTHERVALUE;
+    private static DoctorSpecialty NON_EXISTANT_VALUE = DoctorSpecialty.OTHERVALUE;
 
     public static Doctor getTestNonExistentDoctor( ) {
         return Doctor.builder()
                 .id(NON_EXISTENT_Long)
-                .doctorFields(NON_EXISTANT_VALUE)
+                .doctorSpecialty(NON_EXISTANT_VALUE)
                 .build();
     }
 

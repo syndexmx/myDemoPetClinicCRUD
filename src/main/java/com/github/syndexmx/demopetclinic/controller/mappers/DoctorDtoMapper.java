@@ -2,9 +2,10 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.DoctorDto;
-import com.github.syndexmx.demopetclinic.domain.DoctorFields;
+import com.github.syndexmx.demopetclinic.domain.DoctorSpecialty;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 
@@ -14,7 +15,11 @@ public class DoctorDtoMapper {
     public static DoctorDto doctorToDoctorDto(Doctor doctor) {
         final DoctorDto doctorDto = DoctorDto.builder()
                 .id(doctor.getId())
-                .doctorFieldContent(doctor.getDoctorFields().toString())
+                .name(doctor.getName())
+                .phone(doctor.getPhone())
+                .startDate(doctor.getStartDate().toString())
+                .birthDate(doctor.getBirthDate().toString())
+                .doctorSpecialty(doctor.getDoctorSpecialty().toString())
                 .build();
         return doctorDto;
     }
@@ -22,7 +27,11 @@ public class DoctorDtoMapper {
     public static Doctor doctorDtoToDoctor(DoctorDto doctorDto) {
         Doctor doctor = Doctor.builder()
                 .id(doctorDto.getId())
-                .doctorFields(DoctorFields.valueOf(doctorDto.getDoctorFieldContent()))
+                .name(doctorDto.getName())
+                .phone(doctorDto.getPhone())
+                .startDate(LocalDate.parse(doctorDto.getStartDate()))
+                .birthDate(LocalDate.parse(doctorDto.getBirthDate()))
+                .doctorSpecialty(DoctorSpecialty.valueOf(doctorDto.getDoctorSpecialty()))
                 .build();
         return doctor;
     }
@@ -31,7 +40,11 @@ public class DoctorDtoMapper {
         Random random = new Random();
         Doctor doctor = Doctor.builder()
                 .id(random.nextLong())
-                .doctorFields(DoctorFields.valueOf(doctorDto.getDoctorFieldContent()))
+                .name(doctorDto.getName())
+                .phone(doctorDto.getPhone())
+                .startDate(LocalDate.parse(doctorDto.getStartDate()))
+                .birthDate(LocalDate.parse(doctorDto.getBirthDate()))
+                .doctorSpecialty(DoctorSpecialty.valueOf(doctorDto.getDoctorSpecialty()))
                 .build();
         return doctor;
     }

@@ -1,7 +1,7 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.DoctorFields;
+import com.github.syndexmx.demopetclinic.domain.DoctorSpecialty;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
 
@@ -11,7 +11,11 @@ public class DoctorEntityMapper {
     public static DoctorEntity doctorToDoctorEntity(Doctor doctor) {
         final DoctorEntity doctorEntity = DoctorEntity.builder()
                 .doctorId(doctor.getId())
-                .doctorFieldContent(doctor.getDoctorFields().toString())
+                .name(doctor.getName())
+                .phone(doctor.getPhone())
+                .birthDate(doctor.getBirthDate())
+                .startDate(doctor.getStartDate())
+                .doctorFieldContent(doctor.getDoctorSpecialty().toString())
                 .build();
         return doctorEntity;
     }
@@ -19,7 +23,11 @@ public class DoctorEntityMapper {
     public static Doctor doctorEntityToDoctor(DoctorEntity doctorEntity) {
         Doctor doctor = Doctor.builder()
                 .id(doctorEntity.getDoctorId())
-                .doctorFields(DoctorFields.valueOf(doctorEntity.getDoctorFieldContent()))
+                .name(doctorEntity.getName())
+                .phone(doctorEntity.getPhone())
+                .birthDate(doctorEntity.getBirthDate())
+                .startDate(doctorEntity.getStartDate())
+                .doctorSpecialty(DoctorSpecialty.valueOf(doctorEntity.getDoctorFieldContent()))
                 .build();
         return doctor;
     }

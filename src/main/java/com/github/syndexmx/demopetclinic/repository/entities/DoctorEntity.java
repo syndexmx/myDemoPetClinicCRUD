@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 
 
 @TemplatedAnnotation
@@ -20,6 +21,11 @@ public class DoctorEntity {
 
     @Id
     private Long doctorId;
+
+    private String name;
+    private String phone;
+    private LocalDate birthDate;
+    private LocalDate startDate;
 
     private String doctorFieldContent;
 
