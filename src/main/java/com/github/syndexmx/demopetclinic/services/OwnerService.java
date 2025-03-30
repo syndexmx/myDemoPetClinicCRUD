@@ -15,14 +15,14 @@ public interface OwnerService {
 
     Owner save(Owner owner);
 
-    Optional<Owner> findById(String ownerId);
+    Optional<Owner> findById(Long ownerId);
 
     List<Owner> listAll();
 
-    boolean isPresent(String ownerId);
+    boolean isPresent(Long ownerId);
 
     boolean isPresent(Owner owner);
 
-    void deleteById(String ownerId);
+    void deleteById(Long ownerId);
 
 }

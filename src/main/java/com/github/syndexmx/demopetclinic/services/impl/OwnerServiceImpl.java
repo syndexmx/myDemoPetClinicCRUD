@@ -48,9 +48,9 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Optional<Owner> findById(String ownerId) {
+    public Optional<Owner> findById(Long ownerId) {
         final Optional<OwnerEntity> ownerEntityFound = ownerRepository
-                .findById(Long.parseLong(ownerId));
+                .findById(ownerId);
         final Optional<Owner> ownerFound = ownerEntityFound.map(ownerEntity ->
                 ownerEntityMapper.ownerEntityToOwner(ownerEntity));
         return ownerFound;
@@ -66,8 +66,8 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public boolean isPresent(String ownerId) {
-        return ownerRepository.existsById(Long.parseLong(ownerId));
+    public boolean isPresent(Long ownerId) {
+        return ownerRepository.existsById(ownerId);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public void deleteById(String ownerId) {
+    public void deleteById(Long ownerId) {
         try {
-            ownerRepository.deleteById(Long.parseLong(ownerId));
+            ownerRepository.deleteById(ownerId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent owner");
         }

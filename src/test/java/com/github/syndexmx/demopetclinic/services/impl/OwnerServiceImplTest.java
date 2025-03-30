@@ -59,7 +59,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Owner nonExistentOwner = OwnerTestSupplierKit.getTestNonExistentOwner();
-        final String nonExistentId = nonExistentOwner.getId().toString();
+        final Long nonExistentId = nonExistentOwner.getId().toString();
         when(ownerRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
         final Optional<Owner> foundOwner = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundOwner);
@@ -69,7 +69,7 @@ public class OwnerServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
         final OwnerEntity ownerEntity = ownerEntityMapper.ownerToOwnerEntity(owner);
-        final String idString = owner.getId().toString();
+        final Long idString = owner.getId().toString();
         when(ownerRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(ownerEntity));
         final Optional<Owner> foundOwner = underTest.findById(idString);
         assertEquals(Optional.of(owner), foundOwner);
@@ -96,7 +96,7 @@ public class OwnerServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(ownerRepository.existsById(any())).thenReturn(false);
         final Owner nonExistentOwner = OwnerTestSupplierKit.getTestNonExistentOwner();
-        final String nonExistentUuid = nonExistentOwner.getId().toString();
+        final Long nonExistentUuid = nonExistentOwner.getId().toString();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,7 +104,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final String idString = owner.getId().toString();
+        final Long idString = owner.getId().toString();
         when(ownerRepository.existsById(Long.parseLong(idString))).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
@@ -130,7 +130,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testThatDeleteOwnerDeletesOwner() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final String idString = owner.getId().toString();
+        final Long idString = owner.getId().toString();
         underTest.deleteById(idString);
         verify(ownerRepository).deleteById(eq(Long.parseLong(idString)));
     }

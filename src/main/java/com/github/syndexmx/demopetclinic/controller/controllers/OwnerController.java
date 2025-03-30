@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper.*;
-
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Owner", description = "API Хозяин")
@@ -49,7 +47,7 @@ public class OwnerController {
     @GetMapping(ROOT_API_PATH + "/{ownerId}")
     @Operation(summary = "Хозяин:получить по id",
             description = "Получить существующий объект Хозяин")
-    public ResponseEntity<OwnerDto> retrieve(@PathVariable String ownerId) {
+    public ResponseEntity<OwnerDto> retrieve(@PathVariable Long ownerId) {
         final Optional<Owner> foundOwner = ownerService.findById(ownerId);
         if (foundOwner.isEmpty()) {
             return new ResponseEntity<OwnerDto>(HttpStatus.NOT_FOUND);
@@ -90,7 +88,7 @@ public class OwnerController {
     @DeleteMapping(ROOT_API_PATH + "/{ownerId}")
     @Operation(summary = "Хозяин:удалить объект по id",
             description = "Удалить существующий в базе объект Хозяин")
-    public ResponseEntity deleteById(@PathVariable String ownerId) {
+    public ResponseEntity deleteById(@PathVariable Long ownerId) {
         log.info("POST " + ROOT_API_PATH + " \n" + ownerId);
         ownerService.deleteById(ownerId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
