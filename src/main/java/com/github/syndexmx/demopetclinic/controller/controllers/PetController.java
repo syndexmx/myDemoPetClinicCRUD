@@ -37,7 +37,7 @@ public class PetController {
     @Operation(summary = "Животное:добавить",
             description = "Создание нового объекта Животное. id присваивается системой")
     public ResponseEntity<PetDto> create(@RequestBody final PetDto petDto) {
-        log.info("POST " + ROOT_API_PATH + " \n" + petDto);
+        log.info("POST " + ROOT_API_PATH + "\n" + petDto);
         final Pet pet = petDtoMapper.petDtoNoIdToPet(petDto);
         final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
                 petDtoMapper.petToPetDto(petService.create(pet)), HttpStatus.CREATED);
