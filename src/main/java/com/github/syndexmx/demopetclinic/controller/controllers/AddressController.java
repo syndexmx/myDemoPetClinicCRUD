@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.AddressDtoMapper.*;
-
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Address", description = "API Адрес")
@@ -39,7 +37,7 @@ public class AddressController {
     @Operation(summary = "Адрес:добавить",
             description = "Создание нового объекта Адрес. id присваивается системой")
     public ResponseEntity<AddressDto> create(@RequestBody final AddressDto addressDto) {
-        log.info("POST " + ROOT_API_PATH + " \n" + addressDto);
+        log.info("POST " + ROOT_API_PATH + "\n" + addressDto);
         final Address address = addressDtoMapper.addressDtoNoIdToAddress(addressDto);
         final ResponseEntity<AddressDto> responseEntity = new ResponseEntity<> (
                 addressDtoMapper.addressToAddressDto(addressService.create(address)), HttpStatus.CREATED);
@@ -52,10 +50,10 @@ public class AddressController {
     public ResponseEntity<AddressDto> retrieve(@PathVariable String addressId) {
         final Optional<Address> foundAddress = addressService.findById(addressId);
         if (foundAddress.isEmpty()) {
-            return new ResponseEntity<AddressDto>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             final AddressDto addressDto = addressDtoMapper.addressToAddressDto(foundAddress.get());
-            return new ResponseEntity<AddressDto>(addressDto, HttpStatus.FOUND);
+            return new ResponseEntity<>(addressDto, HttpStatus.FOUND);
         }
     }
 
