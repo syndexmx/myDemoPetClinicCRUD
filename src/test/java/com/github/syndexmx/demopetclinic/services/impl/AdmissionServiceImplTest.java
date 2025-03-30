@@ -5,23 +5,23 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.domain.AdmissionTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.AdmissionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper.admissionToAdmissionEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 @TemplatedAnnotation
@@ -34,10 +34,13 @@ public class AdmissionServiceImplTest {
     @InjectMocks
     private AdmissionServiceImpl underTest;
 
+    @Autowired
+    private AdmissionEntityMapper admissionEntityMapper;
+
     @Test
     public void testThatAdmissionIsCreated() {
         Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        AdmissionEntity admissionEntity = admissionToAdmissionEntity(admission);
+        AdmissionEntity admissionEntity = admissionEntityMapper.admissionToAdmissionEntity(admission);
         when(admissionRepository.save(any())).thenReturn(admissionEntity);
         final Admission savedAdmission = underTest.create(admission);
         admission.setId(savedAdmission.getId());
@@ -47,7 +50,7 @@ public class AdmissionServiceImplTest {
     @Test
     public void testThatAdmissionIsSaved() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final AdmissionEntity admissionEntity = admissionToAdmissionEntity(admission);
+        final AdmissionEntity admissionEntity = admissionEntityMapper.admissionToAdmissionEntity(admission);
         when(admissionRepository.save(eq(admissionEntity))).thenReturn(admissionEntity);
         final Admission savedAdmission = underTest.save(admission);
         assertEquals(admission, savedAdmission);
@@ -65,7 +68,7 @@ public class AdmissionServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final AdmissionEntity admissionEntity = admissionToAdmissionEntity(admission);
+        final AdmissionEntity admissionEntity = admissionEntityMapper.admissionToAdmissionEntity(admission);
         final String idString = admission.getId().toString();
         when(admissionRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(admissionEntity));
         final Optional<Admission> foundAdmission = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class AdmissionServiceImplTest {
     @Test
     public void testListAdmissionsReturnsListWhenExist() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final AdmissionEntity admissionEntity = admissionToAdmissionEntity(admission);
+        final AdmissionEntity admissionEntity = admissionEntityMapper.admissionToAdmissionEntity(admission);
         List<AdmissionEntity> listOfExisting = new ArrayList<>(List.of(admissionEntity));
         when(admissionRepository.findAll()).thenReturn(listOfExisting);
         final List<Admission> result = underTest.listAll();

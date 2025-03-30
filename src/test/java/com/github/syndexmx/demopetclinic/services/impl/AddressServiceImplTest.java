@@ -5,19 +5,19 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.domain.AddressTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.AddressEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.AddressRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-import static com.github.syndexmx.demopetclinic.repository.mappers.AddressEntityMapper.addressToAddressEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -34,10 +34,13 @@ public class AddressServiceImplTest {
     @InjectMocks
     private AddressServiceImpl underTest;
 
+    @Autowired
+    private AddressEntityMapper addressEntityMapper;
+
     @Test
     public void testThatAddressIsCreated() {
         Address address = AddressTestSupplierKit.getTestAddress();
-        AddressEntity addressEntity = addressToAddressEntity(address);
+        AddressEntity addressEntity = addressEntityMapper.addressToAddressEntity(address);
         when(addressRepository.save(any())).thenReturn(addressEntity);
         final Address savedAddress = underTest.create(address);
         address.setId(savedAddress.getId());
@@ -47,7 +50,7 @@ public class AddressServiceImplTest {
     @Test
     public void testThatAddressIsSaved() {
         final Address address = AddressTestSupplierKit.getTestAddress();
-        final AddressEntity addressEntity = addressToAddressEntity(address);
+        final AddressEntity addressEntity = addressEntityMapper.addressToAddressEntity(address);
         when(addressRepository.save(eq(addressEntity))).thenReturn(addressEntity);
         final Address savedAddress = underTest.save(address);
         assertEquals(address, savedAddress);
@@ -65,7 +68,7 @@ public class AddressServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Address address = AddressTestSupplierKit.getTestAddress();
-        final AddressEntity addressEntity = addressToAddressEntity(address);
+        final AddressEntity addressEntity = addressEntityMapper.addressToAddressEntity(address);
         final String idString = address.getId().toString();
         when(addressRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(addressEntity));
         final Optional<Address> foundAddress = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class AddressServiceImplTest {
     @Test
     public void testListAddresssReturnsListWhenExist() {
         final Address address = AddressTestSupplierKit.getTestAddress();
-        final AddressEntity addressEntity = addressToAddressEntity(address);
+        final AddressEntity addressEntity = addressEntityMapper.addressToAddressEntity(address);
         List<AddressEntity> listOfExisting = new ArrayList<>(List.of(addressEntity));
         when(addressRepository.findAll()).thenReturn(listOfExisting);
         final List<Address> result = underTest.listAll();

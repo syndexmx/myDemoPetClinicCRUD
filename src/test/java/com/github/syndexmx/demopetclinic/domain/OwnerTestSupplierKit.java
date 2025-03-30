@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.domain;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -20,7 +21,7 @@ public class OwnerTestSupplierKit {
                 .name("John Smith")
                 .phone("+1(800)01885476")
                 .id(id)
-                .ownerFields(GENERIC_FIELD_VALUE)
+                //.petIdList(new ArrayList<Pet>())
                 .build();
     }
 
@@ -29,7 +30,7 @@ public class OwnerTestSupplierKit {
                 .id(id)
                 .name("James Gold")
                 .phone("+1(800)01997476")
-                .ownerFields(GENERIC_STRING_MODIFIED)
+                //.petIdList(new ArrayList<Pet>())
                 .build();
     }
 
@@ -39,7 +40,7 @@ public class OwnerTestSupplierKit {
     public static Owner getTestNonExistentOwner( ) {
         return Owner.builder()
                 .id(NON_EXISTENT_Long)
-                .ownerFields(NON_EXISTENT_VALUE)
+                //.petIdList(new ArrayList<Pet>())
                 .build();
     }
 

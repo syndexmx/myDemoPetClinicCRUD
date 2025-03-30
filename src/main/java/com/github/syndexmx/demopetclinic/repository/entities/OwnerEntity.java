@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @TemplatedAnnotation
@@ -25,7 +26,7 @@ public class OwnerEntity {
     private String phone;
     private Long address;
 
-    private String ownerFieldContent;
-
+    @OneToMany
+    private List<PetEntity> petList;
 
 }

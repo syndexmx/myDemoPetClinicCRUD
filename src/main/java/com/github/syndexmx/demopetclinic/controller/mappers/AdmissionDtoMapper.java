@@ -4,15 +4,16 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AdmissionDto;
 import com.github.syndexmx.demopetclinic.domain.AdmissionFields;
 import com.github.syndexmx.demopetclinic.domain.Admission;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Random;
 
-
+@Service
 @TemplatedAnnotation
 public class AdmissionDtoMapper {
 
-    public static AdmissionDto admissionToAdmissionDto(Admission admission) {
+    public AdmissionDto admissionToAdmissionDto(Admission admission) {
         final AdmissionDto admissionDto = AdmissionDto.builder()
                 .id(admission.getId())
                 .petId(admission.getPetId())
@@ -26,7 +27,7 @@ public class AdmissionDtoMapper {
         return admissionDto;
     }
 
-    public static Admission admissionDtoToAdmission(AdmissionDto admissionDto) {
+    public Admission admissionDtoToAdmission(AdmissionDto admissionDto) {
         Admission admission = Admission.builder()
                 .id(admissionDto.getId())
                 .petId(admissionDto.getPetId())
@@ -40,7 +41,7 @@ public class AdmissionDtoMapper {
         return admission;
     }
 
-    public static Admission admissionDtoNoIdToAdmission(AdmissionDto admissionDto) {
+    public Admission admissionDtoNoIdToAdmission(AdmissionDto admissionDto) {
         Random random = new Random();
         Admission admission = Admission.builder()
                 .id(random.nextLong())

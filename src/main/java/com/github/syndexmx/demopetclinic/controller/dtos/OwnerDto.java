@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,10 +38,7 @@ public class OwnerDto {
     @Schema(description = "Адрес")
     private Long address;
 
-    @NotNull(message = "Поле должно существовать")
-    @NotBlank(message = "Требуется непустое поле")
-    @Schema(description = "Поле", example = "DEFAULTVALUE")
-    private String ownerFieldContent;
-
+    @Schema(description = "Список животных", example = "[]")
+    private List<Long> petList;
 
 }

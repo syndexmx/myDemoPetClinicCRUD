@@ -4,11 +4,13 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.DoctorSpecialty;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 @TemplatedAnnotation
 public class DoctorEntityMapper {
 
-    public static DoctorEntity doctorToDoctorEntity(Doctor doctor) {
+    public DoctorEntity doctorToDoctorEntity(Doctor doctor) {
         final DoctorEntity doctorEntity = DoctorEntity.builder()
                 .doctorId(doctor.getId())
                 .name(doctor.getName())
@@ -20,7 +22,7 @@ public class DoctorEntityMapper {
         return doctorEntity;
     }
 
-    public static Doctor doctorEntityToDoctor(DoctorEntity doctorEntity) {
+    public Doctor doctorEntityToDoctor(DoctorEntity doctorEntity) {
         Doctor doctor = Doctor.builder()
                 .id(doctorEntity.getDoctorId())
                 .name(doctorEntity.getName())

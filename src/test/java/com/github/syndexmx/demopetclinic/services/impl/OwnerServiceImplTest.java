@@ -5,23 +5,23 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.OwnerTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.OwnerEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.OwnerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repository.mappers.OwnerEntityMapper.ownerToOwnerEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 @TemplatedAnnotation
@@ -34,10 +34,13 @@ public class OwnerServiceImplTest {
     @InjectMocks
     private OwnerServiceImpl underTest;
 
+    @Autowired
+    private OwnerEntityMapper ownerEntityMapper;
+
     @Test
     public void testThatOwnerIsCreated() {
         Owner owner = OwnerTestSupplierKit.getTestOwner();
-        OwnerEntity ownerEntity = ownerToOwnerEntity(owner);
+        OwnerEntity ownerEntity = ownerEntityMapper.ownerToOwnerEntity(owner);
         when(ownerRepository.save(any())).thenReturn(ownerEntity);
         final Owner savedOwner = underTest.create(owner);
         owner.setId(savedOwner.getId());
@@ -47,7 +50,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testThatOwnerIsSaved() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final OwnerEntity ownerEntity = ownerToOwnerEntity(owner);
+        final OwnerEntity ownerEntity = ownerEntityMapper.ownerToOwnerEntity(owner);
         when(ownerRepository.save(eq(ownerEntity))).thenReturn(ownerEntity);
         final Owner savedOwner = underTest.save(owner);
         assertEquals(owner, savedOwner);
@@ -65,7 +68,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final OwnerEntity ownerEntity = ownerToOwnerEntity(owner);
+        final OwnerEntity ownerEntity = ownerEntityMapper.ownerToOwnerEntity(owner);
         final String idString = owner.getId().toString();
         when(ownerRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(ownerEntity));
         final Optional<Owner> foundOwner = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class OwnerServiceImplTest {
     @Test
     public void testListOwnersReturnsListWhenExist() {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final OwnerEntity ownerEntity = ownerToOwnerEntity(owner);
+        final OwnerEntity ownerEntity = ownerEntityMapper.ownerToOwnerEntity(owner);
         List<OwnerEntity> listOfExisting = new ArrayList<>(List.of(ownerEntity));
         when(ownerRepository.findAll()).thenReturn(listOfExisting);
         final List<Owner> result = underTest.listAll();

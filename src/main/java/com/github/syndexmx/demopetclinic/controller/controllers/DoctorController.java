@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.DoctorDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.controller.dtos.DoctorDto;
 import com.github.syndexmx.demopetclinic.services.DoctorService;
@@ -26,10 +27,12 @@ public class DoctorController {
     private final String ROOT_API_PATH = "/api/v0/doctors";
 
     private final DoctorService doctorService;
+    private final DoctorDtoMapper doctorDtoMapper;
 
     @Autowired
-    private DoctorController(DoctorService doctorService) {
+    private DoctorController(DoctorService doctorService, DoctorDtoMapper doctorDtoMapper) {
         this.doctorService = doctorService;
+        this.doctorDtoMapper = doctorDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class DoctorController {
             description = "Создание нового объекта Доктор. id присваивается системой")
     public ResponseEntity<DoctorDto> create(@RequestBody final DoctorDto doctorDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + doctorDto);
-        final Doctor doctor = doctorDtoNoIdToDoctor(doctorDto);
+        final Doctor doctor = doctorDtoMapper.doctorDtoNoIdToDoctor(doctorDto);
         final ResponseEntity<DoctorDto> responseEntity = new ResponseEntity<> (
-                doctorToDoctorDto(doctorService.create(doctor)), HttpStatus.CREATED);
+                doctorDtoMapper.doctorToDoctorDto(doctorService.create(doctor)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class DoctorController {
         if (foundDoctor.isEmpty()) {
             return new ResponseEntity<DoctorDto>(HttpStatus.NOT_FOUND);
         } else {
-            final DoctorDto doctorDto = doctorToDoctorDto(foundDoctor.get());
+            final DoctorDto doctorDto = doctorDtoMapper.doctorToDoctorDto(foundDoctor.get());
             return new ResponseEntity<DoctorDto>(doctorDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class DoctorController {
     public ResponseEntity<List<DoctorDto>> retrieveAll() {
         final List<Doctor> listFound = doctorService.listAll();
         final List<DoctorDto> listFoundDtos = listFound.stream()
-                .map(doctor -> doctorToDoctorDto(doctor)).toList();
+                .map(doctor -> doctorDtoMapper.doctorToDoctorDto(doctor)).toList();
         final ResponseEntity<List<DoctorDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -73,14 +76,14 @@ public class DoctorController {
             description = "Обновить существующий в базе объект Доктор")
     public ResponseEntity<DoctorDto> update(@RequestBody final DoctorDto doctorDto) {
         log.info("PUT " + ROOT_API_PATH + " \n" + doctorDto);
-        final Doctor doctor = doctorDtoToDoctor(doctorDto);
+        final Doctor doctor = doctorDtoMapper.doctorDtoToDoctor(doctorDto);
         if (!doctorService.isPresent(doctor)) {
             final ResponseEntity<DoctorDto> responseEntity = new ResponseEntity<> (
-                    doctorToDoctorDto(doctorService.save(doctor)), HttpStatus.CREATED);
+                    doctorDtoMapper.doctorToDoctorDto(doctorService.save(doctor)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<DoctorDto> responseEntity = new ResponseEntity<> (
-                doctorToDoctorDto(doctorService.save(doctor)), HttpStatus.OK);
+                doctorDtoMapper.doctorToDoctorDto(doctorService.save(doctor)), HttpStatus.OK);
         return responseEntity;
     }
 

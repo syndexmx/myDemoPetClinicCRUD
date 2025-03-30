@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.controller.dtos.OwnerDto;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
@@ -26,10 +27,12 @@ public class OwnerController {
     private final String ROOT_API_PATH = "/api/v0/owners";
 
     private final OwnerService ownerService;
+    private final OwnerDtoMapper ownerDtoMapper;
 
     @Autowired
-    private OwnerController(OwnerService ownerService) {
+    private OwnerController(OwnerService ownerService, OwnerDtoMapper ownerDtoMapper) {
         this.ownerService = ownerService;
+        this.ownerDtoMapper = ownerDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class OwnerController {
             description = "Создание нового объекта Хозяин. id присваивается системой")
     public ResponseEntity<OwnerDto> create(@RequestBody final OwnerDto ownerDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + ownerDto);
-        final Owner owner = ownerDtoNoIdToOwner(ownerDto);
+        final Owner owner = ownerDtoMapper.ownerDtoNoIdToOwner(ownerDto);
         final ResponseEntity<OwnerDto> responseEntity = new ResponseEntity<> (
-                ownerToOwnerDto(ownerService.create(owner)), HttpStatus.CREATED);
+                ownerDtoMapper.ownerToOwnerDto(ownerService.create(owner)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class OwnerController {
         if (foundOwner.isEmpty()) {
             return new ResponseEntity<OwnerDto>(HttpStatus.NOT_FOUND);
         } else {
-            final OwnerDto ownerDto = ownerToOwnerDto(foundOwner.get());
+            final OwnerDto ownerDto = ownerDtoMapper.ownerToOwnerDto(foundOwner.get());
             return new ResponseEntity<OwnerDto>(ownerDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class OwnerController {
     public ResponseEntity<List<OwnerDto>> retrieveAll() {
         final List<Owner> listFound = ownerService.listAll();
         final List<OwnerDto> listFoundDtos = listFound.stream()
-                .map(owner -> ownerToOwnerDto(owner)).toList();
+                .map(owner -> ownerDtoMapper.ownerToOwnerDto(owner)).toList();
         final ResponseEntity<List<OwnerDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -73,14 +76,14 @@ public class OwnerController {
             description = "Обновить существующий в базе объект Хозяин")
     public ResponseEntity<OwnerDto> update(@RequestBody final OwnerDto ownerDto) {
         log.info("PUT " + ROOT_API_PATH + " \n" + ownerDto);
-        final Owner owner = ownerDtoToOwner(ownerDto);
+        final Owner owner = ownerDtoMapper.ownerDtoToOwner(ownerDto);
         if (!ownerService.isPresent(owner)) {
             final ResponseEntity<OwnerDto> responseEntity = new ResponseEntity<> (
-                    ownerToOwnerDto(ownerService.save(owner)), HttpStatus.CREATED);
+                    ownerDtoMapper.ownerToOwnerDto(ownerService.save(owner)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<OwnerDto> responseEntity = new ResponseEntity<> (
-                ownerToOwnerDto(ownerService.save(owner)), HttpStatus.OK);
+                ownerDtoMapper.ownerToOwnerDto(ownerService.save(owner)), HttpStatus.OK);
         return responseEntity;
     }
 

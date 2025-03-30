@@ -22,14 +22,17 @@ public class PetEntity {
     @Id
     private Long petId;
 
-    String name;
-    String species;
-    String breed;
-    LocalDate birthDate;
-    Integer weight; // grams
-    String colour;
+    @ManyToOne
+    private OwnerEntity owner;
 
-    String petSpecies;
+    private String name;
+    private String species;
+    private String breed;
+    private LocalDate birthDate;
+    private Integer weight; // grams
+    private String colour;
+
+    private String petSpecies;
 
 
 }

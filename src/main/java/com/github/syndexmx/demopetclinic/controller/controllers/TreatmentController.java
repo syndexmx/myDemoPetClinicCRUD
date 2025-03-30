@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.TreatmentDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.controller.dtos.TreatmentDto;
 import com.github.syndexmx.demopetclinic.services.TreatmentService;
@@ -26,10 +27,12 @@ public class TreatmentController {
     private final String ROOT_API_PATH = "/api/v0/treatments";
 
     private final TreatmentService treatmentService;
+    private final TreatmentDtoMapper treatmentDtoMapper;
 
     @Autowired
-    private TreatmentController(TreatmentService treatmentService) {
+    private TreatmentController(TreatmentService treatmentService, TreatmentDtoMapper treatmentDtoMapper) {
         this.treatmentService = treatmentService;
+        this.treatmentDtoMapper = treatmentDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class TreatmentController {
             description = "Создание нового объекта Лечение. id присваивается системой")
     public ResponseEntity<TreatmentDto> create(@RequestBody final TreatmentDto treatmentDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + treatmentDto);
-        final Treatment treatment = treatmentDtoNoIdToTreatment(treatmentDto);
+        final Treatment treatment = treatmentDtoMapper.treatmentDtoNoIdToTreatment(treatmentDto);
         final ResponseEntity<TreatmentDto> responseEntity = new ResponseEntity<> (
-                treatmentToTreatmentDto(treatmentService.create(treatment)), HttpStatus.CREATED);
+                treatmentDtoMapper.treatmentToTreatmentDto(treatmentService.create(treatment)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class TreatmentController {
         if (foundTreatment.isEmpty()) {
             return new ResponseEntity<TreatmentDto>(HttpStatus.NOT_FOUND);
         } else {
-            final TreatmentDto treatmentDto = treatmentToTreatmentDto(foundTreatment.get());
+            final TreatmentDto treatmentDto = treatmentDtoMapper.treatmentToTreatmentDto(foundTreatment.get());
             return new ResponseEntity<TreatmentDto>(treatmentDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class TreatmentController {
     public ResponseEntity<List<TreatmentDto>> retrieveAll() {
         final List<Treatment> listFound = treatmentService.listAll();
         final List<TreatmentDto> listFoundDtos = listFound.stream()
-                .map(treatment -> treatmentToTreatmentDto(treatment)).toList();
+                .map(treatment -> treatmentDtoMapper.treatmentToTreatmentDto(treatment)).toList();
         final ResponseEntity<List<TreatmentDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -72,14 +75,14 @@ public class TreatmentController {
     @Operation(summary = "Лечение:обновить объект по id",
             description = "Обновить существующий в базе объект Лечение")
     public ResponseEntity<TreatmentDto> update(@RequestBody final TreatmentDto treatmentDto) {
-        final Treatment treatment = treatmentDtoToTreatment(treatmentDto);
+        final Treatment treatment = treatmentDtoMapper.treatmentDtoToTreatment(treatmentDto);
         if (!treatmentService.isPresent(treatment)) {
             final ResponseEntity<TreatmentDto> responseEntity = new ResponseEntity<> (
-                    treatmentToTreatmentDto(treatmentService.save(treatment)), HttpStatus.CREATED);
+                    treatmentDtoMapper.treatmentToTreatmentDto(treatmentService.save(treatment)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<TreatmentDto> responseEntity = new ResponseEntity<> (
-                treatmentToTreatmentDto(treatmentService.save(treatment)), HttpStatus.OK);
+                treatmentDtoMapper.treatmentToTreatmentDto(treatmentService.save(treatment)), HttpStatus.OK);
         return responseEntity;
     }
 

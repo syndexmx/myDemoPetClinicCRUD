@@ -4,13 +4,19 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.PetSpecies;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
+import com.github.syndexmx.demopetclinic.services.OwnerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
+@Service
 @TemplatedAnnotation
 public class PetEntityMapper {
 
-    public static PetEntity petToPetEntity(Pet pet) {
+    public PetEntity petToPetEntity(Pet pet) {
         final PetEntity petEntity = PetEntity.builder()
                 .petId(pet.getId())
+                //.owner(ownerService.findById(pet.getOwnerId()))
                 .breed(pet.getBreed())
                 .birthDate(pet.getBirthDate())
                 .name(pet.getName())
@@ -21,9 +27,10 @@ public class PetEntityMapper {
         return petEntity;
     }
 
-    public static Pet petEntityToPet(PetEntity petEntity) {
+    public Pet petEntityToPet(PetEntity petEntity) {
         Pet pet = Pet.builder()
                 .id(petEntity.getPetId())
+                //.ownerId()
                 .breed(petEntity.getBreed())
                 .birthDate(petEntity.getBirthDate())
                 .name(petEntity.getName())

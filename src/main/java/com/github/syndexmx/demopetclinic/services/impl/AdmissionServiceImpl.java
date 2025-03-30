@@ -3,6 +3,7 @@ package com.github.syndexmx.demopetclinic.services.impl;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.AdmissionRepository;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,35 +15,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-
-import static com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper.admissionEntityToAdmission;
-import static com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper.admissionToAdmissionEntity;
-
 @TemplatedAnnotation
 @Service
 @Slf4j
 public class AdmissionServiceImpl implements AdmissionService {
 
     private final AdmissionRepository admissionRepository;
+    private final AdmissionEntityMapper admissionEntityMapper;
 
     @Autowired
-    private AdmissionServiceImpl(AdmissionRepository admissionRepository) {
+    private AdmissionServiceImpl(AdmissionRepository admissionRepository, AdmissionEntityMapper admissionEntityMapper) {
         this.admissionRepository = admissionRepository;
+        this.admissionEntityMapper = admissionEntityMapper;
     }
 
     @Override
     public Admission create(Admission admission) {
         Random random = new Random();Long spoofId = random.nextLong();
         admission.setId(spoofId);
-        final AdmissionEntity savedEntity = admissionRepository.save(admissionToAdmissionEntity(admission));
-        final Admission savedAdmission = admissionEntityToAdmission(savedEntity);
+        final AdmissionEntity savedEntity = admissionRepository
+                .save(admissionEntityMapper.admissionToAdmissionEntity(admission));
+        final Admission savedAdmission = admissionEntityMapper.admissionEntityToAdmission(savedEntity);
         return savedAdmission;
     }
 
     @Override
     public Admission save(Admission admission) {
-        final AdmissionEntity savedEntity = admissionRepository.save(admissionToAdmissionEntity(admission));
-        final Admission savedAdmission = admissionEntityToAdmission(savedEntity);
+        final AdmissionEntity savedEntity = admissionRepository
+                .save(admissionEntityMapper.admissionToAdmissionEntity(admission));
+        final Admission savedAdmission = admissionEntityMapper.admissionEntityToAdmission(savedEntity);
         return savedAdmission;
     }
 
@@ -51,7 +52,7 @@ public class AdmissionServiceImpl implements AdmissionService {
         final Optional<AdmissionEntity> admissionEntityFound = admissionRepository
                 .findById(Long.parseLong(admissionId));
         final Optional<Admission> admissionFound = admissionEntityFound.map(admissionEntity ->
-                admissionEntityToAdmission(admissionEntity));
+                admissionEntityMapper.admissionEntityToAdmission(admissionEntity));
         return admissionFound;
     }
 
@@ -59,7 +60,7 @@ public class AdmissionServiceImpl implements AdmissionService {
     public List<Admission> listAll() {
         final List<AdmissionEntity> listOfFoundAdmissionEntities = admissionRepository.findAll();
         final List<Admission> listOfFoundAdmissions =listOfFoundAdmissionEntities.stream()
-                .map(entity -> admissionEntityToAdmission(entity)).toList();
+                .map(entity -> admissionEntityMapper.admissionEntityToAdmission(entity)).toList();
         return listOfFoundAdmissions;
     }
 

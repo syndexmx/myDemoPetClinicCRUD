@@ -4,13 +4,15 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.TreatmentFields;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.repository.entities.TreatmentEntity;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+@Service
 @TemplatedAnnotation
 public class TreatmentEntityMapper {
 
-    public static TreatmentEntity treatmentToTreatmentEntity(Treatment treatment) {
+    public TreatmentEntity treatmentToTreatmentEntity(Treatment treatment) {
         final TreatmentEntity treatmentEntity = TreatmentEntity.builder()
                 .treatmentId(treatment.getId())
                 .medicine(treatment.getMedicine())
@@ -23,7 +25,7 @@ public class TreatmentEntityMapper {
         return treatmentEntity;
     }
 
-    public static Treatment treatmentEntityToTreatment(TreatmentEntity treatmentEntity) {
+    public Treatment treatmentEntityToTreatment(TreatmentEntity treatmentEntity) {
         Treatment treatment = Treatment.builder()
                 .id(treatmentEntity.getTreatmentId())
                 .medicine(treatmentEntity.getMedicine())

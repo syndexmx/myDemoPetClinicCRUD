@@ -4,14 +4,15 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
 import com.github.syndexmx.demopetclinic.domain.AddressFields;
 import com.github.syndexmx.demopetclinic.domain.Address;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
-
+@Service
 @TemplatedAnnotation
 public class AddressDtoMapper {
 
-    public static AddressDto addressToAddressDto(Address address) {
+    public AddressDto addressToAddressDto(Address address) {
         final AddressDto addressDto = AddressDto.builder()
                 .id(address.getId())
                 .region(address.getRegion())
@@ -25,7 +26,7 @@ public class AddressDtoMapper {
         return addressDto;
     }
 
-    public static Address addressDtoToAddress(AddressDto addressDto) {
+    public Address addressDtoToAddress(AddressDto addressDto) {
         Address address = Address.builder()
                 .id(addressDto.getId())
                 .region(addressDto.getRegion())
@@ -39,7 +40,7 @@ public class AddressDtoMapper {
         return address;
     }
 
-    public static Address addressDtoNoIdToAddress(AddressDto addressDto) {
+    public Address addressDtoNoIdToAddress(AddressDto addressDto) {
         Random random = new Random();
         Address address = Address.builder()
                 .id(random.nextLong())

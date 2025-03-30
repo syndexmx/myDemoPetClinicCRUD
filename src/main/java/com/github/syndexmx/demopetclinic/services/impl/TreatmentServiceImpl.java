@@ -3,6 +3,7 @@ package com.github.syndexmx.demopetclinic.services.impl;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.repository.entities.TreatmentEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.TreatmentEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.TreatmentRepository;
 import com.github.syndexmx.demopetclinic.services.TreatmentService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,35 +15,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-
-import static com.github.syndexmx.demopetclinic.repository.mappers.TreatmentEntityMapper.treatmentEntityToTreatment;
-import static com.github.syndexmx.demopetclinic.repository.mappers.TreatmentEntityMapper.treatmentToTreatmentEntity;
-
 @TemplatedAnnotation
 @Service
 @Slf4j
 public class TreatmentServiceImpl implements TreatmentService {
 
     private final TreatmentRepository treatmentRepository;
+    private final TreatmentEntityMapper treatmentEntityMapper;
 
     @Autowired
-    private TreatmentServiceImpl(TreatmentRepository treatmentRepository) {
+    private TreatmentServiceImpl(TreatmentRepository treatmentRepository, TreatmentEntityMapper treatmentEntityMapper) {
         this.treatmentRepository = treatmentRepository;
+        this.treatmentEntityMapper = treatmentEntityMapper;
     }
 
     @Override
     public Treatment create(Treatment treatment) {
         Random random = new Random();Long spoofId = random.nextLong();
         treatment.setId(spoofId);
-        final TreatmentEntity savedEntity = treatmentRepository.save(treatmentToTreatmentEntity(treatment));
-        final Treatment savedTreatment = treatmentEntityToTreatment(savedEntity);
+        final TreatmentEntity savedEntity = treatmentRepository
+                .save(treatmentEntityMapper.treatmentToTreatmentEntity(treatment));
+        final Treatment savedTreatment = treatmentEntityMapper.treatmentEntityToTreatment(savedEntity);
         return savedTreatment;
     }
 
     @Override
     public Treatment save(Treatment treatment) {
-        final TreatmentEntity savedEntity = treatmentRepository.save(treatmentToTreatmentEntity(treatment));
-        final Treatment savedTreatment = treatmentEntityToTreatment(savedEntity);
+        final TreatmentEntity savedEntity = treatmentRepository
+                .save(treatmentEntityMapper.treatmentToTreatmentEntity(treatment));
+        final Treatment savedTreatment = treatmentEntityMapper.treatmentEntityToTreatment(savedEntity);
         return savedTreatment;
     }
 
@@ -51,7 +52,7 @@ public class TreatmentServiceImpl implements TreatmentService {
         final Optional<TreatmentEntity> treatmentEntityFound = treatmentRepository
                 .findById(Long.parseLong(treatmentId));
         final Optional<Treatment> treatmentFound = treatmentEntityFound.map(treatmentEntity ->
-                treatmentEntityToTreatment(treatmentEntity));
+                treatmentEntityMapper.treatmentEntityToTreatment(treatmentEntity));
         return treatmentFound;
     }
 
@@ -59,7 +60,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     public List<Treatment> listAll() {
         final List<TreatmentEntity> listOfFoundTreatmentEntities = treatmentRepository.findAll();
         final List<Treatment> listOfFoundTreatments =listOfFoundTreatmentEntities.stream()
-                .map(entity -> treatmentEntityToTreatment(entity)).toList();
+                .map(entity ->
+                        treatmentEntityMapper.treatmentEntityToTreatment(entity)).toList();
         return listOfFoundTreatments;
     }
 

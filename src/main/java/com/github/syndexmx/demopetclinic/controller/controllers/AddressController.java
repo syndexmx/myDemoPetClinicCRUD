@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.AddressDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
 import com.github.syndexmx.demopetclinic.services.AddressService;
@@ -26,10 +27,12 @@ public class AddressController {
     private final String ROOT_API_PATH = "/api/v0/addresses";
 
     private final AddressService addressService;
+    private final AddressDtoMapper addressDtoMapper;
 
-    @Autowired
-    private AddressController(AddressService addressService) {
+    private AddressController(@Autowired AddressService addressService,
+                              @Autowired AddressDtoMapper addressDtoMapper) {
         this.addressService = addressService;
+        this.addressDtoMapper = addressDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class AddressController {
             description = "Создание нового объекта Адрес. id присваивается системой")
     public ResponseEntity<AddressDto> create(@RequestBody final AddressDto addressDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + addressDto);
-        final Address address = addressDtoNoIdToAddress(addressDto);
+        final Address address = addressDtoMapper.addressDtoNoIdToAddress(addressDto);
         final ResponseEntity<AddressDto> responseEntity = new ResponseEntity<> (
-                addressToAddressDto(addressService.create(address)), HttpStatus.CREATED);
+                addressDtoMapper.addressToAddressDto(addressService.create(address)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class AddressController {
         if (foundAddress.isEmpty()) {
             return new ResponseEntity<AddressDto>(HttpStatus.NOT_FOUND);
         } else {
-            final AddressDto addressDto = addressToAddressDto(foundAddress.get());
+            final AddressDto addressDto = addressDtoMapper.addressToAddressDto(foundAddress.get());
             return new ResponseEntity<AddressDto>(addressDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class AddressController {
     public ResponseEntity<List<AddressDto>> retrieveAll() {
         final List<Address> listFound = addressService.listAll();
         final List<AddressDto> listFoundDtos = listFound.stream()
-                .map(address -> addressToAddressDto(address)).toList();
+                .map(address -> addressDtoMapper.addressToAddressDto(address)).toList();
         final ResponseEntity<List<AddressDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -73,14 +76,14 @@ public class AddressController {
             description = "Обновить существующий в базе объект Адрес")
     public ResponseEntity<AddressDto> update(@RequestBody final AddressDto addressDto) {
         log.info("PUT " + ROOT_API_PATH + " \n" + addressDto);
-        final Address address = addressDtoToAddress(addressDto);
+        final Address address = addressDtoMapper.addressDtoToAddress(addressDto);
         if (!addressService.isPresent(address)) {
             final ResponseEntity<AddressDto> responseEntity = new ResponseEntity<> (
-                    addressToAddressDto(addressService.save(address)), HttpStatus.CREATED);
+                    addressDtoMapper.addressToAddressDto(addressService.save(address)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<AddressDto> responseEntity = new ResponseEntity<> (
-                addressToAddressDto(addressService.save(address)), HttpStatus.OK);
+                addressDtoMapper.addressToAddressDto(addressService.save(address)), HttpStatus.OK);
         return responseEntity;
     }
 

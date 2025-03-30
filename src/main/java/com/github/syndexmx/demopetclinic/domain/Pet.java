@@ -17,12 +17,14 @@ public class Pet {
 
     private Long id;
 
-    String name;
-    String species;
-    String breed;
-    LocalDate birthDate;
-    Integer weight; // grams
-    String colour;
-    PetSpecies petSpecies;
+    private Long ownerId;
+
+    private String name;
+    private String species;
+    private String breed;
+    private LocalDate birthDate;
+    private Integer weight; // grams
+    private String colour;
+    private PetSpecies petSpecies;
 
 }

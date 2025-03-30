@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.TreatmentDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.domain.TreatmentTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.TreatmentDto;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.TreatmentDtoMapper.treatmentToTreatmentDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +40,13 @@ public class TreatmentControllerIT {
     @Autowired
     private TreatmentService treatmentService;
 
+    @Autowired
+    private TreatmentDtoMapper treatmentDtoMapper;
+
     @Test
     public void testThatTreatmentIsCreated() throws Exception {
         Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final TreatmentDto treatmentDto = treatmentToTreatmentDto(treatment);
+        final TreatmentDto treatmentDto = treatmentDtoMapper.treatmentToTreatmentDto(treatment);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String treatmentJson = objectMapper.writeValueAsString(treatmentDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +68,7 @@ public class TreatmentControllerIT {
         final Long id = savedTreatment.getId();
         Treatment modifiedTreatment = TreatmentTestSupplierKit.getModifiedTestTreatment();
         modifiedTreatment.setId(id);
-        final TreatmentDto modifiedTreatmentDto = treatmentToTreatmentDto(modifiedTreatment);
+        final TreatmentDto modifiedTreatmentDto = treatmentDtoMapper.treatmentToTreatmentDto(modifiedTreatment);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedTreatmentJson = modifiedObjectMapper.writeValueAsString(modifiedTreatmentDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +91,7 @@ public class TreatmentControllerIT {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
         final Treatment treatmentSaved = treatmentService.create(treatment);
         final Long id = treatmentSaved.getId();
-        final TreatmentDto treatmentDto = treatmentToTreatmentDto(treatmentSaved);
+        final TreatmentDto treatmentDto = treatmentDtoMapper.treatmentToTreatmentDto(treatmentSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String treatmentJson = objectMapper.writeValueAsString(treatmentDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +110,7 @@ public class TreatmentControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
         final Treatment treatmentSaved = treatmentService.create(treatment);
-        final TreatmentDto treatmentDto = treatmentToTreatmentDto(treatmentSaved);
+        final TreatmentDto treatmentDto = treatmentDtoMapper.treatmentToTreatmentDto(treatmentSaved);
         final List<TreatmentDto> listTreatmentDto = new ArrayList<>(List.of(treatmentDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String treatmentListJson = objectMapper.writeValueAsString(listTreatmentDto);

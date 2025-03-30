@@ -4,11 +4,13 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.AddressFields;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 @TemplatedAnnotation
 public class AddressEntityMapper {
 
-    public static AddressEntity addressToAddressEntity(Address address) {
+    public AddressEntity addressToAddressEntity(Address address) {
         final AddressEntity addressEntity = AddressEntity.builder()
                 .addressId(address.getId())
                 .region(address.getRegion())
@@ -22,7 +24,7 @@ public class AddressEntityMapper {
         return addressEntity;
     }
 
-    public static Address addressEntityToAddress(AddressEntity addressEntity) {
+    public Address addressEntityToAddress(AddressEntity addressEntity) {
         Address address = Address.builder()
                 .id(addressEntity.getAddressId())
                 .addressFields(AddressFields.valueOf(addressEntity.getAddressFieldContent()))

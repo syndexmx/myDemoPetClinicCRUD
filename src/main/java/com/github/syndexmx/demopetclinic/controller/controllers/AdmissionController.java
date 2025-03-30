@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.AdmissionDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.controller.dtos.AdmissionDto;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
@@ -26,10 +27,12 @@ public class AdmissionController {
     private final String ROOT_API_PATH = "/api/v0/admissions";
 
     private final AdmissionService admissionService;
+    private final AdmissionDtoMapper addmissionDtoMapper;
 
     @Autowired
-    private AdmissionController(AdmissionService admissionService) {
+    private AdmissionController(AdmissionService admissionService, AdmissionDtoMapper addmissionDtoMapper) {
         this.admissionService = admissionService;
+        this.addmissionDtoMapper = addmissionDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class AdmissionController {
             description = "Создание нового объекта Визит. id присваивается системой")
     public ResponseEntity<AdmissionDto> create(@RequestBody final AdmissionDto admissionDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + admissionDto);
-        final Admission admission = admissionDtoNoIdToAdmission(admissionDto);
+        final Admission admission = addmissionDtoMapper.admissionDtoNoIdToAdmission(admissionDto);
         final ResponseEntity<AdmissionDto> responseEntity = new ResponseEntity<> (
-                admissionToAdmissionDto(admissionService.create(admission)), HttpStatus.CREATED);
+                addmissionDtoMapper.admissionToAdmissionDto(admissionService.create(admission)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class AdmissionController {
         if (foundAdmission.isEmpty()) {
             return new ResponseEntity<AdmissionDto>(HttpStatus.NOT_FOUND);
         } else {
-            final AdmissionDto admissionDto = admissionToAdmissionDto(foundAdmission.get());
+            final AdmissionDto admissionDto = addmissionDtoMapper.admissionToAdmissionDto(foundAdmission.get());
             return new ResponseEntity<AdmissionDto>(admissionDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class AdmissionController {
     public ResponseEntity<List<AdmissionDto>> retrieveAll() {
         final List<Admission> listFound = admissionService.listAll();
         final List<AdmissionDto> listFoundDtos = listFound.stream()
-                .map(admission -> admissionToAdmissionDto(admission)).toList();
+                .map(admission -> addmissionDtoMapper.admissionToAdmissionDto(admission)).toList();
         final ResponseEntity<List<AdmissionDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -73,14 +76,14 @@ public class AdmissionController {
             description = "Обновить существующий в базе объект Визит")
     public ResponseEntity<AdmissionDto> update(@RequestBody final AdmissionDto admissionDto) {
         log.info("PUT " + ROOT_API_PATH + " \n" + admissionDto);
-        final Admission admission = admissionDtoToAdmission(admissionDto);
+        final Admission admission = addmissionDtoMapper.admissionDtoToAdmission(admissionDto);
         if (!admissionService.isPresent(admission)) {
             final ResponseEntity<AdmissionDto> responseEntity = new ResponseEntity<> (
-                    admissionToAdmissionDto(admissionService.save(admission)), HttpStatus.CREATED);
+                    addmissionDtoMapper.admissionToAdmissionDto(admissionService.save(admission)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<AdmissionDto> responseEntity = new ResponseEntity<> (
-                admissionToAdmissionDto(admissionService.save(admission)), HttpStatus.OK);
+                addmissionDtoMapper.admissionToAdmissionDto(admissionService.save(admission)), HttpStatus.OK);
         return responseEntity;
     }
 

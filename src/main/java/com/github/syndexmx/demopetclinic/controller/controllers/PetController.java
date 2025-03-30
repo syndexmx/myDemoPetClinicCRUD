@@ -1,6 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetDto;
 import com.github.syndexmx.demopetclinic.services.PetService;
@@ -26,10 +27,12 @@ public class PetController {
     private final String ROOT_API_PATH = "/api/v0/pets";
 
     private final PetService petService;
+    private final PetDtoMapper petDtoMapper;
 
     @Autowired
-    private PetController(PetService petService) {
+    private PetController(PetService petService, PetDtoMapper petDtoMapper) {
         this.petService = petService;
+        this.petDtoMapper = petDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -37,9 +40,9 @@ public class PetController {
             description = "Создание нового объекта Животное. id присваивается системой")
     public ResponseEntity<PetDto> create(@RequestBody final PetDto petDto) {
         log.info("POST " + ROOT_API_PATH + " \n" + petDto);
-        final Pet pet = petDtoNoIdToPet(petDto);
+        final Pet pet = petDtoMapper.petDtoNoIdToPet(petDto);
         final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
-                petToPetDto(petService.create(pet)), HttpStatus.CREATED);
+                petDtoMapper.petToPetDto(petService.create(pet)), HttpStatus.CREATED);
         return responseEntity;
     }
 
@@ -51,7 +54,7 @@ public class PetController {
         if (foundPet.isEmpty()) {
             return new ResponseEntity<PetDto>(HttpStatus.NOT_FOUND);
         } else {
-            final PetDto petDto = petToPetDto(foundPet.get());
+            final PetDto petDto = petDtoMapper.petToPetDto(foundPet.get());
             return new ResponseEntity<PetDto>(petDto, HttpStatus.FOUND);
         }
     }
@@ -62,7 +65,7 @@ public class PetController {
     public ResponseEntity<List<PetDto>> retrieveAll() {
         final List<Pet> listFound = petService.listAll();
         final List<PetDto> listFoundDtos = listFound.stream()
-                .map(pet -> petToPetDto(pet)).toList();
+                .map(pet -> petDtoMapper.petToPetDto(pet)).toList();
         final ResponseEntity<List<PetDto>> response = new ResponseEntity<>(listFoundDtos,
                 HttpStatus.OK);
         return response;
@@ -73,14 +76,14 @@ public class PetController {
             description = "Обновить существующий в базе объект Животное")
     public ResponseEntity<PetDto> update(@RequestBody final PetDto petDto) {
         log.info("PUT " + ROOT_API_PATH + " \n" + petDto);
-        final Pet pet = petDtoToPet(petDto);
+        final Pet pet = petDtoMapper.petDtoToPet(petDto);
         if (!petService.isPresent(pet)) {
             final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
-                    petToPetDto(petService.save(pet)), HttpStatus.CREATED);
+                    petDtoMapper.petToPetDto(petService.save(pet)), HttpStatus.CREATED);
             return responseEntity;
         }
         final ResponseEntity<PetDto> responseEntity = new ResponseEntity<> (
-                petToPetDto(petService.save(pet)), HttpStatus.OK);
+                petDtoMapper.petToPetDto(petService.save(pet)), HttpStatus.OK);
         return responseEntity;
     }
 

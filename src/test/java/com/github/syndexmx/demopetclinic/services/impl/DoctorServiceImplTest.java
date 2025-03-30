@@ -5,23 +5,23 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.domain.DoctorTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.DoctorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper.doctorToDoctorEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 @TemplatedAnnotation
@@ -34,10 +34,13 @@ public class DoctorServiceImplTest {
     @InjectMocks
     private DoctorServiceImpl underTest;
 
+    @Autowired
+    private DoctorEntityMapper doctorEntityMapper;
+
     @Test
     public void testThatDoctorIsCreated() {
         Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        DoctorEntity doctorEntity = doctorToDoctorEntity(doctor);
+        DoctorEntity doctorEntity = doctorEntityMapper.doctorToDoctorEntity(doctor);
         when(doctorRepository.save(any())).thenReturn(doctorEntity);
         final Doctor savedDoctor = underTest.create(doctor);
         doctor.setId(savedDoctor.getId());
@@ -47,7 +50,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testThatDoctorIsSaved() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final DoctorEntity doctorEntity = doctorToDoctorEntity(doctor);
+        final DoctorEntity doctorEntity = doctorEntityMapper.doctorToDoctorEntity(doctor);
         when(doctorRepository.save(eq(doctorEntity))).thenReturn(doctorEntity);
         final Doctor savedDoctor = underTest.save(doctor);
         assertEquals(doctor, savedDoctor);
@@ -65,7 +68,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final DoctorEntity doctorEntity = doctorToDoctorEntity(doctor);
+        final DoctorEntity doctorEntity = doctorEntityMapper.doctorToDoctorEntity(doctor);
         final String idString = doctor.getId().toString();
         when(doctorRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(doctorEntity));
         final Optional<Doctor> foundDoctor = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testListDoctorsReturnsListWhenExist() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final DoctorEntity doctorEntity = doctorToDoctorEntity(doctor);
+        final DoctorEntity doctorEntity = doctorEntityMapper.doctorToDoctorEntity(doctor);
         List<DoctorEntity> listOfExisting = new ArrayList<>(List.of(doctorEntity));
         when(doctorRepository.findAll()).thenReturn(listOfExisting);
         final List<Doctor> result = underTest.listAll();

@@ -5,19 +5,19 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.domain.PetTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.PetEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.PetRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-import static com.github.syndexmx.demopetclinic.repository.mappers.PetEntityMapper.petToPetEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -34,10 +34,13 @@ public class PetServiceImplTest {
     @InjectMocks
     private PetServiceImpl underTest;
 
+    @Autowired
+    private PetEntityMapper petEntityMapper;
+
     @Test
     public void testThatPetIsCreated() {
         Pet pet = PetTestSupplierKit.getTestPet();
-        PetEntity petEntity = petToPetEntity(pet);
+        PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
         when(petRepository.save(any())).thenReturn(petEntity);
         final Pet savedPet = underTest.create(pet);
         pet.setId(savedPet.getId());
@@ -47,7 +50,7 @@ public class PetServiceImplTest {
     @Test
     public void testThatPetIsSaved() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final PetEntity petEntity = petToPetEntity(pet);
+        final PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
         when(petRepository.save(eq(petEntity))).thenReturn(petEntity);
         final Pet savedPet = underTest.save(pet);
         assertEquals(pet, savedPet);
@@ -65,7 +68,7 @@ public class PetServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final PetEntity petEntity = petToPetEntity(pet);
+        final PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
         final String idString = pet.getId().toString();
         when(petRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(petEntity));
         final Optional<Pet> foundPet = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class PetServiceImplTest {
     @Test
     public void testListPetsReturnsListWhenExist() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final PetEntity petEntity = petToPetEntity(pet);
+        final PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
         List<PetEntity> listOfExisting = new ArrayList<>(List.of(petEntity));
         when(petRepository.findAll()).thenReturn(listOfExisting);
         final List<Pet> result = underTest.listAll();

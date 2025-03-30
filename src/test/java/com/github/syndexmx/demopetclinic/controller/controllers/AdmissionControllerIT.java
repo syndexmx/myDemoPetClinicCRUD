@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.AdmissionDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.domain.AdmissionTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.AdmissionDto;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.AdmissionDtoMapper.admissionToAdmissionDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +40,13 @@ public class AdmissionControllerIT {
     @Autowired
     private AdmissionService admissionService;
 
+    @Autowired
+    private AdmissionDtoMapper admissionDtoMapper;
+
     @Test
     public void testThatAdmissionIsCreated() throws Exception {
         Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final AdmissionDto admissionDto = admissionToAdmissionDto(admission);
+        final AdmissionDto admissionDto = admissionDtoMapper.admissionToAdmissionDto(admission);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String admissionJson = objectMapper.writeValueAsString(admissionDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +68,7 @@ public class AdmissionControllerIT {
         final Long id = savedAdmission.getId();
         Admission modifiedAdmission = AdmissionTestSupplierKit.getModifiedTestAdmission();
         modifiedAdmission.setId(id);
-        final AdmissionDto modifiedAdmissionDto = admissionToAdmissionDto(modifiedAdmission);
+        final AdmissionDto modifiedAdmissionDto = admissionDtoMapper.admissionToAdmissionDto(modifiedAdmission);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedAdmissionJson = modifiedObjectMapper.writeValueAsString(modifiedAdmissionDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +91,7 @@ public class AdmissionControllerIT {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
         final Admission admissionSaved = admissionService.create(admission);
         final Long id = admissionSaved.getId();
-        final AdmissionDto admissionDto = admissionToAdmissionDto(admissionSaved);
+        final AdmissionDto admissionDto = admissionDtoMapper.admissionToAdmissionDto(admissionSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String admissionJson = objectMapper.writeValueAsString(admissionDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +110,7 @@ public class AdmissionControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
         final Admission admissionSaved = admissionService.create(admission);
-        final AdmissionDto admissionDto = admissionToAdmissionDto(admissionSaved);
+        final AdmissionDto admissionDto = admissionDtoMapper.admissionToAdmissionDto(admissionSaved);
         final List<AdmissionDto> listAdmissionDto = new ArrayList<>(List.of(admissionDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String admissionListJson = objectMapper.writeValueAsString(listAdmissionDto);

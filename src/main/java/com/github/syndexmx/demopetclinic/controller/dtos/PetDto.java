@@ -21,6 +21,11 @@ public class PetDto {
     @Schema(description = "Идентификатор")
     private Long id;
 
+    @NotNull(message = "Поле Идентификатор Хозяина должно существовать")
+    @NotBlank(message = "Требуется непустое поле Идентификатор Хозяина")
+    @Schema(description = "Идентификатор Хозяина", example = "1")
+    private Long ownerId;
+
     @NotNull(message = "Поле Имя должно существовать")
     @NotBlank(message = "Требуется непустое поле Имя")
     @Schema(description = "Имя (кличка)", example = "Китикэт")

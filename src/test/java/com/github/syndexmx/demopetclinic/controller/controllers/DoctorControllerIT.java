@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.DoctorDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.domain.DoctorTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.DoctorDto;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.DoctorDtoMapper.doctorToDoctorDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +40,13 @@ public class DoctorControllerIT {
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private DoctorDtoMapper doctorDtoMapper;
+
     @Test
     public void testThatDoctorIsCreated() throws Exception {
         Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final DoctorDto doctorDto = doctorToDoctorDto(doctor);
+        final DoctorDto doctorDto = doctorDtoMapper.doctorToDoctorDto(doctor);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String doctorJson = objectMapper.writeValueAsString(doctorDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +68,7 @@ public class DoctorControllerIT {
         final Long id = savedDoctor.getId();
         Doctor modifiedDoctor = DoctorTestSupplierKit.getModifiedTestDoctor();
         modifiedDoctor.setId(id);
-        final DoctorDto modifiedDoctorDto = doctorToDoctorDto(modifiedDoctor);
+        final DoctorDto modifiedDoctorDto = doctorDtoMapper.doctorToDoctorDto(modifiedDoctor);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedDoctorJson = modifiedObjectMapper.writeValueAsString(modifiedDoctorDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +91,7 @@ public class DoctorControllerIT {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
         final Doctor doctorSaved = doctorService.create(doctor);
         final Long id = doctorSaved.getId();
-        final DoctorDto doctorDto = doctorToDoctorDto(doctorSaved);
+        final DoctorDto doctorDto = doctorDtoMapper.doctorToDoctorDto(doctorSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String doctorJson = objectMapper.writeValueAsString(doctorDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +110,7 @@ public class DoctorControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
         final Doctor doctorSaved = doctorService.create(doctor);
-        final DoctorDto doctorDto = doctorToDoctorDto(doctorSaved);
+        final DoctorDto doctorDto = doctorDtoMapper.doctorToDoctorDto(doctorSaved);
         final List<DoctorDto> listDoctorDto = new ArrayList<>(List.of(doctorDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String doctorListJson = objectMapper.writeValueAsString(listDoctorDto);

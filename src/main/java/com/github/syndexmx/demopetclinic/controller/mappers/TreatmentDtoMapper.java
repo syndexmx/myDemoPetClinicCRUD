@@ -4,15 +4,16 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.TreatmentDto;
 import com.github.syndexmx.demopetclinic.domain.TreatmentFields;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Random;
 
-
+@Service
 @TemplatedAnnotation
 public class TreatmentDtoMapper {
 
-    public static TreatmentDto treatmentToTreatmentDto(Treatment treatment) {
+    public TreatmentDto treatmentToTreatmentDto(Treatment treatment) {
         final TreatmentDto treatmentDto = TreatmentDto.builder()
                 .id(treatment.getId())
                 .medicine(treatment.getMedicine())
@@ -25,7 +26,7 @@ public class TreatmentDtoMapper {
         return treatmentDto;
     }
 
-    public static Treatment treatmentDtoToTreatment(TreatmentDto treatmentDto) {
+    public Treatment treatmentDtoToTreatment(TreatmentDto treatmentDto) {
         Treatment treatment = Treatment.builder()
                 .id(treatmentDto.getId())
                 .medicine(treatmentDto.getMedicine())
@@ -38,7 +39,7 @@ public class TreatmentDtoMapper {
         return treatment;
     }
 
-    public static Treatment treatmentDtoNoIdToTreatment(TreatmentDto treatmentDto) {
+    public Treatment treatmentDtoNoIdToTreatment(TreatmentDto treatmentDto) {
         Random random = new Random();
         Treatment treatment = Treatment.builder()
                 .id(random.nextLong())

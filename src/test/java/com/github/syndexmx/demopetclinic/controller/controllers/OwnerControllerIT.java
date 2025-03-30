@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.OwnerTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.OwnerDto;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper.ownerToOwnerDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +40,13 @@ public class OwnerControllerIT {
     @Autowired
     private OwnerService ownerService;
 
+    @Autowired
+    private OwnerDtoMapper ownerDtoMapper;
+
     @Test
     public void testThatOwnerIsCreated() throws Exception {
         Owner owner = OwnerTestSupplierKit.getTestOwner();
-        final OwnerDto ownerDto = ownerToOwnerDto(owner);
+        final OwnerDto ownerDto = ownerDtoMapper.ownerToOwnerDto(owner);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String ownerJson = objectMapper.writeValueAsString(ownerDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +68,7 @@ public class OwnerControllerIT {
         final Long id = savedOwner.getId();
         Owner modifiedOwner = OwnerTestSupplierKit.getModifiedTestOwner();
         modifiedOwner.setId(id);
-        final OwnerDto modifiedOwnerDto = ownerToOwnerDto(modifiedOwner);
+        final OwnerDto modifiedOwnerDto = ownerDtoMapper.ownerToOwnerDto(modifiedOwner);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedOwnerJson = modifiedObjectMapper.writeValueAsString(modifiedOwnerDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +91,7 @@ public class OwnerControllerIT {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
         final Owner ownerSaved = ownerService.create(owner);
         final Long id = ownerSaved.getId();
-        final OwnerDto ownerDto = ownerToOwnerDto(ownerSaved);
+        final OwnerDto ownerDto = ownerDtoMapper.ownerToOwnerDto(ownerSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String ownerJson = objectMapper.writeValueAsString(ownerDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +110,7 @@ public class OwnerControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Owner owner = OwnerTestSupplierKit.getTestOwner();
         final Owner ownerSaved = ownerService.create(owner);
-        final OwnerDto ownerDto = ownerToOwnerDto(ownerSaved);
+        final OwnerDto ownerDto = ownerDtoMapper.ownerToOwnerDto(ownerSaved);
         final List<OwnerDto> listOwnerDto = new ArrayList<>(List.of(ownerDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String ownerListJson = objectMapper.writeValueAsString(listOwnerDto);

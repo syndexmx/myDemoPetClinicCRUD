@@ -4,15 +4,16 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.DoctorDto;
 import com.github.syndexmx.demopetclinic.domain.DoctorSpecialty;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Random;
 
-
+@Service
 @TemplatedAnnotation
 public class DoctorDtoMapper {
 
-    public static DoctorDto doctorToDoctorDto(Doctor doctor) {
+    public DoctorDto doctorToDoctorDto(Doctor doctor) {
         final DoctorDto doctorDto = DoctorDto.builder()
                 .id(doctor.getId())
                 .name(doctor.getName())
@@ -24,7 +25,7 @@ public class DoctorDtoMapper {
         return doctorDto;
     }
 
-    public static Doctor doctorDtoToDoctor(DoctorDto doctorDto) {
+    public Doctor doctorDtoToDoctor(DoctorDto doctorDto) {
         Doctor doctor = Doctor.builder()
                 .id(doctorDto.getId())
                 .name(doctorDto.getName())
@@ -36,7 +37,7 @@ public class DoctorDtoMapper {
         return doctor;
     }
 
-    public static Doctor doctorDtoNoIdToDoctor(DoctorDto doctorDto) {
+    public Doctor doctorDtoNoIdToDoctor(DoctorDto doctorDto) {
         Random random = new Random();
         Doctor doctor = Doctor.builder()
                 .id(random.nextLong())

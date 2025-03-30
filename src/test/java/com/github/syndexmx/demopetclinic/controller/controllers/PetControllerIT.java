@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.domain.PetTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetDto;
@@ -21,8 +22,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper.petToPetDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +39,13 @@ public class PetControllerIT {
     @Autowired
     private PetService petService;
 
+    @Autowired
+    private PetDtoMapper petDtoMapper;
+
     @Test
     public void testThatPetIsCreated() throws Exception {
         Pet pet = PetTestSupplierKit.getTestPet();
-        final PetDto petDto = petToPetDto(pet);
+        final PetDto petDto = petDtoMapper.petToPetDto(pet);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String petJson = objectMapper.writeValueAsString(petDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +67,7 @@ public class PetControllerIT {
         final Long id = savedPet.getId();
         Pet modifiedPet = PetTestSupplierKit.getModifiedTestPet();
         modifiedPet.setId(id);
-        final PetDto modifiedPetDto = petToPetDto(modifiedPet);
+        final PetDto modifiedPetDto = petDtoMapper.petToPetDto(modifiedPet);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedPetJson = modifiedObjectMapper.writeValueAsString(modifiedPetDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +90,7 @@ public class PetControllerIT {
         final Pet pet = PetTestSupplierKit.getTestPet();
         final Pet petSaved = petService.create(pet);
         final Long id = petSaved.getId();
-        final PetDto petDto = petToPetDto(petSaved);
+        final PetDto petDto = petDtoMapper.petToPetDto(petSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String petJson = objectMapper.writeValueAsString(petDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +109,7 @@ public class PetControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Pet pet = PetTestSupplierKit.getTestPet();
         final Pet petSaved = petService.create(pet);
-        final PetDto petDto = petToPetDto(petSaved);
+        final PetDto petDto = petDtoMapper.petToPetDto(petSaved);
         final List<PetDto> listPetDto = new ArrayList<>(List.of(petDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String petListJson = objectMapper.writeValueAsString(listPetDto);

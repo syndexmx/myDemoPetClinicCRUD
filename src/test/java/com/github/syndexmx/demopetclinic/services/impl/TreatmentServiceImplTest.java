@@ -5,23 +5,23 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.domain.TreatmentTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.TreatmentEntity;
+import com.github.syndexmx.demopetclinic.repository.mappers.TreatmentEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.TreatmentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-import static com.github.syndexmx.demopetclinic.repository.mappers.TreatmentEntityMapper.treatmentToTreatmentEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
 @TemplatedAnnotation
@@ -34,10 +34,13 @@ public class TreatmentServiceImplTest {
     @InjectMocks
     private TreatmentServiceImpl underTest;
 
+    @Autowired
+    private TreatmentEntityMapper treatmentEntityMapper;
+
     @Test
     public void testThatTreatmentIsCreated() {
         Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        TreatmentEntity treatmentEntity = treatmentToTreatmentEntity(treatment);
+        TreatmentEntity treatmentEntity = treatmentEntityMapper.treatmentToTreatmentEntity(treatment);
         when(treatmentRepository.save(any())).thenReturn(treatmentEntity);
         final Treatment savedTreatment = underTest.create(treatment);
         treatment.setId(savedTreatment.getId());
@@ -47,7 +50,7 @@ public class TreatmentServiceImplTest {
     @Test
     public void testThatTreatmentIsSaved() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final TreatmentEntity treatmentEntity = treatmentToTreatmentEntity(treatment);
+        final TreatmentEntity treatmentEntity = treatmentEntityMapper.treatmentToTreatmentEntity(treatment);
         when(treatmentRepository.save(eq(treatmentEntity))).thenReturn(treatmentEntity);
         final Treatment savedTreatment = underTest.save(treatment);
         assertEquals(treatment, savedTreatment);
@@ -65,7 +68,7 @@ public class TreatmentServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final TreatmentEntity treatmentEntity = treatmentToTreatmentEntity(treatment);
+        final TreatmentEntity treatmentEntity = treatmentEntityMapper.treatmentToTreatmentEntity(treatment);
         final String idString = treatment.getId().toString();
         when(treatmentRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(treatmentEntity));
         final Optional<Treatment> foundTreatment = underTest.findById(idString);
@@ -82,7 +85,7 @@ public class TreatmentServiceImplTest {
     @Test
     public void testListTreatmentsReturnsListWhenExist() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final TreatmentEntity treatmentEntity = treatmentToTreatmentEntity(treatment);
+        final TreatmentEntity treatmentEntity = treatmentEntityMapper.treatmentToTreatmentEntity(treatment);
         List<TreatmentEntity> listOfExisting = new ArrayList<>(List.of(treatmentEntity));
         when(treatmentRepository.findAll()).thenReturn(listOfExisting);
         final List<Treatment> result = underTest.listAll();

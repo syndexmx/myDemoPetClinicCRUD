@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.mappers.AddressDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.domain.AddressTestSupplierKit;
 import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.AddressDtoMapper.addressToAddressDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TemplatedAnnotation
@@ -40,10 +40,13 @@ public class AddressControllerIT {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private AddressDtoMapper addressDtoMapper;
+
     @Test
     public void testThatAddressIsCreated() throws Exception {
         Address address = AddressTestSupplierKit.getTestAddress();
-        final AddressDto addressDto = addressToAddressDto(address);
+        final AddressDto addressDto = addressDtoMapper.addressToAddressDto(address);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String addressJson = objectMapper.writeValueAsString(addressDto);
         mockMvc.perform(MockMvcRequestBuilders.post(ROOT_API_PATH)
@@ -65,7 +68,7 @@ public class AddressControllerIT {
         final Long id = savedAddress.getId();
         Address modifiedAddress = AddressTestSupplierKit.getModifiedTestAddress();
         modifiedAddress.setId(id);
-        final AddressDto modifiedAddressDto = addressToAddressDto(modifiedAddress);
+        final AddressDto modifiedAddressDto = addressDtoMapper.addressToAddressDto(modifiedAddress);
         final ObjectMapper modifiedObjectMapper = new ObjectMapper();
         final String modifiedAddressJson = modifiedObjectMapper.writeValueAsString(modifiedAddressDto);
         mockMvc.perform(MockMvcRequestBuilders.put(ROOT_API_PATH + "/" + id.toString())
@@ -88,7 +91,7 @@ public class AddressControllerIT {
         final Address address = AddressTestSupplierKit.getTestAddress();
         final Address addressSaved = addressService.create(address);
         final Long id = addressSaved.getId();
-        final AddressDto addressDto = addressToAddressDto(addressSaved);
+        final AddressDto addressDto = addressDtoMapper.addressToAddressDto(addressSaved);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String addressJson = objectMapper.writeValueAsString(addressDto);
         mockMvc.perform(MockMvcRequestBuilders.get(ROOT_API_PATH + "/" + id.toString()))
@@ -107,7 +110,7 @@ public class AddressControllerIT {
     public void testThatRetrieveAllReturnsListWhenExist() throws Exception {
         final Address address = AddressTestSupplierKit.getTestAddress();
         final Address addressSaved = addressService.create(address);
-        final AddressDto addressDto = addressToAddressDto(addressSaved);
+        final AddressDto addressDto = addressDtoMapper.addressToAddressDto(addressSaved);
         final List<AddressDto> listAddressDto = new ArrayList<>(List.of(addressDto));
         final ObjectMapper objectMapper = new ObjectMapper();
         final String addressListJson = objectMapper.writeValueAsString(listAddressDto);
