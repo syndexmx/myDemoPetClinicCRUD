@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper.*;
-
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Pet", description = "API Животное")
@@ -49,7 +47,7 @@ public class PetController {
     @GetMapping(ROOT_API_PATH + "/{petId}")
     @Operation(summary = "Животное:получить по id",
             description = "Получить существующий объект Животное")
-    public ResponseEntity<PetDto> retrieve(@PathVariable String petId) {
+    public ResponseEntity<PetDto> retrieve(@PathVariable Long petId) {
         final Optional<Pet> foundPet = petService.findById(petId);
         if (foundPet.isEmpty()) {
             return new ResponseEntity<PetDto>(HttpStatus.NOT_FOUND);
@@ -90,7 +88,7 @@ public class PetController {
     @DeleteMapping(ROOT_API_PATH + "/{petId}")
     @Operation(summary = "Животное:удалить объект по id",
             description = "Удалить существующий в базе объект Животное")
-    public ResponseEntity deleteById(@PathVariable String petId) {
+    public ResponseEntity deleteById(@PathVariable Long petId) {
         log.info("POST " + ROOT_API_PATH + " \n" + petId);
         petService.deleteById(petId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

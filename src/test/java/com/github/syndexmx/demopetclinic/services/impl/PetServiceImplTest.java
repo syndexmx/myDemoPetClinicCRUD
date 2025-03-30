@@ -59,7 +59,7 @@ public class PetServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Pet nonExistentPet = PetTestSupplierKit.getTestNonExistentPet();
-        final String nonExistentId = nonExistentPet.getId().toString();
+        final Long nonExistentId = nonExistentPet.getId().toString();
         when(petRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
         final Optional<Pet> foundPet = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundPet);
@@ -69,7 +69,7 @@ public class PetServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Pet pet = PetTestSupplierKit.getTestPet();
         final PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
-        final String idString = pet.getId().toString();
+        final Long idString = pet.getId().toString();
         when(petRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(petEntity));
         final Optional<Pet> foundPet = underTest.findById(idString);
         assertEquals(Optional.of(pet), foundPet);
@@ -96,7 +96,7 @@ public class PetServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(petRepository.existsById(any())).thenReturn(false);
         final Pet nonExistentPet = PetTestSupplierKit.getTestNonExistentPet();
-        final String nonExistentUuid = nonExistentPet.getId().toString();
+        final Long nonExistentUuid = nonExistentPet.getId().toString();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,7 +104,7 @@ public class PetServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final String idString = pet.getId().toString();
+        final Long idString = pet.getId().toString();
         when(petRepository.existsById(Long.parseLong(idString))).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
@@ -130,7 +130,7 @@ public class PetServiceImplTest {
     @Test
     public void testThatDeletePetDeletesPet() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final String idString = pet.getId().toString();
+        final Long idString = pet.getId().toString();
         underTest.deleteById(idString);
         verify(petRepository).deleteById(eq(Long.parseLong(idString)));
     }

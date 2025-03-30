@@ -15,14 +15,14 @@ public interface PetService {
 
     Pet save(Pet pet);
 
-    Optional<Pet> findById(String petId);
+    Optional<Pet> findById(Long petId);
 
     List<Pet> listAll();
 
-    boolean isPresent(String petId);
+    boolean isPresent(Long petId);
 
     boolean isPresent(Pet pet);
 
-    void deleteById(String petId);
+    void deleteById(Long petId);
 
 }

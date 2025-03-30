@@ -46,9 +46,9 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Optional<Pet> findById(String petId) {
+    public Optional<Pet> findById(Long petId) {
         final Optional<PetEntity> petEntityFound = petRepository
-                .findById(Long.parseLong(petId));
+                .findById(petId);
         final Optional<Pet> petFound = petEntityFound.map(petEntity ->
                 petEntityMapper.petEntityToPet(petEntity));
         return petFound;
@@ -63,8 +63,8 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public boolean isPresent(String petId) {
-        return petRepository.existsById(Long.parseLong(petId));
+    public boolean isPresent(Long petId) {
+        return petRepository.existsById(petId);
     }
 
     @Override
@@ -73,9 +73,9 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void deleteById(String petId) {
+    public void deleteById(Long petId) {
         try {
-            petRepository.deleteById(Long.parseLong(petId));
+            petRepository.deleteById(petId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent pet");
         }

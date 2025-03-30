@@ -16,13 +16,6 @@ import java.util.Random;
 @TemplatedAnnotation
 public class PetDtoMapper {
 
-    private OwnerService ownerService;
-
-    @Autowired
-    public PetDtoMapper(OwnerService ownerService) {
-        this.ownerService = ownerService;
-    }
-
     public PetDto petToPetDto(Pet pet) {
         final PetDto petDto = PetDto.builder()
                 .id(pet.getId())
