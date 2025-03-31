@@ -50,7 +50,7 @@ public class TreatmentDto {
 
     @NotNull(message = "Поле должно существовать")
     @NotBlank(message = "Требуется непустое поле")
-    @Schema(description = "Поле", example = "IBUPROPHENE")
+    @Schema(description = "Поле", example = "ANALGESIC")
     private String treatmentFieldContent;
 
 

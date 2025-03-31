@@ -15,14 +15,14 @@ public interface TreatmentService {
 
     Treatment save(Treatment treatment);
 
-    Optional<Treatment> findById(String treatmentId);
+    Optional<Treatment> findById(Long treatmentId);
 
     List<Treatment> listAll();
 
-    boolean isPresent(String treatmentId);
+    boolean isPresent(Long treatmentId);
 
     boolean isPresent(Treatment treatment);
 
-    void deleteById(String treatmentId);
+    void deleteById(Long treatmentId);
 
 }

@@ -22,6 +22,7 @@ public class AdmissionDtoMapper {
                 .issue(admission.getIssue())
                 .inspection(admission.getInspection())
                 .diagnosis(admission.getDiagnosis())
+                .treatment(admission.getTreatmentId())
                 .admissionKind(admission.getAdmissionKind().toString())
                 .build();
         return admissionDto;
@@ -36,6 +37,7 @@ public class AdmissionDtoMapper {
                 .issue(admissionDto.getIssue())
                 .inspection(admissionDto.getInspection())
                 .diagnosis(admissionDto.getDiagnosis())
+                .treatmentId(admissionDto.getTreatment())
                 .admissionKind(AdmissionKind.valueOf(admissionDto.getAdmissionKind()))
                 .build();
         return admission;
@@ -51,6 +53,7 @@ public class AdmissionDtoMapper {
                 .issue(admissionDto.getIssue())
                 .inspection(admissionDto.getInspection())
                 .diagnosis(admissionDto.getDiagnosis())
+                .treatmentId(admissionDto.getTreatment())
                 .admissionKind(AdmissionKind.valueOf(admissionDto.getAdmissionKind()))
                 .build();
         return admission;

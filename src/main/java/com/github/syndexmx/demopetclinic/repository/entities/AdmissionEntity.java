@@ -32,6 +32,9 @@ public class AdmissionEntity {
     private String inspection;
     private String diagnosis;
 
+    @OneToOne(cascade = CascadeType.DETACH)
+    private TreatmentEntity treatment;
+
     private String admissionFieldContent;
 
 

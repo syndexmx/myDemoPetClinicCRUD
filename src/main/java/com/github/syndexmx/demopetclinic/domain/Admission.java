@@ -27,6 +27,8 @@ public class Admission {
     private String inspection;
     private String diagnosis;
 
+    private Long treatmentId;
+
     private AdmissionKind admissionKind;
 
 }
