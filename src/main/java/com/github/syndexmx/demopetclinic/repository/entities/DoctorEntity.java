@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class DoctorEntity {
 
     @Id
-    private Long doctorId;
+    private Long id;
 
     private String name;
     private String phone;

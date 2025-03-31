@@ -59,7 +59,7 @@ public class AddressServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Address nonExistentAddress = AddressTestSupplierKit.getTestNonExistentAddress();
-        final String nonExistentId = nonExistentAddress.getId().toString();
+        final Long nonExistentId = nonExistentAddress.getId().toString();
         when(addressRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
         final Optional<Address> foundAddress = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundAddress);
@@ -69,7 +69,7 @@ public class AddressServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Address address = AddressTestSupplierKit.getTestAddress();
         final AddressEntity addressEntity = addressEntityMapper.addressToAddressEntity(address);
-        final String idString = address.getId().toString();
+        final Long idString = address.getId().toString();
         when(addressRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(addressEntity));
         final Optional<Address> foundAddress = underTest.findById(idString);
         assertEquals(Optional.of(address), foundAddress);
@@ -96,7 +96,7 @@ public class AddressServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(addressRepository.existsById(any())).thenReturn(false);
         final Address nonExistentAddress = AddressTestSupplierKit.getTestNonExistentAddress();
-        final String nonExistentUuid = nonExistentAddress.getId().toString();
+        final Long nonExistentUuid = nonExistentAddress.getId().toString();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,7 +104,7 @@ public class AddressServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Address address = AddressTestSupplierKit.getTestAddress();
-        final String idString = address.getId().toString();
+        final Long idString = address.getId().toString();
         when(addressRepository.existsById(Long.parseLong(idString))).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
@@ -130,7 +130,7 @@ public class AddressServiceImplTest {
     @Test
     public void testThatDeleteAddressDeletesAddress() {
         final Address address = AddressTestSupplierKit.getTestAddress();
-        final String idString = address.getId().toString();
+        final Long idString = address.getId().toString();
         underTest.deleteById(idString);
         verify(addressRepository).deleteById(eq(Long.parseLong(idString)));
     }

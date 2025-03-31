@@ -12,7 +12,7 @@ public class DoctorEntityMapper {
 
     public DoctorEntity doctorToDoctorEntity(Doctor doctor) {
         final DoctorEntity doctorEntity = DoctorEntity.builder()
-                .doctorId(doctor.getId())
+                .id(doctor.getId())
                 .name(doctor.getName())
                 .phone(doctor.getPhone())
                 .birthDate(doctor.getBirthDate())
@@ -24,7 +24,7 @@ public class DoctorEntityMapper {
 
     public Doctor doctorEntityToDoctor(DoctorEntity doctorEntity) {
         Doctor doctor = Doctor.builder()
-                .id(doctorEntity.getDoctorId())
+                .id(doctorEntity.getId())
                 .name(doctorEntity.getName())
                 .phone(doctorEntity.getPhone())
                 .birthDate(doctorEntity.getBirthDate())

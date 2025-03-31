@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class AdmissionEntity {
 
     @Id
-    private Long admissionId;
+    private Long id;
 
     private Long petId;
     private Long doctorId;

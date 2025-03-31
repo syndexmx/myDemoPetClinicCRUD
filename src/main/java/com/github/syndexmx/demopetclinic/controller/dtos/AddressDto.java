@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,12 +43,14 @@ public class AddressDto {
     @Schema(description = "Номер дома", example = "5")
     private Integer house;
 
-    @Schema(description = "Здание", example = "")
+    @Schema(description = "Здание", example = "3Б")
     private String building;
 
     @Schema(description = "Квартира", example = "31")
     private Integer flat;
 
+    @Schema(description = "Список жильцов", example = "[]")
+    private List<Long> ownerList;
 
 
 }

@@ -18,9 +18,10 @@ public class Owner {
 
     private Long id;
 
+    private Long addressId;
+
     private String name;
     private String phone;
-    private Long address;
 
     private List<Long> petIdList;
 

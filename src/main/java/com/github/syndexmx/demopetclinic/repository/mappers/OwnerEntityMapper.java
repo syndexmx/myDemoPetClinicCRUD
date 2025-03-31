@@ -4,6 +4,7 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
+import com.github.syndexmx.demopetclinic.services.AddressService;
 import com.github.syndexmx.demopetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -19,15 +20,23 @@ public class OwnerEntityMapper {
 
     @Autowired
     @Lazy
+    AddressService addressService;
+
+    @Autowired
+    @Lazy
     PetEntityMapper petEntityMapper;
+
+    @Autowired
+    @Lazy
+    AddressEntityMapper addressEntityMapper;
 
     public OwnerEntity ownerToOwnerEntity(Owner owner) {
 
         final OwnerEntity ownerEntity = OwnerEntity.builder()
-                .ownerId(owner.getId())
+                .id(owner.getId())
                 .name(owner.getName())
                 .phone(owner.getPhone())
-                .address(owner.getAddress())
+                .addressId(owner.getAddressId())
                 .petList(owner.getPetIdList().stream()
                         .map(petId -> {
                             Pet pet = petService.findById(petId).orElseThrow();
@@ -40,17 +49,15 @@ public class OwnerEntityMapper {
 
     public Owner ownerEntityToOwner(OwnerEntity ownerEntity) {
         Owner owner = Owner.builder()
-                .id(ownerEntity.getOwnerId())
+                .id(ownerEntity.getId())
                 .name(ownerEntity.getName())
                 .phone(ownerEntity.getPhone())
-                .address(ownerEntity.getAddress())
+                .addressId(ownerEntity.getAddressId())
                 .petIdList(ownerEntity.getPetList().stream()
-                        .map(petEntity -> petEntity.getPetId())
+                        .map(petEntity -> petEntity.getId())
                         .toList())
                 .build();
         return owner;
     }
-
-
 
 }

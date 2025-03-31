@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @TemplatedAnnotation
@@ -25,5 +26,6 @@ public class Address {
     private String building;
     private Integer flat;
 
+    private List<Long> ownerIdList;
 
 }

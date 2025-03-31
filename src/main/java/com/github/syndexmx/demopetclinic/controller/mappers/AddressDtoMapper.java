@@ -5,6 +5,7 @@ import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @Service
@@ -20,6 +21,7 @@ public class AddressDtoMapper {
                 .street(address.getStreet())
                 .building(address.getBuilding())
                 .flat(address.getFlat())
+                .ownerList(address.getOwnerIdList().stream().toList())
                 .build();
         return addressDto;
     }
@@ -33,6 +35,7 @@ public class AddressDtoMapper {
                 .street(addressDto.getStreet())
                 .building(addressDto.getBuilding())
                 .flat(addressDto.getFlat())
+                .ownerIdList(addressDto.getOwnerList().stream().toList())
                 .build();
         return address;
     }
@@ -47,6 +50,7 @@ public class AddressDtoMapper {
                 .street(addressDto.getStreet())
                 .building(addressDto.getBuilding())
                 .flat(addressDto.getFlat())
+                .ownerIdList(new ArrayList<Long>())
                 .build();
         return address;
     }

@@ -12,7 +12,7 @@ public class TreatmentEntityMapper {
 
     public TreatmentEntity treatmentToTreatmentEntity(Treatment treatment) {
         final TreatmentEntity treatmentEntity = TreatmentEntity.builder()
-                .treatmentId(treatment.getId())
+                .id(treatment.getId())
                 .medicine(treatment.getMedicine())
                 .dose(treatment.getDose())
                 .times(treatment.getTimes())
@@ -25,7 +25,7 @@ public class TreatmentEntityMapper {
 
     public Treatment treatmentEntityToTreatment(TreatmentEntity treatmentEntity) {
         Treatment treatment = Treatment.builder()
-                .id(treatmentEntity.getTreatmentId())
+                .id(treatmentEntity.getId())
                 .medicine(treatmentEntity.getMedicine())
                 .dose(treatmentEntity.getDose())
                 .times(treatmentEntity.getTimes())

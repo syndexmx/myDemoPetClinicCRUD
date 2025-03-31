@@ -48,9 +48,9 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Optional<Address> findById(String addressId) {
+    public Optional<Address> findById(Long addressId) {
         final Optional<AddressEntity> addressEntityFound = addressRepository
-                .findById(Long.parseLong(addressId));
+                .findById(addressId);
         final Optional<Address> addressFound = addressEntityFound.map(addressEntity ->
                 addressEntityMapper.addressEntityToAddress(addressEntity));
         return addressFound;
@@ -66,8 +66,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public boolean isPresent(String addressId) {
-        return addressRepository.existsById(Long.parseLong(addressId));
+    public boolean isPresent(Long addressId) {
+        return addressRepository.existsById(addressId);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void deleteById(String addressId) {
+    public void deleteById(Long addressId) {
         try {
-            addressRepository.deleteById(Long.parseLong(addressId));
+            addressRepository.deleteById(addressId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent address");
         }
