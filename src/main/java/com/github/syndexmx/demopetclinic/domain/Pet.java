@@ -26,6 +26,7 @@ public class Pet {
     private Integer weight; // grams
     private String colour;
     private Species species;
+    private Sex sex;
 
     private List<Long> admissionIdList;
 

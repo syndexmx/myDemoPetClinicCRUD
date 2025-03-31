@@ -1,10 +1,7 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.Admission;
-import com.github.syndexmx.demopetclinic.domain.Owner;
-import com.github.syndexmx.demopetclinic.domain.Species;
-import com.github.syndexmx.demopetclinic.domain.Pet;
+import com.github.syndexmx.demopetclinic.domain.*;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
@@ -42,6 +39,7 @@ public class PetEntityMapper {
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
                 .petSpecies(pet.getSpecies().toString())
+                .sex(pet.getSex().toString())
                 .admissionList(pet.getAdmissionIdList().stream()
                         .map(admissionId -> {
                             Admission admission = admissionService.findById(admissionId).orElseThrow();
@@ -62,6 +60,7 @@ public class PetEntityMapper {
                 .weight(petEntity.getWeight())
                 .colour(petEntity.getColour())
                 .species(Species.valueOf(petEntity.getPetSpecies()))
+                .sex(Sex.valueOf(petEntity.getSex()))
                 .admissionIdList(petEntity.getAdmissionList().stream()
                         .map(admissionEntity -> admissionEntity.getId())
                         .toList())

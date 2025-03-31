@@ -42,6 +42,9 @@ public class PetReturnDto {
     @Schema(description = "Вид", example = "CAT")
     private String petSpecies;
 
+    @Schema(description = "Пол", example = "FEMALE")
+    private String sex;
+
     @Schema(description = "Список Визитов (Обращений)")
     private List<AdmissionDto> admissionList;
 
