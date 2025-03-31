@@ -1,16 +1,21 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.Pet;
+import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
 import com.github.syndexmx.demopetclinic.repository.mappers.PetEntityMapper;
+import com.github.syndexmx.demopetclinic.repository.reporitories.OwnerRepository;
 import com.github.syndexmx.demopetclinic.repository.reporitories.PetRepository;
+import com.github.syndexmx.demopetclinic.services.OwnerService;
 import com.github.syndexmx.demopetclinic.services.PetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -22,11 +27,13 @@ public class PetServiceImpl implements PetService {
 
     private final PetRepository petRepository;
     private final PetEntityMapper petEntityMapper;
+    private final OwnerService ownerService;
 
     @Autowired
-    private PetServiceImpl(PetRepository petRepository, PetEntityMapper petEntityMapper) {
+    private PetServiceImpl(PetRepository petRepository, PetEntityMapper petEntityMapper, OwnerService ownerService) {
         this.petRepository = petRepository;
         this.petEntityMapper = petEntityMapper;
+        this.ownerService = ownerService;
     }
 
     @Override
@@ -35,6 +42,7 @@ public class PetServiceImpl implements PetService {
         pet.setId(spoofId);
         final PetEntity savedEntity = petRepository.save(petEntityMapper.petToPetEntity(pet));
         final Pet savedPet = petEntityMapper.petEntityToPet(savedEntity);
+        casscadeAssignOwner(savedPet.getId(), savedPet.getOwnerId());
         return savedPet;
     }
 
@@ -79,6 +87,16 @@ public class PetServiceImpl implements PetService {
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent pet");
         }
+    }
+
+    @Override
+    public void casscadeAssignOwner(Long petId, Long ownerId) {
+        Owner owner = ownerService.findById(ownerId).orElseThrow();
+        List<Long> updatedPetList = new ArrayList<>();
+        updatedPetList.addAll(owner.getPetIdList());
+        updatedPetList.add(petId);
+        owner.setPetIdList(updatedPetList);
+        ownerService.save(owner);
     }
 
 }

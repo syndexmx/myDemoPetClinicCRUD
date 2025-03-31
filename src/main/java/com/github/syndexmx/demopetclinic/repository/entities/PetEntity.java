@@ -22,7 +22,7 @@ public class PetEntity {
     @Id
     private Long petId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private OwnerEntity owner;
 
     private String name;
@@ -31,7 +31,6 @@ public class PetEntity {
     private LocalDate birthDate;
     private Integer weight; // grams
     private String colour;
-
     private String petSpecies;
 
 
