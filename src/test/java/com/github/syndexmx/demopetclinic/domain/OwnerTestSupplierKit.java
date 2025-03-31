@@ -18,7 +18,8 @@ public class OwnerTestSupplierKit {
                 .name("John Smith")
                 .phone("+1(800)01885476")
                 .id(id)
-                //.petIdList(new ArrayList<Pet>())
+                .petIdList(new ArrayList<Long>())
+                .addressId(AddressTestSupplierKit.getTestAddress().getId())
                 .build();
     }
 
@@ -27,7 +28,8 @@ public class OwnerTestSupplierKit {
                 .id(id)
                 .name("James Gold")
                 .phone("+1(800)01997476")
-                //.petIdList(new ArrayList<Pet>())
+                .petIdList(new ArrayList<Long>())
+                .addressId(AddressTestSupplierKit.getTestAddress().getId())
                 .build();
     }
 
