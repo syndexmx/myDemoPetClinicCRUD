@@ -19,11 +19,10 @@ public class Treatment {
     private Long id;
 
     private String medicine;
+    private MedicineKind medicineKind;
     private Integer dose;
     private Integer times;
     private LocalDate fromDate;
     private LocalDate toDate;
-
-    private TreatmentFields treatmentFields;
 
 }

@@ -20,11 +20,10 @@ public class Pet {
     private Long ownerId;
 
     private String name;
-    private String species;
     private String breed;
     private LocalDate birthDate;
     private Integer weight; // grams
     private String colour;
-    private PetSpecies petSpecies;
+    private Species species;
 
 }

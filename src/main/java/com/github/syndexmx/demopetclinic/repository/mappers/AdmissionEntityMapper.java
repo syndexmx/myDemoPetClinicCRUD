@@ -1,12 +1,10 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.AdmissionFields;
+import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 @Service
 @TemplatedAnnotation
@@ -21,7 +19,7 @@ public class AdmissionEntityMapper {
                 .issue(admission.getIssue())
                 .inspection(admission.getInspection())
                 .diagnosis(admission.getDiagnosis())
-                .admissionFieldContent(admission.getAdmissionFields().toString())
+                .admissionFieldContent(admission.getAdmissionKind().toString())
                 .build();
         return admissionEntity;
     }
@@ -35,7 +33,7 @@ public class AdmissionEntityMapper {
                 .issue(admissionEntity.getIssue())
                 .inspection(admissionEntity.getInspection())
                 .diagnosis(admissionEntity.getDiagnosis())
-                .admissionFields(AdmissionFields.valueOf(admissionEntity.getAdmissionFieldContent()))
+                .admissionKind(AdmissionKind.valueOf(admissionEntity.getAdmissionFieldContent()))
                 .build();
         return admission;
     }

@@ -2,7 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.TreatmentDto;
-import com.github.syndexmx.demopetclinic.domain.TreatmentFields;
+import com.github.syndexmx.demopetclinic.domain.MedicineKind;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class TreatmentDtoMapper {
                 .times(treatment.getTimes())
                 .fromDate(treatment.getFromDate().toString())
                 .toDate(treatment.getToDate().toString())
-                .treatmentFieldContent(treatment.getTreatmentFields().toString())
+                .treatmentFieldContent(treatment.getMedicineKind().toString())
                 .build();
         return treatmentDto;
     }
@@ -34,7 +34,7 @@ public class TreatmentDtoMapper {
                 .times(treatmentDto.getTimes())
                 .fromDate(LocalDate.parse(treatmentDto.getFromDate()))
                 .toDate(LocalDate.parse(treatmentDto.getToDate()))
-                .treatmentFields(TreatmentFields.valueOf(treatmentDto.getTreatmentFieldContent()))
+                .medicineKind(MedicineKind.valueOf(treatmentDto.getTreatmentFieldContent()))
                 .build();
         return treatment;
     }
@@ -43,7 +43,7 @@ public class TreatmentDtoMapper {
         Random random = new Random();
         Treatment treatment = Treatment.builder()
                 .id(random.nextLong())
-                .treatmentFields(TreatmentFields.valueOf(treatmentDto.getTreatmentFieldContent()))
+                .medicineKind(MedicineKind.valueOf(treatmentDto.getTreatmentFieldContent()))
                 .build();
         return treatment;
     }

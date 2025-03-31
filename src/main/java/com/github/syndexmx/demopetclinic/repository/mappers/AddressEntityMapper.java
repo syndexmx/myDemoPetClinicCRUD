@@ -1,7 +1,6 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.AddressFields;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ public class AddressEntityMapper {
                 .street(address.getStreet())
                 .building(address.getBuilding())
                 .flat(address.getFlat())
-                .addressFieldContent(address.getAddressFields().toString())
                 .build();
         return addressEntity;
     }
@@ -27,7 +25,6 @@ public class AddressEntityMapper {
     public Address addressEntityToAddress(AddressEntity addressEntity) {
         Address address = Address.builder()
                 .id(addressEntity.getAddressId())
-                .addressFields(AddressFields.valueOf(addressEntity.getAddressFieldContent()))
                 .build();
         return address;
     }

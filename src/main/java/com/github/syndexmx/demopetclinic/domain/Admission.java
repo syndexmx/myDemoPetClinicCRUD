@@ -25,6 +25,6 @@ public class Admission {
     private String inspection;
     private String diagnosis;
 
-    private AdmissionFields admissionFields;
+    private AdmissionKind admissionKind;
 
 }

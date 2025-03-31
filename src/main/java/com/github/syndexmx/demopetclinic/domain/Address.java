@@ -25,6 +25,5 @@ public class Address {
     private String building;
     private Integer flat;
 
-    private AddressFields addressFields;
 
 }

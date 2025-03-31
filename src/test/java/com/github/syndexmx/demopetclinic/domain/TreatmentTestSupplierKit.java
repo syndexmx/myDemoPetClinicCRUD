@@ -13,8 +13,8 @@ public class TreatmentTestSupplierKit {
 
     private static Long id = random.nextLong();
 
-    private static TreatmentFields GENERIC_FIELD_VALUE = TreatmentFields.IBUPROPHENE;
-    private static TreatmentFields GENERIC_STRING_MODIFIED = TreatmentFields.ALTERNATIVEVALUE;
+    private static MedicineKind GENERIC_FIELD_VALUE = MedicineKind.IBUPROPHENE;
+    private static MedicineKind GENERIC_STRING_MODIFIED = MedicineKind.ANTIBIOTICS;
 
     public static Treatment getTestTreatment( ) {
         return Treatment.builder()
@@ -24,7 +24,7 @@ public class TreatmentTestSupplierKit {
                 .times(3)
                 .fromDate(LocalDate.parse("2025-02-01"))
                 .toDate(LocalDate.parse("2025-03-01"))
-                .treatmentFields(GENERIC_FIELD_VALUE)
+                .medicineKind(GENERIC_FIELD_VALUE)
                 .build();
     }
 
@@ -36,17 +36,17 @@ public class TreatmentTestSupplierKit {
                 .times(2)
                 .fromDate(LocalDate.parse("2025-03-01"))
                 .toDate(LocalDate.parse("2025-03-15"))
-                .treatmentFields(GENERIC_STRING_MODIFIED)
+                .medicineKind(GENERIC_STRING_MODIFIED)
                 .build();
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static TreatmentFields NON_EXISTENT_VALUE = TreatmentFields.OTHERVALUE;
+    private static MedicineKind NON_EXISTENT_VALUE = MedicineKind.OTHERVALUE;
 
     public static Treatment getTestNonExistentTreatment( ) {
         return Treatment.builder()
                 .id(NON_EXISTENT_Long)
-                .treatmentFields(NON_EXISTENT_VALUE)
+                .medicineKind(NON_EXISTENT_VALUE)
                 .build();
     }
 

@@ -21,7 +21,7 @@ public class PetTestSupplierKit {
                 .name("Котяра")
                 .colour("Серый")
                 .weight(2400)
-                .petSpecies(PetSpecies.CAT)
+                .species(Species.CAT)
                 .build();
     }
 
@@ -33,7 +33,7 @@ public class PetTestSupplierKit {
                 .name("Собакен")
                 .colour("Серый")
                 .weight(7650)
-                .petSpecies(PetSpecies.DOG)
+                .species(Species.DOG)
                 .build();
     }
 
@@ -41,7 +41,7 @@ public class PetTestSupplierKit {
     public static Pet getTestNonExistentPet( ) {
         return Pet.builder()
                 .id(random.nextLong())
-                .petSpecies(PetSpecies.COW)
+                .species(Species.COW)
                 .build();
     }
 

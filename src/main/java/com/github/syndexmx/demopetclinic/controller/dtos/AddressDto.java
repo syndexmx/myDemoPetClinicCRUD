@@ -47,10 +47,6 @@ public class AddressDto {
     @Schema(description = "Квартира", example = "31")
     private Integer flat;
 
-    @NotNull(message = "Поле должно существовать")
-    @NotBlank(message = "Требуется непустое поле")
-    @Schema(description = "Поле", example = "DEFAULTVALUE")
-    private String addressFieldContent;
 
 
 }

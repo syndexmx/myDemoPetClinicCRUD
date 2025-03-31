@@ -2,11 +2,8 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetDto;
-import com.github.syndexmx.demopetclinic.domain.PetSpecies;
+import com.github.syndexmx.demopetclinic.domain.Species;
 import com.github.syndexmx.demopetclinic.domain.Pet;
-import com.github.syndexmx.demopetclinic.services.OwnerService;
-import com.github.syndexmx.demopetclinic.services.PetService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,7 +22,7 @@ public class PetDtoMapper {
                 .birthDate(pet.getBirthDate().toString())
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
-                .petSpecies(pet.getPetSpecies().toString())
+                .petSpecies(pet.getSpecies().toString())
                 .build();
         return petDto;
     }
@@ -39,7 +36,7 @@ public class PetDtoMapper {
                 .birthDate(LocalDate.parse(petDto.getBirthDate()))
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
-                .petSpecies(PetSpecies.valueOf(petDto.getPetSpecies()))
+                .species(Species.valueOf(petDto.getPetSpecies()))
                 .build();
         return pet;
     }
@@ -54,7 +51,7 @@ public class PetDtoMapper {
                 .birthDate(LocalDate.parse(petDto.getBirthDate()))
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
-                .petSpecies(PetSpecies.valueOf(petDto.getPetSpecies()))
+                .species(Species.valueOf(petDto.getPetSpecies()))
                 .build();
         return pet;
     }

@@ -28,7 +28,7 @@ public class TreatmentEntity {
     private LocalDate fromDate;
     private LocalDate toDate;
 
-    private String treatmentFieldContent;
+    private String generiq;
 
 
 }

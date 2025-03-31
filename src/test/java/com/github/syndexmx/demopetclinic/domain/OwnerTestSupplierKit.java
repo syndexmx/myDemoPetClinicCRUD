@@ -13,9 +13,6 @@ public class OwnerTestSupplierKit {
 
     private static Long id = random.nextLong();
 
-    private static OwnerFields GENERIC_FIELD_VALUE = OwnerFields.DEFAULTVALUE;
-    private static OwnerFields GENERIC_STRING_MODIFIED = OwnerFields.ALTERNATIVEVALUE;
-
     public static Owner getTestOwner( ) {
         return Owner.builder()
                 .name("John Smith")
@@ -35,7 +32,6 @@ public class OwnerTestSupplierKit {
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static OwnerFields NON_EXISTENT_VALUE = OwnerFields.OTHERVALUE;
 
     public static Owner getTestNonExistentOwner( ) {
         return Owner.builder()

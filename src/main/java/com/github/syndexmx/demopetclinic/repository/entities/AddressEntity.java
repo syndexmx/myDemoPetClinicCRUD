@@ -28,7 +28,6 @@ public class AddressEntity {
     private String building;
     private Integer flat;
 
-    private String addressFieldContent;
 
 
 }

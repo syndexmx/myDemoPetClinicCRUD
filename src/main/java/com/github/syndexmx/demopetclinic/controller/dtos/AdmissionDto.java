@@ -10,8 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,10 +47,10 @@ public class AdmissionDto {
     @Schema(description = "Диагноз", example = "Перелом большой берцовой кости")
     private String diagnosis;
 
-    @NotNull(message = "Поле должно существовать")
-    @NotBlank(message = "Требуется непустое поле")
-    @Schema(description = "Поле", example = "DEFAULTVALUE")
-    private String admissionFieldContent;
+    @NotNull(message = "Поле Тип Визита должно существовать")
+    @NotBlank(message = "Требуется непустое поле Тип Визита")
+    @Schema(description = "Тип Визита", example = "PROFILAXIS")
+    private String admissionKind;
 
 
 }

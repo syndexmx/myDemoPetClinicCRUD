@@ -1,12 +1,10 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.TreatmentFields;
+import com.github.syndexmx.demopetclinic.domain.MedicineKind;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.repository.entities.TreatmentEntity;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 @Service
 @TemplatedAnnotation
@@ -20,7 +18,7 @@ public class TreatmentEntityMapper {
                 .times(treatment.getTimes())
                 .fromDate(treatment.getFromDate())
                 .toDate(treatment.getToDate())
-                .treatmentFieldContent(treatment.getTreatmentFields().toString())
+                .generiq(treatment.getMedicineKind().toString())
                 .build();
         return treatmentEntity;
     }
@@ -33,7 +31,7 @@ public class TreatmentEntityMapper {
                 .times(treatmentEntity.getTimes())
                 .fromDate(treatmentEntity.getFromDate())
                 .toDate(treatmentEntity.getToDate())
-                .treatmentFields(TreatmentFields.valueOf(treatmentEntity.getTreatmentFieldContent()))
+                .medicineKind(MedicineKind.valueOf(treatmentEntity.getGeneriq()))
                 .build();
         return treatment;
     }

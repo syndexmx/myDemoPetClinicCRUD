@@ -2,7 +2,6 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
-import com.github.syndexmx.demopetclinic.domain.AddressFields;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ public class AddressDtoMapper {
                 .street(address.getStreet())
                 .building(address.getBuilding())
                 .flat(address.getFlat())
-                .addressFieldContent(address.getAddressFields().toString())
                 .build();
         return addressDto;
     }
@@ -35,7 +33,6 @@ public class AddressDtoMapper {
                 .street(addressDto.getStreet())
                 .building(addressDto.getBuilding())
                 .flat(addressDto.getFlat())
-                .addressFields(AddressFields.valueOf(addressDto.getAddressFieldContent()))
                 .build();
         return address;
     }
@@ -50,7 +47,6 @@ public class AddressDtoMapper {
                 .street(addressDto.getStreet())
                 .building(addressDto.getBuilding())
                 .flat(addressDto.getFlat())
-                .addressFields(AddressFields.valueOf(addressDto.getAddressFieldContent()))
                 .build();
         return address;
     }

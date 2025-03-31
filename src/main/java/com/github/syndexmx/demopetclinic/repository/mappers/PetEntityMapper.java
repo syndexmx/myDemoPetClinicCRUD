@@ -1,11 +1,10 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-import com.github.syndexmx.demopetclinic.domain.PetSpecies;
+import com.github.syndexmx.demopetclinic.domain.Species;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
-import com.github.syndexmx.demopetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class PetEntityMapper {
                 .name(pet.getName())
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
-                .petSpecies(pet.getPetSpecies().toString())
+                .petSpecies(pet.getSpecies().toString())
                 .build();
         return petEntity;
     }
@@ -46,7 +45,7 @@ public class PetEntityMapper {
                 .name(petEntity.getName())
                 .weight(petEntity.getWeight())
                 .colour(petEntity.getColour())
-                .petSpecies(PetSpecies.valueOf(petEntity.getPetSpecies()))
+                .species(Species.valueOf(petEntity.getPetSpecies()))
                 .build();
         return pet;
     }

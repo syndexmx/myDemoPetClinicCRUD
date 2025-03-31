@@ -13,8 +13,8 @@ public class AdmissionTestSupplierKit {
 
     private static Long id = random.nextLong();
 
-    private static AdmissionFields GENERIC_FIELD_VALUE = AdmissionFields.DEFAULTVALUE;
-    private static AdmissionFields GENERIC_STRING_MODIFIED = AdmissionFields.ALTERNATIVEVALUE;
+    private static AdmissionKind GENERIC_FIELD_VALUE = AdmissionKind.DEFAULT;
+    private static AdmissionKind GENERIC_STRING_MODIFIED = AdmissionKind.PROFILAXIS;
 
     public static Admission getTestAdmission( ) {
         return Admission.builder()
@@ -23,7 +23,7 @@ public class AdmissionTestSupplierKit {
                 .issue("Front leg trauma")
                 .inspection("Improper bone movement")
                 .diagnosis("Front left tibia fracture")
-                .admissionFields(GENERIC_FIELD_VALUE)
+                .admissionKind(GENERIC_FIELD_VALUE)
                 .build();
     }
 
@@ -34,17 +34,17 @@ public class AdmissionTestSupplierKit {
                 .issue("Profilactic visit")
                 .inspection("")
                 .diagnosis("Anti-Rabies Vaccination")
-                .admissionFields(GENERIC_STRING_MODIFIED)
+                .admissionKind(GENERIC_STRING_MODIFIED)
                 .build();
     }
 
     private static Long NON_EXISTENT_Long = random.nextLong();
-    private static AdmissionFields NON_EXISTENT_VALUE = AdmissionFields.OTHERVALUE;
+    private static AdmissionKind NON_EXISTENT_VALUE = AdmissionKind.TREATMENT;
 
     public static Admission getTestNonExistentAdmission( ) {
         return Admission.builder()
                 .id(NON_EXISTENT_Long)
-                .admissionFields(NON_EXISTENT_VALUE)
+                .admissionKind(NON_EXISTENT_VALUE)
                 .build();
     }
 

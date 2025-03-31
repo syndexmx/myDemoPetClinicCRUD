@@ -2,7 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AdmissionDto;
-import com.github.syndexmx.demopetclinic.domain.AdmissionFields;
+import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class AdmissionDtoMapper {
                 .issue(admission.getIssue())
                 .inspection(admission.getInspection())
                 .diagnosis(admission.getDiagnosis())
-                .admissionFieldContent(admission.getAdmissionFields().toString())
+                .admissionKind(admission.getAdmissionKind().toString())
                 .build();
         return admissionDto;
     }
@@ -36,7 +36,7 @@ public class AdmissionDtoMapper {
                 .issue(admissionDto.getIssue())
                 .inspection(admissionDto.getInspection())
                 .diagnosis(admissionDto.getDiagnosis())
-                .admissionFields(AdmissionFields.valueOf(admissionDto.getAdmissionFieldContent()))
+                .admissionKind(AdmissionKind.valueOf(admissionDto.getAdmissionKind()))
                 .build();
         return admission;
     }
@@ -51,7 +51,7 @@ public class AdmissionDtoMapper {
                 .issue(admissionDto.getIssue())
                 .inspection(admissionDto.getInspection())
                 .diagnosis(admissionDto.getDiagnosis())
-                .admissionFields(AdmissionFields.valueOf(admissionDto.getAdmissionFieldContent()))
+                .admissionKind(AdmissionKind.valueOf(admissionDto.getAdmissionKind()))
                 .build();
         return admission;
     }
