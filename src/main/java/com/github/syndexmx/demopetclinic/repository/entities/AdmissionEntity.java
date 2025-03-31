@@ -23,7 +23,10 @@ public class AdmissionEntity {
     private Long id;
 
     private Long petId;
-    private Long doctorId;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private DoctorEntity doctor;
+
     private LocalDate date;
     private String issue;
     private String inspection;

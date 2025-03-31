@@ -4,17 +4,29 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
+import com.github.syndexmx.demopetclinic.services.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
 @TemplatedAnnotation
 public class AdmissionEntityMapper {
 
+    @Autowired
+    @Lazy
+    DoctorService doctorService;
+
+    @Autowired
+    @Lazy
+    DoctorEntityMapper doctorEntityMapper;
+
     public AdmissionEntity admissionToAdmissionEntity(Admission admission) {
         final AdmissionEntity admissionEntity = AdmissionEntity.builder()
                 .id(admission.getId())
                 .petId(admission.getPetId())
-                .doctorId(admission.getDoctorId())
+                .doctor(doctorEntityMapper.doctorToDoctorEntity(
+                        doctorService.findById(admission.getDoctorId()).orElseThrow()))
                 .date(admission.getDate())
                 .issue(admission.getIssue())
                 .inspection(admission.getInspection())
@@ -28,7 +40,7 @@ public class AdmissionEntityMapper {
         Admission admission = Admission.builder()
                 .id(admissionEntity.getId())
                 .petId(admissionEntity.getPetId())
-                .doctorId(admissionEntity.getDoctorId())
+                .doctorId(admissionEntity.getDoctor().getId())
                 .date(admissionEntity.getDate())
                 .issue(admissionEntity.getIssue())
                 .inspection(admissionEntity.getInspection())
@@ -37,7 +49,5 @@ public class AdmissionEntityMapper {
                 .build();
         return admission;
     }
-
-
 
 }

@@ -10,5 +10,11 @@ public enum Species {
     PARROT,
     LIZARD,
     SNAKE,
+    SHEEP,
+    DOVE,
+    RAT,
+    RABBIT,
+    CHINCHILLA,
+    TURTLE,
     COW;
 }

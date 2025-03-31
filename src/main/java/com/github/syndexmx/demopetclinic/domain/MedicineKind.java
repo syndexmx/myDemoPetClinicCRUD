@@ -6,5 +6,13 @@ import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 public enum MedicineKind {
     IBUPROPHENE,
     ANTIBIOTICS,
+    ANTIVIRAL,
+    ANTIPYRETICS,
+    ANTIPARASITE,
+    ANALGESIC,
+    ANTISEPTIC,
+    STEROIDS,
+    MONOCLONAL_ANTIBODIES,
+    SERUM,
     OTHERVALUE;
 }

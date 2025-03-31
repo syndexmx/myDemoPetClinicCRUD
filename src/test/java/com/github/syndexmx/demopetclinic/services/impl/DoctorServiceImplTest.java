@@ -59,7 +59,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Doctor nonExistentDoctor = DoctorTestSupplierKit.getTestNonExistentDoctor();
-        final String nonExistentId = nonExistentDoctor.getId().toString();
+        final Long nonExistentId = nonExistentDoctor.getId().toString();
         when(doctorRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
         final Optional<Doctor> foundDoctor = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundDoctor);
@@ -69,7 +69,7 @@ public class DoctorServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
         final DoctorEntity doctorEntity = doctorEntityMapper.doctorToDoctorEntity(doctor);
-        final String idString = doctor.getId().toString();
+        final Long idString = doctor.getId().toString();
         when(doctorRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(doctorEntity));
         final Optional<Doctor> foundDoctor = underTest.findById(idString);
         assertEquals(Optional.of(doctor), foundDoctor);
@@ -96,7 +96,7 @@ public class DoctorServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(doctorRepository.existsById(any())).thenReturn(false);
         final Doctor nonExistentDoctor = DoctorTestSupplierKit.getTestNonExistentDoctor();
-        final String nonExistentUuid = nonExistentDoctor.getId().toString();
+        final Long nonExistentUuid = nonExistentDoctor.getId().toString();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,7 +104,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final String idString = doctor.getId().toString();
+        final Long idString = doctor.getId().toString();
         when(doctorRepository.existsById(Long.parseLong(idString))).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
@@ -130,7 +130,7 @@ public class DoctorServiceImplTest {
     @Test
     public void testThatDeleteDoctorDeletesDoctor() {
         final Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
-        final String idString = doctor.getId().toString();
+        final Long idString = doctor.getId().toString();
         underTest.deleteById(idString);
         verify(doctorRepository).deleteById(eq(Long.parseLong(idString)));
     }
