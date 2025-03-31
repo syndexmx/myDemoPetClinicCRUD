@@ -58,6 +58,11 @@ public class PetDto {
     @Schema(description = "Вид", example = "CAT")
     private String petSpecies;
 
+    @NotNull(message = "Поле Пол должно существовать")
+    @NotBlank(message = "Требуется непустое поле Пол")
+    @Schema(description = "Пол", example = "FEMALE")
+    private String sex;
+
     @Schema(description = "Список Визитов (Обращений)", example = "[]")
     private List<Long> admissionIdList;
 

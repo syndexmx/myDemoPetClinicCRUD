@@ -2,6 +2,7 @@ package com.github.syndexmx.demopetclinic.controller.mappers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetDto;
+import com.github.syndexmx.demopetclinic.domain.Sex;
 import com.github.syndexmx.demopetclinic.domain.Species;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class PetDtoMapper {
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
                 .petSpecies(pet.getSpecies().toString())
+                .sex(pet.getSex().toString())
                 .admissionIdList(pet.getAdmissionIdList().stream().toList())
                 .build();
         return petDto;
@@ -39,6 +41,7 @@ public class PetDtoMapper {
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
                 .species(Species.valueOf(petDto.getPetSpecies()))
+                .sex(Sex.valueOf(petDto.getSex()))
                 .admissionIdList(petDto.getAdmissionIdList().stream().toList())
                 .build();
         return pet;
@@ -55,6 +58,7 @@ public class PetDtoMapper {
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
                 .species(Species.valueOf(petDto.getPetSpecies()))
+                .sex(Sex.valueOf(petDto.getSex()))
                 .admissionIdList(new ArrayList<Long>())
                 .build();
         return pet;

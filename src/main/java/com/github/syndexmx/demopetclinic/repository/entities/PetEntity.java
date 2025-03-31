@@ -32,6 +32,7 @@ public class PetEntity {
     private Integer weight; // grams
     private String colour;
     private String petSpecies;
+    private String sex;
 
     @OneToMany(cascade = CascadeType.PERSIST) // TODO: Check validity of cascade propagation
     private List<AdmissionEntity> admissionList;

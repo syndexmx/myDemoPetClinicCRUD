@@ -29,6 +29,7 @@ public class PetReturnDtoMapper {
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
                 .petSpecies(pet.getSpecies().toString())
+                .sex(pet.getSex().toString())
                 .admissionList(pet.getAdmissionIdList().stream()
                         .map(admissionId -> admissionDtoMapper.admissionToAdmissionDto(admissionService
                                 .findById(admissionId).orElseThrow()))
