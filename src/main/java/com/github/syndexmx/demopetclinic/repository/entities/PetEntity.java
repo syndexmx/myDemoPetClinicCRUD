@@ -22,7 +22,7 @@ public class PetEntity {
     @Id
     private Long petId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL) // TODO: check TICKET#00000 not cascading!
     private OwnerEntity owner;
 
     private String name;
