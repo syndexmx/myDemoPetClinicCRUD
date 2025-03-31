@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AdmissionDto;
 import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 @Service
-@TemplatedAnnotation
 public class AdmissionDtoMapper {
 
     public AdmissionDto admissionToAdmissionDto(Admission admission) {

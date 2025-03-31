@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
-@TemplatedAnnotation
 public class AdmissionEntityMapper {
 
     @Autowired

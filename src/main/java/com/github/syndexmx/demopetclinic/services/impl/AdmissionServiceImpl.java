@@ -1,13 +1,11 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
 import com.github.syndexmx.demopetclinic.repository.mappers.AdmissionEntityMapper;
 import com.github.syndexmx.demopetclinic.repository.reporitories.AdmissionRepository;
-import com.github.syndexmx.demopetclinic.services.AddressService;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
 import com.github.syndexmx.demopetclinic.services.PetService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@TemplatedAnnotation
 @Service
 @Slf4j
 public class AdmissionServiceImpl implements AdmissionService {

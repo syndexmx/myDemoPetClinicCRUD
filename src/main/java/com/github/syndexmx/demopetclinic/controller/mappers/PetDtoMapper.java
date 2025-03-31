@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetDto;
 import com.github.syndexmx.demopetclinic.domain.Sex;
 import com.github.syndexmx.demopetclinic.domain.Species;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @Service
-@TemplatedAnnotation
 public class PetDtoMapper {
 
     public PetDto petToPetDto(Pet pet) {

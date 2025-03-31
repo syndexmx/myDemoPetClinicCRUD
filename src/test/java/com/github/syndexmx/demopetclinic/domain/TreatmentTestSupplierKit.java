@@ -1,12 +1,8 @@
 package com.github.syndexmx.demopetclinic.domain;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-
 import java.time.LocalDate;
 import java.util.Random;
 
-
-@TemplatedAnnotation
 public class TreatmentTestSupplierKit {
 
     private static Random random;

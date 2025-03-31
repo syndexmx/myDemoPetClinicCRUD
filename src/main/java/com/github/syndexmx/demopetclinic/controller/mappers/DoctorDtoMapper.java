@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.DoctorDto;
 import com.github.syndexmx.demopetclinic.domain.DoctorSpecialty;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 @Service
-@TemplatedAnnotation
 public class DoctorDtoMapper {
 
     public DoctorDto doctorToDoctorDto(Doctor doctor) {

@@ -1,17 +1,15 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
-import com.github.syndexmx.demopetclinic.services.AddressService;
 import com.github.syndexmx.demopetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
-@TemplatedAnnotation
 public class OwnerEntityMapper {
 
     @Autowired

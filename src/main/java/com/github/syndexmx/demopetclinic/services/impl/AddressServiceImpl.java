@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
 import com.github.syndexmx.demopetclinic.repository.mappers.AddressEntityMapper;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@TemplatedAnnotation
 @Service
 @Slf4j
 public class AddressServiceImpl implements AddressService {

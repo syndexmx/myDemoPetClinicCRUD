@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.domain;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
-@TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

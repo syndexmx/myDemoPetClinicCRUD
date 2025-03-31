@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.repository.entities.AddressEntity;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
-@TemplatedAnnotation
 public class AddressEntityMapper {
 
     @Autowired
