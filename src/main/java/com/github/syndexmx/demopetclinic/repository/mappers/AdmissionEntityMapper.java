@@ -21,6 +21,7 @@ public class AdmissionEntityMapper {
     @Lazy
     DoctorEntityMapper doctorEntityMapper;
 
+
     public AdmissionEntity admissionToAdmissionEntity(Admission admission) {
         final AdmissionEntity admissionEntity = AdmissionEntity.builder()
                 .id(admission.getId())

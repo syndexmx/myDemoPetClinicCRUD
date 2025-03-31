@@ -15,14 +15,6 @@ public class PetEntityMapper {
 
     @Autowired
     @Lazy
-    OwnerService ownerService;
-
-    @Autowired
-    @Lazy
-    OwnerEntityMapper ownerEntityMapper;
-
-    @Autowired
-    @Lazy
     AdmissionService admissionService;
 
     @Autowired

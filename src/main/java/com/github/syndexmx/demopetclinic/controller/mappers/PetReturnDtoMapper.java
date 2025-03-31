@@ -19,6 +19,7 @@ public class PetReturnDtoMapper {
     @Lazy
     AdmissionDtoMapper admissionDtoMapper;
 
+
     public PetReturnDto petToPetDto(Pet pet) {
         final PetReturnDto petDto = PetReturnDto.builder()
                 .id(pet.getId())

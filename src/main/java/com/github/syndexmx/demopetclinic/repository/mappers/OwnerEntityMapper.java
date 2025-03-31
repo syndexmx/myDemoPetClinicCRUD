@@ -20,15 +20,7 @@ public class OwnerEntityMapper {
 
     @Autowired
     @Lazy
-    AddressService addressService;
-
-    @Autowired
-    @Lazy
     PetEntityMapper petEntityMapper;
-
-    @Autowired
-    @Lazy
-    AddressEntityMapper addressEntityMapper;
 
     public OwnerEntity ownerToOwnerEntity(Owner owner) {
 
