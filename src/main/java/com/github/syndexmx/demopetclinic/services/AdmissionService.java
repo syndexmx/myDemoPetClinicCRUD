@@ -15,14 +15,16 @@ public interface AdmissionService {
 
     Admission save(Admission admission);
 
-    Optional<Admission> findById(String admissionId);
+    Optional<Admission> findById(Long admissionId);
 
     List<Admission> listAll();
 
-    boolean isPresent(String admissionId);
+    boolean isPresent(Long admissionId);
 
     boolean isPresent(Admission admission);
 
-    void deleteById(String admissionId);
+    void deleteById(Long admissionId);
+
+    public void casscadeAssignPet(Long admissionId, Long petId);
 
 }

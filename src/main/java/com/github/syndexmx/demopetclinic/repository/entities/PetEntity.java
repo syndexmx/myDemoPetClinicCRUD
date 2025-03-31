@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @TemplatedAnnotation
@@ -32,5 +33,7 @@ public class PetEntity {
     private String colour;
     private String petSpecies;
 
+    @OneToMany(cascade = CascadeType.PERSIST) // TODO: Check validity of cascade propagation
+    private List<AdmissionEntity> admissionList;
 
 }

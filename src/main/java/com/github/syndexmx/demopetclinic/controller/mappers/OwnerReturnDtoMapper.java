@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.mappers;
 
-import com.github.syndexmx.demopetclinic.controller.dtos.OwnerDto;
 import com.github.syndexmx.demopetclinic.controller.dtos.OwnerReturnDto;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.services.PetService;

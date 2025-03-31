@@ -7,6 +7,7 @@ import com.github.syndexmx.demopetclinic.domain.Pet;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 
 @Service
@@ -23,6 +24,7 @@ public class PetDtoMapper {
                 .weight(pet.getWeight())
                 .colour(pet.getColour())
                 .petSpecies(pet.getSpecies().toString())
+                .admissionIdList(pet.getAdmissionIdList().stream().toList())
                 .build();
         return petDto;
     }
@@ -37,6 +39,7 @@ public class PetDtoMapper {
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
                 .species(Species.valueOf(petDto.getPetSpecies()))
+                .admissionIdList(petDto.getAdmissionIdList().stream().toList())
                 .build();
         return pet;
     }
@@ -52,6 +55,7 @@ public class PetDtoMapper {
                 .weight(petDto.getWeight())
                 .colour(petDto.getColour())
                 .species(Species.valueOf(petDto.getPetSpecies()))
+                .admissionIdList(new ArrayList<Long>())
                 .build();
         return pet;
     }

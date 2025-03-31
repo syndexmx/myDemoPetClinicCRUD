@@ -59,8 +59,8 @@ public class AdmissionServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Admission nonExistentAdmission = AdmissionTestSupplierKit.getTestNonExistentAdmission();
-        final String nonExistentId = nonExistentAdmission.getId().toString();
-        when(admissionRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
+        final Long nonExistentId = nonExistentAdmission.getId();
+        when(admissionRepository.findById(eq(nonExistentId))).thenReturn(Optional.empty());
         final Optional<Admission> foundAdmission = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundAdmission);
     }
@@ -69,8 +69,8 @@ public class AdmissionServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
         final AdmissionEntity admissionEntity = admissionEntityMapper.admissionToAdmissionEntity(admission);
-        final String idString = admission.getId().toString();
-        when(admissionRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(admissionEntity));
+        final Long idString = admission.getId();
+        when(admissionRepository.findById(eq(idString))).thenReturn(Optional.of(admissionEntity));
         final Optional<Admission> foundAdmission = underTest.findById(idString);
         assertEquals(Optional.of(admission), foundAdmission);
     }
@@ -96,7 +96,7 @@ public class AdmissionServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(admissionRepository.existsById(any())).thenReturn(false);
         final Admission nonExistentAdmission = AdmissionTestSupplierKit.getTestNonExistentAdmission();
-        final String nonExistentUuid = nonExistentAdmission.getId().toString();
+        final Long nonExistentUuid = nonExistentAdmission.getId();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,8 +104,8 @@ public class AdmissionServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final String idString = admission.getId().toString();
-        when(admissionRepository.existsById(Long.parseLong(idString))).thenReturn(true);
+        final Long idString = admission.getId();
+        when(admissionRepository.existsById(idString)).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
     }
@@ -130,8 +130,8 @@ public class AdmissionServiceImplTest {
     @Test
     public void testThatDeleteAdmissionDeletesAdmission() {
         final Admission admission = AdmissionTestSupplierKit.getTestAdmission();
-        final String idString = admission.getId().toString();
+        final Long idString = admission.getId();
         underTest.deleteById(idString);
-        verify(admissionRepository).deleteById(eq(Long.parseLong(idString)));
+        verify(admissionRepository).deleteById(eq(idString));
     }
 }
