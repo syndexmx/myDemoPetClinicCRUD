@@ -1,0 +1,14 @@
+spring.application.name=demopetclinic
+server.port=8080
+
+#DataSource
+spring.datasource.url=jdbc:postgresql://localhost:5432/mydemopetclinicdb?currentSchema=public
+spring.datasource.username=POSTGRESS_USER_NAME
+spring.datasource.password=POSTGRESS_USER_PASSWORD
+
+# Show or not log for each sql query
+# Hibernate ddl auto (create, create-drop, update)
+spring.jpa.hibernate.ddl-auto = update
+
+springdoc.api-docs.enabled=true
+springdoc.swagger-ui.enabled=true
