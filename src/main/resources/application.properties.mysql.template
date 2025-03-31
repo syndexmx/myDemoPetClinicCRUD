@@ -1,0 +1,15 @@
+spring.application.name=demopetclinic
+server.port=8080
+
+#DataSource
+spring.datasource.url=jdbc:mysql://localhost:3306/mydemopetclinicdb?autoReconnect=true&useSSL=false
+spring.datasource.username=MYSQL_USER_NAME
+spring.datasource.password=MYSQL_USER_PASSWORD
+
+
+# Show or not log for each sql query
+# Hibernate ddl auto (create, create-drop, update)
+spring.jpa.hibernate.ddl-auto = update
+
+springdoc.api-docs.enabled=true
+springdoc.swagger-ui.enabled=true
