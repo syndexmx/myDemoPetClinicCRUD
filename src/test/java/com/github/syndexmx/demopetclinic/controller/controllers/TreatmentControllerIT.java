@@ -43,6 +43,8 @@ public class TreatmentControllerIT {
     @Autowired
     private TreatmentDtoMapper treatmentDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatTreatmentIsCreated() throws Exception {
         Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();

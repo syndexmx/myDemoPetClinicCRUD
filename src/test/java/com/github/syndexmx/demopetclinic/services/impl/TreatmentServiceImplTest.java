@@ -37,6 +37,8 @@ public class TreatmentServiceImplTest {
     @Autowired
     private TreatmentEntityMapper treatmentEntityMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatTreatmentIsCreated() {
         Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();

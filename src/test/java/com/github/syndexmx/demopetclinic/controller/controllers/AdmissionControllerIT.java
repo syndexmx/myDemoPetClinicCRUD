@@ -43,6 +43,8 @@ public class AdmissionControllerIT {
     @Autowired
     private AdmissionDtoMapper admissionDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatAdmissionIsCreated() throws Exception {
         Admission admission = AdmissionTestSupplierKit.getTestAdmission();

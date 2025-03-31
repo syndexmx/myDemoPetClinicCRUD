@@ -37,6 +37,8 @@ public class OwnerServiceImplTest {
     @Autowired
     private OwnerEntityMapper ownerEntityMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatOwnerIsCreated() {
         Owner owner = OwnerTestSupplierKit.getTestOwner();

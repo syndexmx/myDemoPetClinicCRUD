@@ -37,6 +37,8 @@ public class AdmissionServiceImplTest {
     @Autowired
     private AdmissionEntityMapper admissionEntityMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatAdmissionIsCreated() {
         Admission admission = AdmissionTestSupplierKit.getTestAdmission();

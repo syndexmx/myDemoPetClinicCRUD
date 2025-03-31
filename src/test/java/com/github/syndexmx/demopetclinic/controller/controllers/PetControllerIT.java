@@ -42,6 +42,8 @@ public class PetControllerIT {
     @Autowired
     private PetDtoMapper petDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatPetIsCreated() throws Exception {
         Pet pet = PetTestSupplierKit.getTestPet();

@@ -43,6 +43,8 @@ public class OwnerControllerIT {
     @Autowired
     private OwnerDtoMapper ownerDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatOwnerIsCreated() throws Exception {
         Owner owner = OwnerTestSupplierKit.getTestOwner();

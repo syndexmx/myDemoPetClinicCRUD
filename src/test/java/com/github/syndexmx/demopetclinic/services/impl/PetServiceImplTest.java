@@ -37,6 +37,8 @@ public class PetServiceImplTest {
     @Autowired
     private PetEntityMapper petEntityMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatPetIsCreated() {
         Pet pet = PetTestSupplierKit.getTestPet();
@@ -59,8 +61,8 @@ public class PetServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Pet nonExistentPet = PetTestSupplierKit.getTestNonExistentPet();
-        final Long nonExistentId = nonExistentPet.getId().toString();
-        when(petRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
+        final Long nonExistentId = nonExistentPet.getId();
+        when(petRepository.findById(eq(nonExistentId))).thenReturn(Optional.empty());
         final Optional<Pet> foundPet = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundPet);
     }
@@ -69,8 +71,8 @@ public class PetServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Pet pet = PetTestSupplierKit.getTestPet();
         final PetEntity petEntity = petEntityMapper.petToPetEntity(pet);
-        final Long idString = pet.getId().toString();
-        when(petRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(petEntity));
+        final Long idString = pet.getId();
+        when(petRepository.findById(eq(idString))).thenReturn(Optional.of(petEntity));
         final Optional<Pet> foundPet = underTest.findById(idString);
         assertEquals(Optional.of(pet), foundPet);
     }
@@ -96,7 +98,7 @@ public class PetServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(petRepository.existsById(any())).thenReturn(false);
         final Pet nonExistentPet = PetTestSupplierKit.getTestNonExistentPet();
-        final Long nonExistentUuid = nonExistentPet.getId().toString();
+        final Long nonExistentUuid = nonExistentPet.getId();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,8 +106,8 @@ public class PetServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final Long idString = pet.getId().toString();
-        when(petRepository.existsById(Long.parseLong(idString))).thenReturn(true);
+        final Long idString = pet.getId();
+        when(petRepository.existsById(idString)).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
     }
@@ -130,8 +132,8 @@ public class PetServiceImplTest {
     @Test
     public void testThatDeletePetDeletesPet() {
         final Pet pet = PetTestSupplierKit.getTestPet();
-        final Long idString = pet.getId().toString();
+        final Long idString = pet.getId();
         underTest.deleteById(idString);
-        verify(petRepository).deleteById(eq(Long.parseLong(idString)));
+        verify(petRepository).deleteById(eq(idString));
     }
 }

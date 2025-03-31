@@ -43,6 +43,8 @@ public class AddressControllerIT {
     @Autowired
     private AddressDtoMapper addressDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatAddressIsCreated() throws Exception {
         Address address = AddressTestSupplierKit.getTestAddress();

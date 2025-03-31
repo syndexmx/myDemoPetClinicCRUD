@@ -37,6 +37,8 @@ public class AddressServiceImplTest {
     @Autowired
     private AddressEntityMapper addressEntityMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatAddressIsCreated() {
         Address address = AddressTestSupplierKit.getTestAddress();
