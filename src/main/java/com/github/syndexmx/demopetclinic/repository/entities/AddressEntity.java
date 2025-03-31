@@ -29,7 +29,7 @@ public class AddressEntity {
     private String building;
     private Integer flat;
 
-    @OneToMany(cascade = CascadeType.DETACH) // TODO: Check validity of cascade propagation
+    @OneToMany(cascade = CascadeType.PERSIST) // TODO: Check validity of cascade propagation
     private List<OwnerEntity> ownerList;
 
 
