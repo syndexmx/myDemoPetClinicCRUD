@@ -5,6 +5,7 @@ import com.github.syndexmx.demopetclinic.domain.AdmissionKind;
 import com.github.syndexmx.demopetclinic.domain.Admission;
 import com.github.syndexmx.demopetclinic.repository.entities.AdmissionEntity;
 import com.github.syndexmx.demopetclinic.services.DoctorService;
+import com.github.syndexmx.demopetclinic.services.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,14 @@ public class AdmissionEntityMapper {
     @Lazy
     DoctorEntityMapper doctorEntityMapper;
 
+    @Autowired
+    @Lazy
+    TreatmentService treatmentService;
+
+    @Autowired
+    @Lazy
+    TreatmentEntityMapper treatmentEntityMapper;
+
 
     public AdmissionEntity admissionToAdmissionEntity(Admission admission) {
         final AdmissionEntity admissionEntity = AdmissionEntity.builder()
@@ -32,6 +41,8 @@ public class AdmissionEntityMapper {
                 .issue(admission.getIssue())
                 .inspection(admission.getInspection())
                 .diagnosis(admission.getDiagnosis())
+                .treatment(treatmentEntityMapper.treatmentToTreatmentEntity(
+                        treatmentService.findById(admission.getTreatmentId()).orElseThrow()))
                 .admissionFieldContent(admission.getAdmissionKind().toString())
                 .build();
         return admissionEntity;
@@ -46,6 +57,7 @@ public class AdmissionEntityMapper {
                 .issue(admissionEntity.getIssue())
                 .inspection(admissionEntity.getInspection())
                 .diagnosis(admissionEntity.getDiagnosis())
+                .treatmentId(admissionEntity.getTreatment().getId())
                 .admissionKind(AdmissionKind.valueOf(admissionEntity.getAdmissionFieldContent()))
                 .build();
         return admission;

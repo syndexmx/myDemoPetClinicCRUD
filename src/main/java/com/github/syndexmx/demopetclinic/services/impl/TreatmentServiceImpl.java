@@ -48,9 +48,9 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
 
     @Override
-    public Optional<Treatment> findById(String treatmentId) {
+    public Optional<Treatment> findById(Long treatmentId) {
         final Optional<TreatmentEntity> treatmentEntityFound = treatmentRepository
-                .findById(Long.parseLong(treatmentId));
+                .findById(treatmentId);
         final Optional<Treatment> treatmentFound = treatmentEntityFound.map(treatmentEntity ->
                 treatmentEntityMapper.treatmentEntityToTreatment(treatmentEntity));
         return treatmentFound;
@@ -66,8 +66,8 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
 
     @Override
-    public boolean isPresent(String treatmentId) {
-        return treatmentRepository.existsById(Long.parseLong(treatmentId));
+    public boolean isPresent(Long treatmentId) {
+        return treatmentRepository.existsById(treatmentId);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class TreatmentServiceImpl implements TreatmentService {
     }
 
     @Override
-    public void deleteById(String treatmentId) {
+    public void deleteById(Long treatmentId) {
         try {
-            treatmentRepository.deleteById(Long.parseLong(treatmentId));
+            treatmentRepository.deleteById(treatmentId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent treatment");
         }

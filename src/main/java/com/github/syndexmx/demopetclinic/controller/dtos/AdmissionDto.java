@@ -47,6 +47,11 @@ public class AdmissionDto {
     @Schema(description = "Диагноз", example = "Перелом большой берцовой кости")
     private String diagnosis;
 
+    @NotNull(message = "Поле Лечение должно существовать")
+    @NotBlank(message = "Требуется непустое поле Лечение")
+    @Schema(description = "Лечение", example = "1")
+    private Long treatment;
+
     @NotNull(message = "Поле Тип Визита должно существовать")
     @NotBlank(message = "Требуется непустое поле Тип Визита")
     @Schema(description = "Тип Визита", example = "PROFILAXIS")

@@ -59,8 +59,8 @@ public class TreatmentServiceImplTest {
     @Test
     public void testThatFindByIdReturnsEmptyWhenNoEntity() {
         final Treatment nonExistentTreatment = TreatmentTestSupplierKit.getTestNonExistentTreatment();
-        final String nonExistentId = nonExistentTreatment.getId().toString();
-        when(treatmentRepository.findById(eq(Long.parseLong(nonExistentId)))).thenReturn(Optional.empty());
+        final Long nonExistentId = nonExistentTreatment.getId();
+        when(treatmentRepository.findById(eq(nonExistentId))).thenReturn(Optional.empty());
         final Optional<Treatment> foundTreatment = underTest.findById(nonExistentId);
         assertEquals(Optional.empty(), foundTreatment);
     }
@@ -69,8 +69,8 @@ public class TreatmentServiceImplTest {
     public void testThatFindByIdReturnsEntityWhenPresent() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
         final TreatmentEntity treatmentEntity = treatmentEntityMapper.treatmentToTreatmentEntity(treatment);
-        final String idString = treatment.getId().toString();
-        when(treatmentRepository.findById(eq(Long.parseLong(idString)))).thenReturn(Optional.of(treatmentEntity));
+        final Long idString = treatment.getId();
+        when(treatmentRepository.findById(eq(idString))).thenReturn(Optional.of(treatmentEntity));
         final Optional<Treatment> foundTreatment = underTest.findById(idString);
         assertEquals(Optional.of(treatment), foundTreatment);
     }
@@ -96,7 +96,7 @@ public class TreatmentServiceImplTest {
     public void testThatIsPresentReturnsFalseWhenAbsent() {
         when(treatmentRepository.existsById(any())).thenReturn(false);
         final Treatment nonExistentTreatment = TreatmentTestSupplierKit.getTestNonExistentTreatment();
-        final String nonExistentUuid = nonExistentTreatment.getId().toString();
+        final Long nonExistentUuid = nonExistentTreatment.getId();
         boolean result = underTest.isPresent(nonExistentUuid);
         assertFalse(result);
     }
@@ -104,8 +104,8 @@ public class TreatmentServiceImplTest {
     @Test
     public void testThatIsPresentReturnsTrueWhenExists() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final String idString = treatment.getId().toString();
-        when(treatmentRepository.existsById(Long.parseLong(idString))).thenReturn(true);
+        final Long idString = treatment.getId();
+        when(treatmentRepository.existsById(idString)).thenReturn(true);
         boolean result = underTest.isPresent(idString);
         assertTrue(result);
     }
@@ -130,8 +130,8 @@ public class TreatmentServiceImplTest {
     @Test
     public void testThatDeleteTreatmentDeletesTreatment() {
         final Treatment treatment = TreatmentTestSupplierKit.getTestTreatment();
-        final String idString = treatment.getId().toString();
+        final Long idString = treatment.getId();
         underTest.deleteById(idString);
-        verify(treatmentRepository).deleteById(eq(Long.parseLong(idString)));
+        verify(treatmentRepository).deleteById(eq(idString));
     }
 }

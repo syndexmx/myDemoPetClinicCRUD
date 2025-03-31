@@ -43,8 +43,12 @@ public class TreatmentDtoMapper {
         Random random = new Random();
         Treatment treatment = Treatment.builder()
                 .id(random.nextLong())
-                .medicineKind(MedicineKind.valueOf(treatmentDto.getTreatmentFieldContent()))
-                .build();
+                .medicine(treatmentDto.getMedicine())
+                .dose(treatmentDto.getDose())
+                .times(treatmentDto.getTimes())
+                .fromDate(LocalDate.parse(treatmentDto.getFromDate()))
+                .toDate(LocalDate.parse(treatmentDto.getToDate()))
+                .medicineKind(MedicineKind.valueOf(treatmentDto.getTreatmentFieldContent())).build();
         return treatment;
     }
 
