@@ -15,14 +15,14 @@ public interface DoctorService {
 
     Doctor save(Doctor doctor);
 
-    Optional<Doctor> findById(String doctorId);
+    Optional<Doctor> findById(Long doctorId);
 
     List<Doctor> listAll();
 
-    boolean isPresent(String doctorId);
+    boolean isPresent(Long doctorId);
 
     boolean isPresent(Doctor doctor);
 
-    void deleteById(String doctorId);
+    void deleteById(Long doctorId);
 
 }

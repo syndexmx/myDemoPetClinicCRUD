@@ -40,7 +40,8 @@ public class AdmissionServiceImpl implements AdmissionService {
 
     @Override
     public Admission create(Admission admission) {
-        Random random = new Random();Long spoofId = random.nextLong();
+        Random random = new Random();
+        Long spoofId = random.nextLong();
         admission.setId(spoofId);
         final AdmissionEntity savedEntity = admissionRepository
                 .save(admissionEntityMapper.admissionToAdmissionEntity(admission));

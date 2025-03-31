@@ -48,9 +48,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Optional<Doctor> findById(String doctorId) {
+    public Optional<Doctor> findById(Long doctorId) {
         final Optional<DoctorEntity> doctorEntityFound = doctorRepository
-                .findById(Long.parseLong(doctorId));
+                .findById(doctorId);
         final Optional<Doctor> doctorFound = doctorEntityFound.map(doctorEntity ->
                 doctorEntityMapper.doctorEntityToDoctor(doctorEntity));
         return doctorFound;
@@ -65,8 +65,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public boolean isPresent(String doctorId) {
-        return doctorRepository.existsById(Long.parseLong(doctorId));
+    public boolean isPresent(Long doctorId) {
+        return doctorRepository.existsById(doctorId);
     }
 
     @Override
@@ -75,9 +75,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void deleteById(String doctorId) {
+    public void deleteById(Long doctorId) {
         try {
-            doctorRepository.deleteById(Long.parseLong(doctorId));
+            doctorRepository.deleteById(doctorId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent doctor");
         }
