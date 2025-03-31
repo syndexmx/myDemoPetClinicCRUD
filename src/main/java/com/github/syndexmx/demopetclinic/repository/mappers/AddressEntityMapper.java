@@ -21,6 +21,7 @@ public class AddressEntityMapper {
     @Lazy
     OwnerEntityMapper ownerEntityMapper;
 
+
     public AddressEntity addressToAddressEntity(Address address) {
         final AddressEntity addressEntity = AddressEntity.builder()
                 .id(address.getId())
