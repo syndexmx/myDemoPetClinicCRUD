@@ -38,7 +38,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet create(Pet pet) {
-        Random random = new Random();Long spoofId = random.nextLong();
+        Random random = new Random();
+        Long spoofId = random.nextLong();
         pet.setId(spoofId);
         final PetEntity savedEntity = petRepository.save(petEntityMapper.petToPetEntity(pet));
         final Pet savedPet = petEntityMapper.petEntityToPet(savedEntity);

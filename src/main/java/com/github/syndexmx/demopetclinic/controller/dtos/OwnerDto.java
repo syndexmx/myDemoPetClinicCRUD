@@ -36,7 +36,7 @@ public class OwnerDto {
     @NotNull(message = "Поле Адрес должно существовать")
     @NotBlank(message = "Требуется непустое поле Адрес")
     @Schema(description = "Адрес")
-    private Long address;
+    private Long addressId;
 
     @Schema(description = "Список животных", example = "[]")
     private List<Long> petList;

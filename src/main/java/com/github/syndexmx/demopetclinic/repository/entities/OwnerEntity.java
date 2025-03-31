@@ -20,13 +20,14 @@ import java.util.List;
 public class OwnerEntity {
 
     @Id
-    private Long ownerId;
+    private Long id;
 
     private String name;
     private String phone;
-    private Long address;
 
-    @OneToMany(cascade = CascadeType.PERSIST) // TODO: Check validity of cascade propagation
+    private Long addressId;
+
+    @OneToMany(cascade = CascadeType.DETACH) // TODO: Check validity of cascade propagation
     private List<PetEntity> petList;
 
 }

@@ -12,7 +12,7 @@ public class AdmissionEntityMapper {
 
     public AdmissionEntity admissionToAdmissionEntity(Admission admission) {
         final AdmissionEntity admissionEntity = AdmissionEntity.builder()
-                .admissionId(admission.getId())
+                .id(admission.getId())
                 .petId(admission.getPetId())
                 .doctorId(admission.getDoctorId())
                 .date(admission.getDate())
@@ -26,7 +26,7 @@ public class AdmissionEntityMapper {
 
     public Admission admissionEntityToAdmission(AdmissionEntity admissionEntity) {
         Admission admission = Admission.builder()
-                .id(admissionEntity.getAdmissionId())
+                .id(admissionEntity.getId())
                 .petId(admissionEntity.getPetId())
                 .doctorId(admissionEntity.getDoctorId())
                 .date(admissionEntity.getDate())

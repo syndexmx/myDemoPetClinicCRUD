@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class TreatmentEntity {
 
     @Id
-    private Long treatmentId;
+    private Long id;
 
     private String medicine;
     private Integer dose;

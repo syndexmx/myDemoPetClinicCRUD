@@ -47,7 +47,7 @@ public class AddressController {
     @GetMapping(ROOT_API_PATH + "/{addressId}")
     @Operation(summary = "Адрес:получить по id",
             description = "Получить существующий объект Адрес")
-    public ResponseEntity<AddressDto> retrieve(@PathVariable String addressId) {
+    public ResponseEntity<AddressDto> retrieve(@PathVariable Long addressId) {
         final Optional<Address> foundAddress = addressService.findById(addressId);
         if (foundAddress.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -88,7 +88,7 @@ public class AddressController {
     @DeleteMapping(ROOT_API_PATH + "/{addressId}")
     @Operation(summary = "Адрес:удалить объект по id",
             description = "Удалить существующий в базе объект Адрес")
-    public ResponseEntity deleteById(@PathVariable String addressId) {
+    public ResponseEntity deleteById(@PathVariable Long addressId) {
         log.info("DELETE " + ROOT_API_PATH + " \n" + addressId);
         addressService.deleteById(addressId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

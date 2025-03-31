@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class PetEntity {
 
     @Id
-    private Long petId;
+    private Long id;
 
     private Long ownerId;
 

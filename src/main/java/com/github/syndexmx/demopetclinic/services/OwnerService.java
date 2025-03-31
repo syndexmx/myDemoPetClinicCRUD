@@ -25,4 +25,5 @@ public interface OwnerService {
 
     void deleteById(Long ownerId);
 
+    public void casscadeAssignAddress(Long ownerId, Long addressId);
 }

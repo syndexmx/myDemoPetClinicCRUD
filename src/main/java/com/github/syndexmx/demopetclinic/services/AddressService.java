@@ -15,14 +15,14 @@ public interface AddressService {
 
     Address save(Address address);
 
-    Optional<Address> findById(String addressId);
+    Optional<Address> findById(Long addressId);
 
     List<Address> listAll();
 
-    boolean isPresent(String addressId);
+    boolean isPresent(Long addressId);
 
     boolean isPresent(Address address);
 
-    void deleteById(String addressId);
+    void deleteById(Long addressId);
 
 }

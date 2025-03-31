@@ -17,7 +17,7 @@ public class OwnerDtoMapper {
                 .id(owner.getId())
                 .name(owner.getName())
                 .phone(owner.getPhone())
-                .address(owner.getAddress())
+                .addressId(owner.getAddressId())
                 .petList(owner.getPetIdList().stream().toList())
                 .build();
         return ownerDto;
@@ -28,7 +28,7 @@ public class OwnerDtoMapper {
                 .id(ownerDto.getId())
                 .name(ownerDto.getName())
                 .phone(ownerDto.getPhone())
-                .address(ownerDto.getAddress())
+                .addressId(ownerDto.getAddressId())
                 .petIdList(ownerDto.getPetList().stream().toList())
                 .build();
         return owner;
@@ -40,7 +40,7 @@ public class OwnerDtoMapper {
                 .id(random.nextLong())
                 .name(ownerDto.getName())
                 .phone(ownerDto.getPhone())
-                .address(ownerDto.getAddress())
+                .addressId(ownerDto.getAddressId())
                 .petIdList(new ArrayList<Long>())
                 .build();
         return owner;

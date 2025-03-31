@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @TemplatedAnnotation
@@ -15,11 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-@Table(name = "addresss")
+@Table(name = "addresses")
 public class AddressEntity {
 
     @Id
-    private Long addressId;
+    private Long id;
 
     private String region;
     private String city;
@@ -28,6 +29,8 @@ public class AddressEntity {
     private String building;
     private Integer flat;
 
+    @OneToMany(cascade = CascadeType.DETACH) // TODO: Check validity of cascade propagation
+    private List<OwnerEntity> ownerList;
 
 
 }
