@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @TemplatedAnnotation
 @AllArgsConstructor
@@ -25,5 +26,7 @@ public class Pet {
     private Integer weight; // grams
     private String colour;
     private Species species;
+
+    private List<Long> admissionIdList;
 
 }

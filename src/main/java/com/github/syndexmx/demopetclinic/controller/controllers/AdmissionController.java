@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.demopetclinic.controller.mappers.AdmissionDtoMapper.*;
-
 @TemplatedAnnotation
 @RestController
 @Tag(name = "Admission", description = "API Визит")
@@ -49,7 +47,7 @@ public class AdmissionController {
     @GetMapping(ROOT_API_PATH +"/{admissionId}")
     @Operation(summary = "Визит:получить по id",
             description = "Получить существующий объект Визит")
-    public ResponseEntity<AdmissionDto> retrieve(@PathVariable String admissionId) {
+    public ResponseEntity<AdmissionDto> retrieve(@PathVariable Long admissionId) {
         final Optional<Admission> foundAdmission = admissionService.findById(admissionId);
         if (foundAdmission.isEmpty()) {
             return new ResponseEntity<AdmissionDto>(HttpStatus.NOT_FOUND);
@@ -90,7 +88,7 @@ public class AdmissionController {
     @DeleteMapping(ROOT_API_PATH + "/{admissionId}")
     @Operation(summary = "Визит:удалить объект по id",
             description = "Удалить существующий в базе объект Визит")
-    public ResponseEntity deleteById(@PathVariable String admissionId) {
+    public ResponseEntity deleteById(@PathVariable Long admissionId) {
         log.info("DELETE " + ROOT_API_PATH + admissionId);
         admissionService.deleteById(admissionId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

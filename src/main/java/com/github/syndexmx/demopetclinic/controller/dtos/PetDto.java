@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,5 +58,7 @@ public class PetDto {
     @Schema(description = "Вид", example = "CAT")
     private String petSpecies;
 
+    @Schema(description = "Список Визитов (Обращений)", example = "[]")
+    private List<Long> admissionIdList;
 
 }

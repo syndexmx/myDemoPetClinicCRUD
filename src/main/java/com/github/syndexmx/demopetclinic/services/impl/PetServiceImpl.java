@@ -41,7 +41,8 @@ public class PetServiceImpl implements PetService {
         Random random = new Random();
         Long spoofId = random.nextLong();
         pet.setId(spoofId);
-        final PetEntity savedEntity = petRepository.save(petEntityMapper.petToPetEntity(pet));
+        final PetEntity savedEntity = petRepository.save(petEntityMapper
+                .petToPetEntity(pet));
         final Pet savedPet = petEntityMapper.petEntityToPet(savedEntity);
         casscadeAssignOwner(savedPet.getId(), savedPet.getOwnerId());
         return savedPet;
