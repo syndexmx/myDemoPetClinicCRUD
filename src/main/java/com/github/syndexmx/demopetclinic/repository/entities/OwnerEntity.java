@@ -26,7 +26,7 @@ public class OwnerEntity {
     private String phone;
     private Long address;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST) // TODO: Check validity of cascade propagation
     private List<PetEntity> petList;
 
 }

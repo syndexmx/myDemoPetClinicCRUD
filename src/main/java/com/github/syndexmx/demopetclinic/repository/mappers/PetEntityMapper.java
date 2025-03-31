@@ -24,8 +24,7 @@ public class PetEntityMapper {
     public PetEntity petToPetEntity(Pet pet) {
         final PetEntity petEntity = PetEntity.builder()
                 .petId(pet.getId())
-                .owner(ownerEntityMapper.ownerToOwnerEntity(
-                        ownerService.findById(pet.getOwnerId()).orElseThrow()))
+                .ownerId(pet.getOwnerId())
                 .breed(pet.getBreed())
                 .birthDate(pet.getBirthDate())
                 .name(pet.getName())
@@ -39,7 +38,7 @@ public class PetEntityMapper {
     public Pet petEntityToPet(PetEntity petEntity) {
         Pet pet = Pet.builder()
                 .id(petEntity.getPetId())
-                .ownerId(petEntity.getOwner().getOwnerId())
+                .ownerId(petEntity.getOwnerId())
                 .breed(petEntity.getBreed())
                 .birthDate(petEntity.getBirthDate())
                 .name(petEntity.getName())

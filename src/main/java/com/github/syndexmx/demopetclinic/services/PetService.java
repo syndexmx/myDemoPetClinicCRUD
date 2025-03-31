@@ -27,4 +27,6 @@ public interface PetService {
 
     void casscadeAssignOwner(Long petId, Long ownerId);
 
+    void casscadeDeleteFromOwner(Long petId, Long ownerId);
+
 }

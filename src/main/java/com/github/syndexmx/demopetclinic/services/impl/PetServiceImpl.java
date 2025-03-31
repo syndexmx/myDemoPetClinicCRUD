@@ -83,6 +83,9 @@ public class PetServiceImpl implements PetService {
     @Override
     public void deleteById(Long petId) {
         try {
+            //PetEntity petEntity = petRepository.findById(petId).orElseThrow();
+            //Owner owner = ownerService.findById(petEntity.getOwner().getOwnerId()).orElseThrow();
+            //casscadeDeleteFromOwner(petId, owner.getId());
             petRepository.deleteById(petId);
         } catch (final EmptyResultDataAccessException e) {
             log.debug("Attempted to delete non-existent pet");
@@ -95,6 +98,16 @@ public class PetServiceImpl implements PetService {
         List<Long> updatedPetList = new ArrayList<>();
         updatedPetList.addAll(owner.getPetIdList());
         updatedPetList.add(petId);
+        owner.setPetIdList(updatedPetList);
+        ownerService.save(owner);
+    }
+
+    @Override
+    public void casscadeDeleteFromOwner(Long petId, Long ownerId) {
+        Owner owner = ownerService.findById(ownerId).orElseThrow();
+        List<Long> updatedPetList = new ArrayList<>();
+        updatedPetList.addAll(owner.getPetIdList());
+        updatedPetList.remove(petId);
         owner.setPetIdList(updatedPetList);
         ownerService.save(owner);
     }
