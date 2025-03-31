@@ -1,7 +1,9 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+import com.github.syndexmx.demopetclinic.controller.dtos.OwnerReturnDto;
 import com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper;
+import com.github.syndexmx.demopetclinic.controller.mappers.OwnerReturnDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.controller.dtos.OwnerDto;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
@@ -26,11 +28,13 @@ public class OwnerController {
 
     private final OwnerService ownerService;
     private final OwnerDtoMapper ownerDtoMapper;
+    private final OwnerReturnDtoMapper ownerReturnDtoMapper;
 
     @Autowired
-    private OwnerController(OwnerService ownerService, OwnerDtoMapper ownerDtoMapper) {
+    private OwnerController(OwnerService ownerService, OwnerDtoMapper ownerDtoMapper, OwnerReturnDtoMapper ownerReturnDtoMapper) {
         this.ownerService = ownerService;
         this.ownerDtoMapper = ownerDtoMapper;
+        this.ownerReturnDtoMapper = ownerReturnDtoMapper;
     }
 
     @PostMapping(ROOT_API_PATH)
@@ -47,13 +51,13 @@ public class OwnerController {
     @GetMapping(ROOT_API_PATH + "/{ownerId}")
     @Operation(summary = "Хозяин:получить по id",
             description = "Получить существующий объект Хозяин")
-    public ResponseEntity<OwnerDto> retrieve(@PathVariable Long ownerId) {
+    public ResponseEntity<OwnerReturnDto> retrieve(@PathVariable Long ownerId) {
         final Optional<Owner> foundOwner = ownerService.findById(ownerId);
         if (foundOwner.isEmpty()) {
-            return new ResponseEntity<OwnerDto>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<OwnerReturnDto>(HttpStatus.NOT_FOUND);
         } else {
-            final OwnerDto ownerDto = ownerDtoMapper.ownerToOwnerDto(foundOwner.get());
-            return new ResponseEntity<OwnerDto>(ownerDto, HttpStatus.FOUND);
+            final OwnerReturnDto ownerDto = ownerReturnDtoMapper.ownerToOwnerDto(foundOwner.get());
+            return new ResponseEntity<OwnerReturnDto>(ownerDto, HttpStatus.FOUND);
         }
     }
 
