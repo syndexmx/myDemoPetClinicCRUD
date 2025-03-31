@@ -1,7 +1,5 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.OwnerTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
@@ -18,13 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-@TemplatedAnnotation
 @ExtendWith(MockitoExtension.class)
 public class OwnerServiceImplTest {
 

@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.AddressDto;
 import com.github.syndexmx.demopetclinic.domain.Address;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @Service
-@TemplatedAnnotation
 public class AddressDtoMapper {
 
     public AddressDto addressToAddressDto(Address address) {

@@ -1,7 +1,7 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
+
 import com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.domain.PetTestSupplierKit;
@@ -24,7 +24,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TemplatedAnnotation
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)

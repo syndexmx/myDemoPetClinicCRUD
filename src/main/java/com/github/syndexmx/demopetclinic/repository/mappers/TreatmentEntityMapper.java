@@ -1,13 +1,11 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.MedicineKind;
 import com.github.syndexmx.demopetclinic.domain.Treatment;
 import com.github.syndexmx.demopetclinic.repository.entities.TreatmentEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@TemplatedAnnotation
 public class TreatmentEntityMapper {
 
     public TreatmentEntity treatmentToTreatmentEntity(Treatment treatment) {

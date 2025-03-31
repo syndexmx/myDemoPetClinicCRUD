@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.PetReturnDto;
 import com.github.syndexmx.demopetclinic.controller.mappers.PetDtoMapper;
 import com.github.syndexmx.demopetclinic.controller.mappers.PetReturnDtoMapper;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@TemplatedAnnotation
 @RestController
 @Tag(name = "Pet", description = "API Животное")
 @Slf4j

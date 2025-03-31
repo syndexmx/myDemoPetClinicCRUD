@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.controllers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.controller.dtos.OwnerReturnDto;
 import com.github.syndexmx.demopetclinic.controller.mappers.OwnerDtoMapper;
 import com.github.syndexmx.demopetclinic.controller.mappers.OwnerReturnDtoMapper;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@TemplatedAnnotation
 @RestController
 @Tag(name = "Owner", description = "API Хозяин")
 @Slf4j

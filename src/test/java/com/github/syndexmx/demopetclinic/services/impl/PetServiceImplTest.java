@@ -1,7 +1,5 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Pet;
 import com.github.syndexmx.demopetclinic.domain.PetTestSupplierKit;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
@@ -24,7 +22,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.*;
 
-@TemplatedAnnotation
 @ExtendWith(MockitoExtension.class)
 public class PetServiceImplTest {
 

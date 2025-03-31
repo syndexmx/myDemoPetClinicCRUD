@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Doctor;
 import com.github.syndexmx.demopetclinic.repository.entities.DoctorEntity;
 import com.github.syndexmx.demopetclinic.repository.mappers.DoctorEntityMapper;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@TemplatedAnnotation
 @Service
 @Slf4j
 public class DoctorServiceImpl implements DoctorService {

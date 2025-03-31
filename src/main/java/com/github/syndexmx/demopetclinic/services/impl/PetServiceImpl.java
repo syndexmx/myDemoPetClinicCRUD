@@ -1,12 +1,9 @@
 package com.github.syndexmx.demopetclinic.services.impl;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.Owner;
 import com.github.syndexmx.demopetclinic.domain.Pet;
-import com.github.syndexmx.demopetclinic.repository.entities.OwnerEntity;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
 import com.github.syndexmx.demopetclinic.repository.mappers.PetEntityMapper;
-import com.github.syndexmx.demopetclinic.repository.reporitories.OwnerRepository;
 import com.github.syndexmx.demopetclinic.repository.reporitories.PetRepository;
 import com.github.syndexmx.demopetclinic.services.OwnerService;
 import com.github.syndexmx.demopetclinic.services.PetService;
@@ -20,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@TemplatedAnnotation
 @Service
 @Slf4j
 public class PetServiceImpl implements PetService {

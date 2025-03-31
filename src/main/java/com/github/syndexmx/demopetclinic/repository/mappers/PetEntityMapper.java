@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.repository.mappers;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import com.github.syndexmx.demopetclinic.domain.*;
 import com.github.syndexmx.demopetclinic.repository.entities.PetEntity;
 import com.github.syndexmx.demopetclinic.services.AdmissionService;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
-@TemplatedAnnotation
 public class PetEntityMapper {
 
     @Autowired

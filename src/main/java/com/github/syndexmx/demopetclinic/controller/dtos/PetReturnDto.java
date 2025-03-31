@@ -1,7 +1,5 @@
 package com.github.syndexmx.demopetclinic.controller.dtos;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@TemplatedAnnotation
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

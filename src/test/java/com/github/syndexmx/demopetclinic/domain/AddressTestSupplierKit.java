@@ -1,11 +1,7 @@
 package com.github.syndexmx.demopetclinic.domain;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-
 import java.util.Random;
 
-
-@TemplatedAnnotation
 public class AddressTestSupplierKit {
 
     private static Random random;

@@ -1,12 +1,8 @@
 package com.github.syndexmx.demopetclinic.domain;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-
-@TemplatedAnnotation
 public class OwnerTestSupplierKit {
 
     private static Random random;

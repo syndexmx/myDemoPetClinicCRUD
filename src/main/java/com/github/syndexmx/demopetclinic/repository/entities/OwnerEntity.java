@@ -1,6 +1,5 @@
 package com.github.syndexmx.demopetclinic.repository.entities;
 
-import com.github.syndexmx.demopetclinic.annotations.TemplatedAnnotation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
-@TemplatedAnnotation
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
