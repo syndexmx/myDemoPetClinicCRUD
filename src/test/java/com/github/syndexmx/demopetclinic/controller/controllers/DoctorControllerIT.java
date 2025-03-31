@@ -43,6 +43,8 @@ public class DoctorControllerIT {
     @Autowired
     private DoctorDtoMapper doctorDtoMapper;
 
+    // TODO : patch tests
+
     @Test
     public void testThatDoctorIsCreated() throws Exception {
         Doctor doctor = DoctorTestSupplierKit.getTestDoctor();
